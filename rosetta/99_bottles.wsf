@@ -1,0 +1,65 @@
+# Rosetta Code
+# 99 Bottles of Beer
+# https://rosettacode.org/wiki/99_Bottles_of_Beer/EsoLang
+
+    "@types/string" import
+
+    -1
+    "Go to the store and buy some more, "
+    "Take one down, pass it around, "
+    "no more bottles of beer on the wall, "
+    0 call string.store_neg
+
+    99 # n
+.loop:
+    # "n bottle(s) of beer on the wall, n bottle(s) of beer."
+    ^ 1 1 call bottles
+    ^ 0 0 call bottles
+
+    1- # n--
+
+    # "Take one down, pass it around, n bottle(s) of beer on the wall."
+    37 31 call string.print
+    ^ 1 0 call bottles
+
+    ^ jz .loop_break
+    jmp .loop
+
+.loop_break:
+    # "No more bottles of beer on the wall, no more bottles of beer."
+    'N' printc 1 36 call string.print
+    ^ 0 0 call bottles
+
+    # "Go to the store and buy some more, 99 bottles of beer on the wall."
+    68 35 call string.print
+    99 1 0 call bottles
+    drop end
+
+# bottles prints a line of text of the form
+# "[n|no more] bottle(s) of beer( on the wall)[.\n|, ]". Pluralization
+# is handled for n. If wall is true, " on the wall" is printed. A period
+# is printed if punctuation is 0, otherwise a comma.
+# (n wall punctuation -- )
+bottles:
+    ^2
+    ^ jz .bottles_none
+    ^ printi
+    1 j= .bottles_one
+    7 16 # " bottles of beer"
+.bottles_wall:
+    ^3 12 * + # append " on the wall" if wall
+    call string.print
+    jz .bottles_period
+    ", "
+.bottles_ret:
+    printc printc 2drop ret
+.bottles_period:
+    ".\n" jmp .bottles_ret
+.bottles_none:
+    drop
+    0 23 # "no more bottles of beer"
+    jmp .bottles_wall
+.bottles_one:
+    7 7 call string.print # " bottle"
+    15 8 # " of beer"
+    jmp .bottles_wall

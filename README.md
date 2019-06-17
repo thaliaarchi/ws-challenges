@@ -32,6 +32,7 @@ in Whitespace.
 
 ## Rosetta Code
 
+- [99 Bottles of Beer](rosetta/99_bottles.wsf)
 - [FizzBuzz](rosetta/fizzbuzz.wsf)
 - [Show ASCII Table](rosetta/ascii.wsf)
 
