@@ -1,6 +1,7 @@
 # Coding Challenges in Whitespace
 
-Solutions for Project Euler and Advent of Code in Whitespace.
+Solutions for Project Euler, Advent of Code, and Rosetta Code challenges
+in Whitespace.
 
 ## Project Euler
 
@@ -28,6 +29,10 @@ Solutions for Project Euler and Advent of Code in Whitespace.
 - [Day 1: Report Repair](advent/2020/1.wsf)
 - [Day 2: Password Philosophy](advent/2020/2.wsf)
 - [Day 3: Toboggan Trajectory](advent/2020/3.wsf)
+
+## Rosetta Code
+
+- [FizzBuzz](rosetta/fizzbuzz.wsf)
 
 ## Misc
 

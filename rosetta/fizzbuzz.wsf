@@ -1,0 +1,26 @@
+# Rosetta Code
+# FizzBuzz
+# https://rosettacode.org/wiki/FizzBuzz
+
+    1
+.loop:
+    ^ 3% jz .fizz
+    ^ 5% jz .buzz
+    ^ printi
+.loop_next:
+    '\n' printc
+    1+
+    ^ 101 j< .loop
+    drop end
+
+.fizz:
+    "Fi" call .zz
+    ^ 5% jz .buzz
+    jmp .loop_next
+.buzz:
+    "Bu" call .zz
+    jmp .loop_next
+.zz:
+    printc printc
+    'z' ^ printc printc
+    ret
