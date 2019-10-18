@@ -1,0 +1,28 @@
+# Rosetta Code
+# Show ASCII Table
+# https://rosettacode.org/wiki/Show_ASCII_table
+
+    32
+.table_loop:
+    99 ^1 j< .print_codepoint
+    ' ' printc
+.print_codepoint:
+    ^ printi
+    ": " prints
+    ^ 32  j= .spc_abbr
+    ^ 127 j= .del_abbr
+    ' ' ^ ^2 # Print char and two spaces
+.print_char:
+    printc printc printc
+    ' ' ^ printc printc
+    16+ # Move to next column
+    ^ 128 j< .table_loop
+    95- # Move to next row
+    '\n' printc
+    ^ 48 j< .table_loop
+    drop end
+
+.spc_abbr:
+    "Spc" jmp .print_char
+.del_abbr:
+    "Del" jmp .print_char

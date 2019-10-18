@@ -33,6 +33,7 @@ in Whitespace.
 ## Rosetta Code
 
 - [FizzBuzz](rosetta/fizzbuzz.wsf)
+- [Show ASCII Table](rosetta/ascii.wsf)
 
 ## Misc
 

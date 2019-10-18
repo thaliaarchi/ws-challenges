@@ -22,6 +22,7 @@ echo euler/48: ; diff euler/48.out <($wspace $build/euler/48.ws)
 echo advent/2020/1: ; diff advent/2020/1.out <($build/advent/2020/1 < advent/2020/1.in)
 echo advent/2020/2: ; diff advent/2020/2.out <($wspace $build/advent/2020/2.ws < advent/2020/2.in)
 echo advent/2020/3: ; diff advent/2020/3.out <($wspace $build/advent/2020/3.ws < advent/2020/3.in)
+echo rosetta/ascii: ; diff rosetta/ascii.out <($wspace $build/rosetta/ascii.ws)
 echo rosetta/fizzbuzz: ; diff rosetta/fizzbuzz.out <($wspace $build/rosetta/fizzbuzz.ws)
 echo misc/ascii4: ; diff misc/ascii4.out <($wspace $build/misc/ascii4.ws)
 
