@@ -1,0 +1,91 @@
+# Four-column ASCII table
+# https://garbagecollected.org/2017/01/31/four-column-ascii/
+
+    "NUL" 0   call store_abbr
+    "SOH" 1   call store_abbr
+    "STX" 2   call store_abbr
+    "ETX" 3   call store_abbr
+    "EOT" 4   call store_abbr
+    "ENQ" 5   call store_abbr
+    "ACK" 6   call store_abbr
+    "BEL" 7   call store_abbr
+    "BS " 8   call store_abbr
+    "TAB" 9   call store_abbr
+    "LF " 10  call store_abbr
+    "VT " 11  call store_abbr
+    "FF " 12  call store_abbr
+    "CR " 13  call store_abbr
+    "SO " 14  call store_abbr
+    "SI " 15  call store_abbr
+    "DLE" 16  call store_abbr
+    "DC1" 17  call store_abbr
+    "DC2" 18  call store_abbr
+    "DC3" 19  call store_abbr
+    "DC4" 20  call store_abbr
+    "NAK" 21  call store_abbr
+    "SYN" 22  call store_abbr
+    "ETB" 23  call store_abbr
+    "CAN" 24  call store_abbr
+    "EM " 25  call store_abbr
+    "SUB" 26  call store_abbr
+    "ESC" 27  call store_abbr
+    "FS " 28  call store_abbr
+    "GS " 29  call store_abbr
+    "RS " 30  call store_abbr
+    "US " 31  call store_abbr
+    "Spc" 32  call store_abbr
+    "DEL" 127 call store_abbr
+
+    # Print header columns
+    '1' ' ' '0'
+    ^ ^ printc printc  ^1 ^ printc printc # 00
+    ^ printc ^2 printc ^1 ^ printc printc # 01
+    ^2 printc printc      ^ printc printc # 10
+    ^ printc printc    '\n' printc        # 11
+
+    0
+.table_loop:
+    # Print four columns and binary
+    ^   ^ call print_cell
+    32+ ^ call print_cell
+    32+ ^ call print_cell
+    32+   call print_cell
+    ^ call print_bin_5
+    '\n' printc
+    1+
+    ^ 32 j< .table_loop
+    end
+
+# print_cell prints the given character or its 3-letter abbreviation,
+# padded with spaces.
+# (ch -- )
+print_cell:
+    ^ 3*
+    ^ retrieve
+    ^ jz .print_cell_char
+    # Print abbreviation
+    printc
+    1+ ^ retrieve printc
+    1+ retrieve printc
+    jmp .print_cell_ret
+.print_cell_char:
+    drop swap printc
+    ' ' ^ printc printc
+.print_cell_ret:
+    ' ' printc drop ret
+
+# print_bin_5 prints n to 5 fixed binary digits.
+# (n -- )
+print_bin_5:
+    ^ 16/ 2% printi
+    ^ 8/ 2% printi
+    ^ 4/ 2% printi
+    ^ 2/ 2% printi
+    2% printi ret
+
+# store_abbr stores the 3-letter abbreviation for ch in the heap.
+# (a3 a2 a1 ch -- )
+store_abbr:
+    3* swap ^1 swap store
+    1+ swap ^1 swap store
+    1+ swap store ret
