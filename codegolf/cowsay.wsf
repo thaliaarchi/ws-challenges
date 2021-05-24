@@ -1,0 +1,70 @@
+# Code Golf
+# Implement cowsay
+# https://codegolf.stackexchange.com/questions/225330/implement-cowsay
+
+    call .hello
+    call .cow
+    end
+
+    1 ^
+.read_line:
+    ^ readc
+    ^ retrieve
+    ^ jeof .read_end
+    '\n' j= .read_next_line
+    1+
+    jmp .read_line
+.read_next_line:
+    2dup -
+
+.largest_line:
+
+.read_end:
+    3drop
+
+.hello:
+    ' ' printc
+    '_' 8 call .repeat
+    '\n' printc
+    "< " prints
+    "Hello!" prints
+    " >\n" prints
+    ' ' printc
+    '-' 8 call .repeat
+    '\n' printc
+    ret
+
+.cow:
+    ' ' 8 call .repeat
+    '\\' printc
+    ' ' 3 call .repeat
+    "^__^\n" prints
+    ' ' 9 call .repeat
+    '\\' printc
+    ' ' 2 call .repeat
+    "(oo)\\" prints
+    '_' 7 call .repeat
+    '\n' printc
+    ' ' 12 call .repeat
+    "(__)\\" prints
+    ' ' 7 call .repeat
+    ")\\/\\\n" prints
+    ' ' 16 call .repeat
+    "||" prints
+    '-' 4 call .repeat
+    "w |\n" prints
+    ' ' 16 call .repeat
+    "||" prints
+    ' ' 5 call .repeat
+    "||\n" prints
+    ret
+
+# Requires n>=0
+# (char n --)
+.repeat:
+    ^ jz .repeat_ret
+    ^1 printc
+    1-
+    jmp .repeat
+.repeat_ret:
+    2drop ret

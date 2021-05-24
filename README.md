@@ -1,7 +1,7 @@
 # Coding Challenges in Whitespace
 
-Solutions for Project Euler, Advent of Code, and Rosetta Code challenges
-in Whitespace.
+Solutions for various coding challenges in Whitespace to improve and
+test [wslib](https://github.com/andrewarchi/wslib).
 
 ## Project Euler
 
@@ -35,6 +35,10 @@ in Whitespace.
 - [99 Bottles of Beer](rosetta/99_bottles.wsf)
 - [FizzBuzz](rosetta/fizzbuzz.wsf)
 - [Show ASCII Table](rosetta/ascii.wsf)
+
+## Code Golf
+
+- [Implement cowsay](codegolf/cowsay.wsf)
 
 ## Misc
 
