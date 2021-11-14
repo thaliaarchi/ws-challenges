@@ -1,0 +1,32 @@
+# Project Euler
+# Problem 36: Double-base palindromes
+# https://projecteuler.net/problem=36
+
+    0
+    ^ ^ readi retrieve
+    1 ^1 2 % - - # make odd
+.loop:
+    ^ jn .end
+    ^ ^ 10 call reverse - jz .is_pal_10
+.loop_continue:
+    2 -
+    jmp .loop
+.is_pal_10:
+    ^ ^ 2 call reverse - jz .is_pal_10_2
+    jmp .loop_continue
+.is_pal_10_2:
+    swap ^1 + swap
+    jmp .loop_continue
+.end:
+    drop printi end
+
+# (n base -- n')
+reverse:
+    swap 0
+.reverse_loop:
+    ^1 jz .reverse_ret
+    ^2 * ^1 ^3 % +
+    swap ^2 / swap
+    jmp .reverse_loop
+.reverse_ret:
+    2slide ret
