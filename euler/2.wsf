@@ -3,14 +3,13 @@
 # https://projecteuler.net/problem=2
 
     1 ^ readi retrieve
-    1 2
+    0 2
 .fib3:
     0 retrieve
     ^3 ^2 - jn .end
     ^1 + 0 swap store
-    swap ^1 +
-    swap ^1 +
-    swap ^1 +
+    # f'(n) = f'(n-2) + 4f'(n-1)
+    swap ^1 4 * +
     jmp .fib3
 .end:
     3slide printi end
