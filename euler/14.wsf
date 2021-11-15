@@ -32,15 +32,16 @@ collatz_memo:
     ^ 1 - jz .collatz_1
     ^ 2 % jz .collatz_even
 # .collatz_odd:
-    3 * 1 +
+    3 * 1 + 2 /
+    swap 2 + swap
     jmp .collatz_next
 .collatz_even:
     2 /
-.collatz_next:
     swap 1 + swap
+.collatz_next:
     ^ ^2 - jn .collatz_stored
     jmp .collatz_loop
 .collatz_stored:
-    retrieve + swap drop ret
+    retrieve + 1slide ret
 .collatz_1:
     2slide ret
