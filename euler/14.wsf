@@ -1,0 +1,45 @@
+# Project Euler
+# Problem 14: Longest Collatz sequence
+# https://projecteuler.net/problem=14
+
+    0 ^ readi retrieve 1 -
+    0 ^ store
+    1
+.loop:
+    2dup - jn .end
+    ^ call collatz_memo
+    1 retrieve ^1 - jn .longer
+    drop
+.loop_next:
+    1 +
+    jmp .loop
+.end:
+    0 retrieve printi end
+.longer:
+    1 swap store
+    0 ^1 store
+    jmp .loop_next
+
+# collatz_memo returns the number of steps for n to reach 1 in the
+# Collatz sequence, with intermediate steps memoized. The sequence is
+# defined as follows: if n is even, the next term is n/2, otherwise
+# 3*n+1.
+# (n -- steps)
+collatz_memo:
+    ^ 1 - jz .collatz_1
+    ^ retrieve ^ jz .collatz_not_stored
+    swap drop ret
+.collatz_not_stored:
+    drop ^
+    ^ 2 % jz .collatz_even
+# .collatz_odd:
+    3 * 1 +
+    jmp .collatz_next
+.collatz_even:
+    2 /
+.collatz_next:
+    call collatz_memo
+    1 + swap ^1 store
+    ret
+.collatz_1:
+    drop 0 ret
