@@ -1,1 +1,6 @@
 *.ws
+*.nir
+*.ll
+*.o
+*.s
+euler/14
