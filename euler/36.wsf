@@ -31,6 +31,7 @@
 .loop_odd_break:
     drop printi drop end
 
+# reverse reverses the order of the digits of n.
 # (n base -- n')
 reverse:
     swap 0
@@ -42,11 +43,15 @@ reverse:
 .reverse_ret:
     2slide ret
 
+# make_pal_odd mirrors the digits of n to create a palindrome with an
+# even number of digits (doubled middle digits).
 # (n base -- pal)
 make_pal_even:
     swap ^
     jmp .reverse_loop
 
+# make_pal_odd mirrors the digits of n to create a palindrome with an
+# odd number of digits (a single middle digit).
 # (n base -- pal)
 make_pal_odd:
     swap ^

@@ -1,4 +1,5 @@
 *.ws
+*.wsa
 *.nir
 *.ll
 *.o

@@ -23,6 +23,7 @@
 .end:
     0 retrieve printi drop end
 
+# reverse reverses the order of the digits of n.
 # (n base -- n')
 reverse:
     swap 0

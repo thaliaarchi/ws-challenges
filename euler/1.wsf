@@ -7,7 +7,9 @@
     ^1 5  call sum +
     ^1 15 call sum -
     printi drop end
-# (x divisor -- sum)
+
+# sum computes the sum of all numbers below x that are divisible by d.
+# (x d -- sum)
 sum:
     swap ^1 /
     ^ 1 + * 2 /
