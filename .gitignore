@@ -1,7 +1,7 @@
+/build/
 *.ws
 *.wsa
 *.nir
 *.ll
 *.o
 *.s
-euler/14

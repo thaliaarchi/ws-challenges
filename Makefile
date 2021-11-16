@@ -1,13 +1,13 @@
 .PHONY: all
-all: $(patsubst %.wsf, %.ws, $(wildcard euler/*.wsf)) euler/14
+all: $(patsubst %.wsf, build/%.ws, $(wildcard euler/*.wsf)) build/euler/14
 
-%.ws: %.wsf
+build/%.ws: %.wsf
 	wsf_assemble $<
-	@mv $(@:euler/%=%) euler/
+	@mkdir -p build/euler && mv $(@:build/euler/%=%) build/euler/
 
-euler/14: euler/14.ws
+build/euler/14: build/euler/14.ws
 	nebula-compile $< $@ '' '-heap 1000000'
 
 .PHONY: clean
 clean:
-	@rm -f euler/*.ws euler/*.nir euler/*.ll euler/*.o euler/*.s euler/14
+	@rm -rf build/
