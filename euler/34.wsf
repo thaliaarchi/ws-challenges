@@ -1,0 +1,15 @@
+# Project Euler
+# Problem 34: Digit factorials
+# https://projecteuler.net/problem=34
+
+    0 # n
+    1 # n!
+.generate_factorials:
+    2dup store
+    swap
+    ^ 9 - jz .generate_factorials_break
+    1 + swap
+    ^1 *
+    jmp .generate_factorials
+.generate_factorials_break:
+    end
