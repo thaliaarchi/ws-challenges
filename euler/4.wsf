@@ -2,6 +2,8 @@
 # Problem 4: Largest palindrome product
 # https://projecteuler.net/problem=4
 
+    0 ^ store # store before retrieving, to avoid wspace error
+
     999
 .loop_i:
     ^ 100 - jn .end
