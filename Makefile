@@ -10,6 +10,8 @@ $(BUILD)/%.ws: %.wsf
 	$(ASSEMBLE) $^
 	@mkdir -p $(BUILD)/euler && mv $(@:$(BUILD)/euler/%=%) $(BUILD)/euler/
 
+$(BUILD)/euler/1.ws: euler/1.wsf $(WSLIB)/math/math.wsf
+$(BUILD)/euler/6.ws: euler/6.wsf $(WSLIB)/math/math.wsf
 $(BUILD)/euler/16.ws: euler/16.wsf $(WSLIB)/math/exp.wsf
 $(BUILD)/euler/48.ws: euler/48.wsf $(WSLIB)/math/exp.wsf
 

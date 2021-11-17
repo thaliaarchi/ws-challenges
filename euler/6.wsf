@@ -3,10 +3,6 @@
 # https://projecteuler.net/problem=6
 
     0 ^ readi retrieve
-    # sum(n) = n(n+1)/2
-    ^ ^ 1 + * 2 / ^ *
-    swap
-    # sum^2(n) = n(n+1)(2n+1)/6
-    ^ 1 + ^1 2 * 1 + * * 6 /
-    - printi
-    end
+    ^ call sum ^ *
+    swap call sum_squares
+    - printi end
