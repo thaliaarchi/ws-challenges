@@ -1,16 +1,21 @@
+BUILD = build
+WSLIB = ../wslib
+ASSEMBLE = wsf_assemble
+COMPILE = nebula-compile
+
 .PHONY: all
-all: $(patsubst %.wsf, build/%.ws, $(wildcard euler/*.wsf)) build/euler/14
+all: $(patsubst %.wsf, $(BUILD)/%.ws, $(wildcard euler/*.wsf)) $(BUILD)/euler/14
 
-build/%.ws: %.wsf
-	wsf_assemble $^
-	@mkdir -p build/euler && mv $(@:build/euler/%=%) build/euler/
+$(BUILD)/%.ws: %.wsf
+	$(ASSEMBLE) $^
+	@mkdir -p $(BUILD)/euler && mv $(@:$(BUILD)/euler/%=%) $(BUILD)/euler/
 
-build/euler/16.ws: euler/16.wsf ../wslib/math/exp.wsf
-build/euler/48.ws: euler/48.wsf ../wslib/math/exp.wsf
+$(BUILD)/euler/16.ws: euler/16.wsf $(WSLIB)/math/exp.wsf
+$(BUILD)/euler/48.ws: euler/48.wsf $(WSLIB)/math/exp.wsf
 
-build/euler/14: build/euler/14.ws
-	nebula-compile $< $@ '' '-heap 1000000'
+$(BUILD)/euler/14: $(BUILD)/euler/14.ws
+	$(COMPILE) $< $@ '' '-heap 1000000'
 
 .PHONY: clean
 clean:
-	@rm -rf build/
+	@rm -rf $(BUILD)/
