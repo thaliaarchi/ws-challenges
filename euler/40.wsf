@@ -1,0 +1,42 @@
+# Project Euler
+# Problem 40: Champernowne's constant
+# https://projecteuler.net/problem=40
+
+    1 call champernowne
+    10 call champernowne *
+    100 call champernowne *
+    1000 call champernowne *
+    10000 call champernowne *
+    100000 call champernowne *
+    1000000 call champernowne *
+    printi end
+
+# champernowne returns the nth digit in the fractional part of the
+# transcendental Champernowne's constant, that is, a fraction
+# constructed through the concatenation of all positive integers:
+# 0.123456789101112131415161718192021...
+# (n -- digit)
+champernowne:
+    1 0 10
+# (n exp lo hi -- digit)
+.champernowne:
+    ^ ^2 - ^3 * # range
+    ^4 ^1 - jn .champernowne_within_bounds
+    ^4 swap - # n -= range
+    ^3 1 +    # exp++
+    ^2        # lo = hi
+    ^ 10 *    # hi *= 10
+    call .champernowne
+    4slide ret
+.champernowne_within_bounds:
+    2drop
+    ^2 ^2 / +          # num that contains digit
+    swap ^2 ^1 % - 1 - # index of digit
+.champernowne_extract_digit:
+    ^ jz .champernowne_ret
+    1 -
+    swap 10 / swap
+    jmp .champernowne_extract_digit
+.champernowne_ret:
+    drop 10 % swap drop
+    ret
