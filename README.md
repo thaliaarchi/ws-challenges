@@ -13,3 +13,4 @@ Solutions for Project Euler in Whitespace.
 - [Problem 34: Digit factorials](euler/34.wsf)
 - [Problem 36: Double-base palindromes](euler/36.wsf)
 - [Problem 40: Champernowne's constant](euler/40.wsf)
+- [Problem 48: Self powers](euler/48.wsf)

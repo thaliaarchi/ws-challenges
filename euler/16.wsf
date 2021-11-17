@@ -14,28 +14,3 @@
     jmp .loop
 .end:
     drop printi end
-
-# exp returns x raised to the power of y, using exponentiation by
-# squaring. If y <= 0, 1 is returned.
-# (x y -- x**y)
-exp:
-    ^ 1 - jn .exp_one   # y <= 0
-.exp:
-    ^ 1 - jz .exp_x     # y == 1
-    ^ 2 % jz .exp_even  # y%2 == 0
-# .exp_odd:
-    # exp(x**2, (y-1)/2) * x
-    ^1 ^ * swap
-    1 - 2 /
-    call .exp
-    *
-    ret
-.exp_even:
-    # exp(x**2, y/2)
-    swap ^ * swap
-    2 /
-    jmp .exp
-.exp_one:
-    2drop 1 ret
-.exp_x:
-    drop ret
