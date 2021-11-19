@@ -6,8 +6,8 @@
     1 0
 .loop_even:
     ^1 10 call make_pal_even
-    ^3 ^1 - jn .loop_even_break
-    ^ ^ 2 call reverse - jz .is_pal_even
+    ^3 ^1 j< .loop_even_break
+    ^ ^ 2 call reverse j= .is_pal_even
     drop
 .loop_even_continue:
     swap 1 + swap
@@ -19,8 +19,8 @@
     drop swap drop 1 swap
 .loop_odd:
     ^1 10 call make_pal_odd
-    ^3 ^1 - jn .loop_odd_break
-    ^ ^ 2 call reverse - jz .is_pal_odd
+    ^3 ^1 j< .loop_odd_break
+    ^ ^ 2 call reverse j= .is_pal_odd
     drop
 .loop_odd_continue:
     swap 1 + swap

@@ -11,7 +11,7 @@
 .sum_loop_break:
     drop
 .extract_loop:
-    ^ 10000000000 - jn .end
+    ^ 10000000000 j< .end
     10 /
     jmp .extract_loop
 .end:

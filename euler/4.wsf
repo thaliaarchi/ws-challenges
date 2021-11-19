@@ -6,11 +6,11 @@
 
     999
 .loop_i:
-    ^ 100 - jn .end
+    ^ 100 j< .end
     ^
 .loop_j:
-    ^ 100 - jn .loop_i_continue
-    2dup * ^ ^ 10 call reverse - jz .is_pal
+    ^ 100 j< .loop_i_continue
+    2dup * ^ ^ 10 call reverse j= .is_pal
     drop
 .loop_j_continue:
     1 -
@@ -19,7 +19,7 @@
     drop 1 -
     jmp .loop_i
 .is_pal:
-    ^ 0 retrieve - jn .loop_i_continue
+    ^ 0 retrieve j< .loop_i_continue
     0 swap store
     jmp .loop_i_continue
 .end:

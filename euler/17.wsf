@@ -58,7 +58,7 @@ number_letter_count:
 .number_letter_count_under100:
     100 %
     ^ jz .number_letter_count_0
-    ^ 20 - jn .number_letter_count_under20
+    ^ 20 j< .number_letter_count_under20
     ^ 10 % retrieve
     ^1 / 10 18 + retrieve
     + ret

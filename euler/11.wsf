@@ -13,7 +13,7 @@ read_square_grid:
     ^ * 1 -
     0 # addr
 .read_square_grid_loop:
-    2dup - jn .read_square_grid_ret
+    2dup j< .read_square_grid_ret
     ^
     ^  ^ readc retrieve '0' - 10 *
     ^1 ^ readc retrieve '0' - +

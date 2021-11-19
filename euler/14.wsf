@@ -6,10 +6,10 @@
     0 ^ store
     1
 .loop:
-    2dup - jn .end
+    2dup j< .end
     ^ call collatz_memo
     2dup store
-    1 retrieve ^1 - jn .longer
+    1 retrieve ^1 j< .longer
     drop
 .loop_next:
     1 +
@@ -29,7 +29,7 @@
 collatz_memo:
     0 ^1
 .collatz_loop:
-    ^ 1 - jz .collatz_1
+    ^ 1 j= .collatz_1
     ^ 2 % jz .collatz_even
 # .collatz_odd:
     3 * 1 + 2 /
@@ -39,7 +39,7 @@ collatz_memo:
     2 /
     swap 1 + swap
 .collatz_next:
-    ^ ^2 - jn .collatz_stored
+    ^ ^2 j< .collatz_stored
     jmp .collatz_loop
 .collatz_stored:
     retrieve + 1slide ret

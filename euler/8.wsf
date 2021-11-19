@@ -10,13 +10,13 @@
 .read_loop:
     ^ ^ readc retrieve '0' -
     2dup store
-    1 - jn .read_loop_break
+    1 j< .read_loop_break
     1 +
     jmp .read_loop
 .read_loop_break:
 
     # Skip sequence if length less than n
-    ^ ^2 - jn .nonzero_loop_continue
+    ^ ^2 j< .nonzero_loop_continue
 
     1 # i
     1 # prod
@@ -25,13 +25,13 @@
 .initial_prod_loop:
     ^1 retrieve *
     swap 1 + swap
-    ^1 ^4 - jn .initial_prod_loop
+    ^1 ^4 j< .initial_prod_loop
 
 # Take the remaining products
 .sliding_prod_loop:
-    0 retrieve ^1 - jn .larger_prod
+    0 retrieve ^1 j< .larger_prod
 .sliding_prod_loop_next:
-    ^1 ^3 - jz .sliding_prod_loop_break
+    ^1 ^3 j= .sliding_prod_loop_break
     ^1 ^4 - 1 + retrieve /
     ^1 retrieve *
     swap 1 + swap

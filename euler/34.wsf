@@ -7,7 +7,7 @@
 .generate_factorials:
     2dup store
     swap
-    ^ 9 - jz .generate_factorials_break
+    ^ 9 j= .generate_factorials_break
     1 + swap
     ^1 *
     jmp .generate_factorials
