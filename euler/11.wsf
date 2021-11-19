@@ -1,0 +1,25 @@
+# Project Euler
+# Problem 11: Largest product in a grid
+# https://projecteuler.net/problem=11
+
+    0 ^ readi retrieve
+    call read_square_grid
+    end
+
+# read_square_grid reads a square grid of two-digit numbers into the
+# heap, starting at address 0.
+# (n -- )
+read_square_grid:
+    ^ * 1 -
+    0 # addr
+.read_square_grid_loop:
+    2dup - jn .read_square_grid_ret
+    ^
+    ^  ^ readc retrieve '0' - 10 *
+    ^1 ^ readc retrieve '0' - +
+    ^1 readc # discard ' ' or '\n'
+    store
+    1 +
+    jmp .read_square_grid_loop
+.read_square_grid_ret:
+    2drop ret
