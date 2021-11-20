@@ -2,7 +2,7 @@
 # Problem 14: Longest Collatz sequence
 # https://projecteuler.net/problem=14
 
-    0 ^ readi retrieve 1 -
+    0 ^ readi retrieve 1-
     0 ^ store
     1
 .loop:
@@ -12,7 +12,7 @@
     1 retrieve ^1 j< .longer
     drop
 .loop_next:
-    1 +
+    1+
     jmp .loop
 .end:
     0 retrieve printi end
@@ -30,14 +30,14 @@ collatz_memo:
     0 ^1
 .collatz_loop:
     ^ 1 j= .collatz_1
-    ^ 2 % jz .collatz_even
+    ^ 2% jz .collatz_even
 # .collatz_odd:
-    3 * 1 + 2 /
-    swap 2 + swap
+    3* 1+ 2/
+    swap 2+ swap
     jmp .collatz_next
 .collatz_even:
-    2 /
-    swap 1 + swap
+    2/
+    swap 1+ swap
 .collatz_next:
     ^ ^2 j< .collatz_stored
     jmp .collatz_loop

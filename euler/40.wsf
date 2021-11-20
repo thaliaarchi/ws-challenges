@@ -23,20 +23,20 @@ champernowne:
     ^ ^2 - ^3 * # range
     ^4 ^1 j< .champernowne_within_bounds
     ^4 swap - # n -= range
-    ^3 1 +    # exp++
+    ^3 1+     # exp++
     ^2        # lo = hi
-    ^ 10 *    # hi *= 10
+    ^ 10*     # hi *= 10
     call .champernowne
     4slide ret
 .champernowne_within_bounds:
     2drop
-    ^2 ^2 / +          # num that contains digit
-    swap ^2 ^1 % - 1 - # index of digit
+    ^2 ^2 / +         # num that contains digit
+    swap ^2 ^1 % - 1- # index of digit
 .champernowne_extract_digit:
     ^ jz .champernowne_ret
-    1 -
-    swap 10 / swap
+    1-
+    swap 10/ swap
     jmp .champernowne_extract_digit
 .champernowne_ret:
-    drop 10 % swap drop
+    drop 10% swap drop
     ret

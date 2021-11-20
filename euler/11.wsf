@@ -15,7 +15,7 @@
 
     0
 .loop_vert:
-    1 + # i++
+    1+ # i++
     ^ ^3 ^3 call line_prods # i n*n n
     ^ ^2 j< .loop_vert # i < n
     drop
@@ -33,11 +33,11 @@ read_square_grid:
 .read_square_grid_loop:
     2dup j< .read_square_grid_ret
     ^
-    ^  ^ readc retrieve '0' - 10 *
+    ^  ^ readc retrieve '0' - 10*
     ^1 ^ readc retrieve '0' - +
     ^1 readc # discard ' ' or '\n'
     store
-    1 +
+    1+
     jmp .read_square_grid_loop
 .read_square_grid_ret:
     2drop ret
@@ -46,7 +46,7 @@ read_square_grid:
 line_prods:
     ^2 retrieve
     ^3 ^2 + retrieve * # half0 = grid[0] * grid[stride]
-    ^3 ^2 2 * +        # i = stride * 2
+    ^3 ^2 2* +         # i = stride * 2
 .line_prods_loop:
     swap
     ^1 retrieve
@@ -55,7 +55,7 @@ line_prods:
     0 retrieve ^1 j< .line_prods_greater_prod
     drop
 .line_prods_loop_next:
-    swap ^2 2 * +      # i *= stride * 2
+    swap ^2 2* +       # i += stride * 2
     ^ ^4 j< .line_prods_loop
     5drop ret
 .line_prods_greater_prod:

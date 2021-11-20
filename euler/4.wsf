@@ -13,10 +13,10 @@
     2dup * ^ ^ 10 call reverse j= .is_pal
     drop
 .loop_j_continue:
-    1 -
+    1-
     jmp .loop_j
 .loop_i_continue:
-    drop 1 -
+    drop 1-
     jmp .loop_i
 .is_pal:
     ^ 0 retrieve j< .loop_i_continue

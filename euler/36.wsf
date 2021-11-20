@@ -2,7 +2,7 @@
 # Problem 36: Double-base palindromes
 # https://projecteuler.net/problem=36
 
-    0 ^ readi retrieve 1 -
+    0 ^ readi retrieve 1-
     1 0
 .loop_even:
     ^1 10 call make_pal_even
@@ -10,7 +10,7 @@
     ^ ^ 2 call reverse j= .is_pal_even
     drop
 .loop_even_continue:
-    swap 1 + swap
+    swap 1+ swap
     jmp .loop_even
 .is_pal_even:
     +
@@ -23,7 +23,7 @@
     ^ ^ 2 call reverse j= .is_pal_odd
     drop
 .loop_odd_continue:
-    swap 1 + swap
+    swap 1+ swap
     jmp .loop_odd
 .is_pal_odd:
     +

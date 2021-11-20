@@ -5,11 +5,11 @@
     1000 0
 .loop:
     ^1 ^ call exp + # TODO: replace with modexp
-    swap 1 -
+    swap 1-
     ^ jz .end
     swap
     jmp .loop
 .end:
     drop
-    10000000000 % printi
+    10000000000% printi
     end

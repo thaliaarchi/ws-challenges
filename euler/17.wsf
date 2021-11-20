@@ -3,54 +3,54 @@
 # https://projecteuler.net/problem=17
 
     # 1-9
-    3   # one
-    3 + # two
-    5 + # three
-    4 + # four
-    4 + # five
-    3 + # six
-    5 + # seven
-    5 + # eight
-    4 + # nine
+    3  # one
+    3+ # two
+    5+ # three
+    4+ # four
+    4+ # five
+    3+ # six
+    5+ # seven
+    5+ # eight
+    4+ # nine
 
     # 1-19
     ^
-    3 + # ten
-    6 + # eleven
-    6 + # twelve
-    8 + # thirteen
-    8 + # fourteen
-    7 + # fifteen
-    7 + # sixteen
-    9 + # seventeen
-    8 + # eighteen
-    8 + # nineteen
+    3+ # ten
+    6+ # eleven
+    6+ # twelve
+    8+ # thirteen
+    8+ # fourteen
+    7+ # fifteen
+    7+ # sixteen
+    9+ # seventeen
+    8+ # eighteen
+    8+ # nineteen
 
     # 20-99
-    ^1 8 *
-    6   # twenty
-    6 + # thirty
-    5 + # forty
-    5 + # fifty
-    5 + # sixty
-    7 + # seventy
-    6 + # eighty
-    6 + # ninety
-    10 * +
+    ^1 8*
+    6  # twenty
+    6+ # thirty
+    5+ # forty
+    5+ # fifty
+    5+ # sixty
+    7+ # seventy
+    6+ # eighty
+    6+ # ninety
+    10* +
 
     # 1-99
     +
 
     # 100-999
     ^
-    3 99  * + # and
-    7 100 * + # hundred
-    9 *
-    ^2 100 * +
+    3 99*  + # and
+    7 100* + # hundred
+    9*
+    ^2 100* +
 
     # 1-1000
     +
-    11 + # one thousand
+    11+ # one thousand
 
     printi end
 
@@ -90,7 +90,7 @@
     0
 .sum_loop:
     ^1 call number_letter_count +
-    swap 1 - ^ jz .end swap
+    swap 1- ^ jz .end swap
     jmp .sum_loop
 .end:
     drop printi end
@@ -106,36 +106,36 @@ number_letter_count:
     drop 0 ret
 .number_letter_count_trillions:
     ^ 1000000000000 j< .number_letter_count_billions
-    ^ 1000000000000 % call .number_letter_count_billions
-    swap 1000000000000 / call .number_letter_count_hundreds +
-    8 + ret # "trillion"
+    ^ 1000000000000% call .number_letter_count_billions
+    swap 1000000000000/ call .number_letter_count_hundreds +
+    8+ ret # "trillion"
 .number_letter_count_billions:
     ^ 1000000000 j< .number_letter_count_millions
-    ^ 1000000000 % call .number_letter_count_millions
-    swap 1000000000 / call .number_letter_count_hundreds +
-    7 + ret # "billion"
+    ^ 1000000000% call .number_letter_count_millions
+    swap 1000000000/ call .number_letter_count_hundreds +
+    7+ ret # "billion"
 .number_letter_count_millions:
     ^ 1000000 j< .number_letter_count_thousands
-    ^ 1000000 % call .number_letter_count_thousands
-    swap 1000000 / call .number_letter_count_hundreds +
-    7 + ret # "million"
+    ^ 1000000% call .number_letter_count_thousands
+    swap 1000000/ call .number_letter_count_hundreds +
+    7+ ret # "million"
 .number_letter_count_thousands:
     ^ 1000 j< .number_letter_count_hundreds
-    ^ 1000 % call .number_letter_count_hundreds
-    swap 1000 / call .number_letter_count_hundreds +
-    8 + ret # "thousand"
+    ^ 1000% call .number_letter_count_hundreds
+    swap 1000/ call .number_letter_count_hundreds +
+    8+ ret # "thousand"
 .number_letter_count_hundreds:
     ^ 100 j< .number_letter_count_tens
-    ^ 100 % jz .number_letter_count_hundreds_no_and
-    ^ 100 % call .number_letter_count_tens
-    swap 100 / retrieve +
-    10 + ret # "hundred and"
+    ^ 100% jz .number_letter_count_hundreds_no_and
+    ^ 100% call .number_letter_count_tens
+    swap 100/ retrieve +
+    10+ ret # "hundred and"
 .number_letter_count_hundreds_no_and:
-    100 / retrieve 7 + ret # "hundred"
+    100/ retrieve 7+ ret # "hundred"
 .number_letter_count_tens:
     ^ 20 j< .number_letter_count_under20
-    ^ 10 % retrieve # ones
-    swap 10 / 18 + retrieve + # tens
+    ^ 10% retrieve # ones
+    swap 10/ 18+ retrieve + # tens
     ret
 .number_letter_count_under20:
     retrieve ret
@@ -143,4 +143,4 @@ number_letter_count:
     drop 4 ret # "zero"
 .number_letter_count_neg:
     call .number_letter_count
-    8 + ret # "negative"
+    8+ ret # "negative"

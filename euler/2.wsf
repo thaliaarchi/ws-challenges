@@ -9,7 +9,7 @@
     ^3 ^2 j< .end
     ^1 + 0 swap store
     # f'(n) = f'(n-2) + 4f'(n-1)
-    swap ^1 4 * +
+    swap ^1 4* +
     jmp .fib3
 .end:
     3slide printi end
