@@ -3,15 +3,33 @@
 # https://projecteuler.net/problem=11
 
     0 ^ readi retrieve
-    call read_square_grid
+    ^ call read_square_grid
+    ^ ^ * swap
+
+    1
+.loop_horiz:
+    ^ ^2 + swap # i += n
+    ^1 1 call line_prods # i i+n 1
+    ^ ^3 j< .loop_horiz # i < n*n
+    drop
+
+    0
+.loop_vert:
+    1 + # i++
+    ^ ^3 ^3 call line_prods # i n*n n
+    ^ ^2 j< .loop_vert # i < n
+    drop
+
+.loop_diag:
+
     end
 
 # read_square_grid reads a square grid of two-digit numbers into the
-# heap, starting at address 0.
+# heap, starting at address 1.
 # (n -- )
 read_square_grid:
-    ^ * 1 -
-    0 # addr
+    ^ *
+    1 # addr
 .read_square_grid_loop:
     2dup j< .read_square_grid_ret
     ^
@@ -23,3 +41,23 @@ read_square_grid:
     jmp .read_square_grid_loop
 .read_square_grid_ret:
     2drop ret
+
+# (start end stride -- )
+line_prods:
+    ^2 retrieve
+    ^3 ^2 + retrieve * # half0 = grid[0] * grid[stride]
+    ^3 ^2 2 * +        # i = stride * 2
+.line_prods_loop:
+    swap
+    ^1 retrieve
+    ^2 ^4 + retrieve * # half1 = grid[i] * grid[i+stride]
+    swap ^1 *          # prod = half0 * half1
+    0 retrieve ^1 j< .line_prods_greater_prod
+    drop
+.line_prods_loop_next:
+    swap ^2 2 * +      # i *= stride * 2
+    ^ ^4 j< .line_prods_loop
+    5drop ret
+.line_prods_greater_prod:
+    0 swap store
+    jmp .line_prods_loop_next
