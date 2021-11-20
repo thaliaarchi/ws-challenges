@@ -2,7 +2,57 @@
 # Problem 17: Number letter counts
 # https://projecteuler.net/problem=17
 
-    0 ^ readi retrieve
+    # 1-9
+    3   # one
+    3 + # two
+    5 + # three
+    4 + # four
+    4 + # five
+    3 + # six
+    5 + # seven
+    5 + # eight
+    4 + # nine
+
+    # 1-19
+    ^
+    3 + # ten
+    6 + # eleven
+    6 + # twelve
+    8 + # thirteen
+    8 + # fourteen
+    7 + # fifteen
+    7 + # sixteen
+    9 + # seventeen
+    8 + # eighteen
+    8 + # nineteen
+
+    # 20-99
+    ^1 8 *
+    6   # twenty
+    6 + # thirty
+    5 + # forty
+    5 + # fifty
+    5 + # sixty
+    7 + # seventy
+    6 + # eighty
+    6 + # ninety
+    10 * +
+
+    # 1-99
+    +
+
+    # 100-999
+    ^
+    3 99  * + # and
+    7 100 * + # hundred
+    9 *
+    ^2 100 * +
+
+    # 1-1000
+    +
+    11 + # one thousand
+
+    printi end
 
     0  4 store # zero
     1  3 store # one
