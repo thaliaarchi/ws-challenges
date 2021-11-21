@@ -4,14 +4,17 @@ SED = gsed
 ASSEMBLE = wsc
 COMPILE = nebula-compile
 
+SOURCES = $(shell find . -type f -name '*.wsf')
+
 .PHONY: all
-all: $(patsubst %.wsf,$(BUILD)/%.ws,$(wildcard euler/*.wsf)) $(BUILD)/euler/14
+all: $(patsubst ./%.wsf,$(BUILD)/%.ws,$(SOURCES)) $(BUILD)/euler/14
 
 $(BUILD)/%.ws: $(BUILD)/%.wsa
 	$(ASSEMBLE) -f asm -t -o $@ $<
 
+.PRECIOUS: $(BUILD)/%.wsa
 $(BUILD)/%.wsa: $(WSLIB)/wsf.sed %.wsf
-	@mkdir -p $(dir $@)
+	@mkdir -p $(@D)
 	$(SED) -Ef $^ > $@
 
 $(BUILD)/euler/1.wsa: $(WSLIB)/math/math.wsf
