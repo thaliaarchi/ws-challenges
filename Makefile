@@ -1,5 +1,6 @@
 BUILD = build
 WSLIB = ../wslib
+WSLIB_BUILD = $(WSLIB)/build
 SED = gsed
 ASSEMBLE = wsc
 COMPILE = nebula-compile
@@ -16,19 +17,24 @@ $(BUILD)/%.ws: $(BUILD)/%.wsa
 .PRECIOUS: $(BUILD)/%.wsa
 $(BUILD)/%.wsa: %.wsf $(WSLIB)/wsf.sed
 	@mkdir -p $(@D)
-	$(SED) -Ef $(WSLIB)/wsf.sed $(filter %.wsf,$^) > $@
+	$(SED) -Ef $(WSLIB)/wsf.sed $< > $@
+	@cat $@ $(filter %.wsa,$^) | sponge $@
 
-$(BUILD)/euler/1.wsa: $(WSLIB)/math/math.wsf
-$(BUILD)/euler/6.wsa: $(WSLIB)/math/math.wsf
-$(BUILD)/euler/16.wsa: $(WSLIB)/math/exp.wsf
-$(BUILD)/euler/48.wsa: $(WSLIB)/math/exp.wsf
+$(BUILD)/euler/1.wsa: $(WSLIB_BUILD)/math/math.wsa
+$(BUILD)/euler/6.wsa: $(WSLIB_BUILD)/math/math.wsa
+$(BUILD)/euler/16.wsa: $(WSLIB_BUILD)/math/exp.wsa
+$(BUILD)/euler/48.wsa: $(WSLIB_BUILD)/math/exp.wsa
 
 $(BUILD)/euler/14: $(BUILD)/euler/14.ws
 	$(COMPILE) $< $@ '' '-heap 1000000'
 
 $(WSLIB)/%:
 	$(error No wslib installation found at WSLIB=$(WSLIB))
+$(WSLIB)/build/%.wsa:
+	@$(MAKE) -C $(WSLIB) --no-print-directory $(@:$(WSLIB)/%=%)
 
-.PHONY: clean
+.PHONY: clean clean_all
 clean:
 	@rm -rf $(BUILD)/
+clean_all: clean
+	@$(MAKE) -C $(WSLIB) --no-print-directory clean
