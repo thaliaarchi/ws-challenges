@@ -1,0 +1,47 @@
+# Advent of Code 2020
+# Day 2: Password Philosophy
+# https://adventofcode.com/2020/day/2
+
+    0 ^ readi retrieve neg
+
+    0
+.validate_loop:
+    '-' call readi_until # min
+    ' ' call readi_until # max
+    0 ^ readc retrieve   # ch
+    0 ^ readc readc
+    call read_password
+    call within_range +
+    swap 1+ swap
+    ^1 jn .validate_loop
+
+    printi '\n' printc
+    drop end
+
+# readi_until reads a number, stopping at character ch. Clobbers address
+# 0.
+# (ch -- n)
+readi_until:
+    0
+.readi_until_loop:
+    0 ^ readc retrieve
+    ^ ^3 j= .readi_until_ret
+    '0' - swap 10* +
+    jmp .readi_until_loop
+.readi_until_ret:
+    drop 1slide ret
+
+# read_password reads a password and returns the number of occurrences
+# of ch. Clobbers address 0.
+# (ch -- count)
+read_password:
+    0
+.read_password_loop:
+    0 ^ readc retrieve
+    ^ ^3 j= .read_password_match
+    '\n' j= .read_password_ret
+    jmp .read_password_loop
+.read_password_match:
+    drop 1+ jmp .read_password_loop
+.read_password_ret:
+    1slide ret
