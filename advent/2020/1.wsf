@@ -1,0 +1,32 @@
+# Advent of Code 2020
+# Day 1: Report Repair
+# https://adventofcode.com/2020/day/1
+
+    0
+.read_loop:
+    ^ ^ readi retrieve
+    jn .read_loop_break
+    1+
+    jmp .read_loop
+.read_loop_break:
+    1-
+
+    0
+.sum_permute_i:
+    ^1 ^1 j<= .sum_permute_i_break
+    ^ retrieve
+    ^1 1+
+.sum_permute_j:
+    ^3 ^1 j< .sum_permute_j_break
+    ^ retrieve
+    ^ ^3 + 2020 j= .sum_permute_2020
+    drop 1+
+    jmp .sum_permute_j
+.sum_permute_j_break:
+    2drop 1+
+    jmp .sum_permute_i
+.sum_permute_i_break:
+    2drop end
+.sum_permute_2020:
+    1slide * printi '\n' printc
+    2drop end

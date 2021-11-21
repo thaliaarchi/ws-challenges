@@ -1,6 +1,8 @@
-# Project Euler in Whitespace
+# Coding Challenges in Whitespace
 
-Solutions for Project Euler in Whitespace.
+Solutions for Project Euler and Advent of Code in Whitespace.
+
+## Project Euler
 
 - [Problem 1: Multiples of 3 or 5](euler/1.wsf)
 - [Problem 2: Even Fibonacci numbers](euler/2.wsf)
@@ -16,3 +18,9 @@ Solutions for Project Euler in Whitespace.
 - [Problem 36: Double-base palindromes](euler/36.wsf)
 - [Problem 40: Champernowne's constant](euler/40.wsf)
 - [Problem 48: Self powers](euler/48.wsf)
+
+## Advent of Code
+
+### 2020
+
+- [Day 1: Report Repair](advent/2020/1.wsf)
