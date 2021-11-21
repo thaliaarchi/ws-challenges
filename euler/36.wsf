@@ -29,7 +29,7 @@
     +
     jmp .loop_odd_continue
 .loop_odd_break:
-    drop printi drop end
+    drop printi 2drop end
 
 # reverse reverses the order of the digits of n.
 # (n base -- n')
