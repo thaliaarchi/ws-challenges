@@ -2,31 +2,69 @@
 # Day 1: Report Repair
 # https://adventofcode.com/2020/day/1
 
-    0
-.read_loop:
-    ^ ^ readi retrieve
-    jn .read_loop_break
-    1+
-    jmp .read_loop
-.read_loop_break:
-    1-
+    0 call readi_eof
+    ^ call find_combination_2 printi '\n' printc
+    ^ 2 call find_combination printi '\n' printc
+    3 call find_combination printi '\n' printc
+    end
 
-    0
-.sum_permute_i:
-    ^1 ^1 j<= .sum_permute_i_break
+# find_combination finds the combination of n numbers that sum to 2020
+# and returns the product. The numbers are stored on the heap from 0 to
+# len.
+# (len n -- prod)
+find_combination:
+    0 swap
+    0 swap
+# (len sum i n -- prod)
+.find_combination:
+    1- # n--
+    ^ jz .find_combination_base
+    swap
+    ^3 ^2 - swap # len - n
+    # (len sum n len-n i)
+.find_combination_loop:
+    ^ retrieve   # v = nums[i]
+    swap 1+ swap # i++
+    # (len sum n len-n i v)
+    ^5 ^5 ^2 + ^3 ^6 call .find_combination # len sum+v i n
+    # (len sum n len-n i v prod)
+    ^ jz .find_combination_loop_next
+    jmp .find_combination_prod
+.find_combination_loop_next:
+    2drop
+    # (len sum n len-n i)
+    ^ ^2 j< .find_combination_loop
+    5drop 0 ret
+.find_combination_base:
+    drop retrieve
+    # sum + nums[i] == 2020
+    swap ^1 + 2020 j= .find_combination_base_2020
+    2drop 0 ret
+.find_combination_base_2020:
+    1slide ret   # nums[i]
+.find_combination_prod:
+    * 5slide ret # prod * nums[i]
+
+# find_combination_2 finds the combination of 2 numbers that sum to 2020
+# and returns the product. The numbers are stored on the heap from 0 to
+# len.
+# (len -- prod)
+find_combination_2:
+    1- 0
+.find_combination_2_i:
+    ^1 ^1 j<= .find_combination_2_i_break
     ^ retrieve
     ^1 1+
-.sum_permute_j:
-    ^3 ^1 j< .sum_permute_j_break
+.find_combination_2_j:
+    ^3 ^1 j< .find_combination_2_j_break
     ^ retrieve
-    ^ ^3 + 2020 j= .sum_permute_2020
+    ^ ^3 + 2020 j= .find_combination_2_2020
     drop 1+
-    jmp .sum_permute_j
-.sum_permute_j_break:
+    jmp .find_combination_2_j
+.find_combination_2_j_break:
     2drop 1+
-    jmp .sum_permute_i
-.sum_permute_i_break:
+    jmp .find_combination_2_i
+.find_combination_2_i_break:
     2drop end
-.sum_permute_2020:
-    1slide * printi '\n' printc
-    2drop end
+.find_combination_2_2020:
+    1slide * 2slide ret

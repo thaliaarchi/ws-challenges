@@ -24,6 +24,7 @@ $(BUILD)/euler/1.wsa: $(WSLIB_BUILD)/math/math.wsa
 $(BUILD)/euler/6.wsa: $(WSLIB_BUILD)/math/math.wsa
 $(BUILD)/euler/16.wsa: $(WSLIB_BUILD)/math/exp.wsa
 $(BUILD)/euler/48.wsa: $(WSLIB_BUILD)/math/exp.wsa
+$(BUILD)/advent/2020/1.wsa: $(WSLIB_BUILD)/io/read.wsa
 
 $(BUILD)/euler/14: $(BUILD)/euler/14.ws
 	$(COMPILE) $< $@ '' '-heap 1000000'
