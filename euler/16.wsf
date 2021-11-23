@@ -2,9 +2,11 @@
 # Problem 16: Power digit sum
 # https://projecteuler.net/problem=16
 
+    "@math" import
+
     0 ^ readi retrieve
     0 ^ readi retrieve
-    call exp
+    call math.exp
     0
 .loop:
     ^1 10% +

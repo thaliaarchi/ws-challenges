@@ -17,21 +17,21 @@ $(BUILD)/%.ws: $(BUILD)/%.wsa
 .PRECIOUS: $(BUILD)/%.wsa
 $(BUILD)/%.wsa: %.wsf $(WSLIB)/wsf.sed
 	@mkdir -p $(@D)
-	$(SED) -Ef $(WSLIB)/wsf.sed $< > $@
-	@cat $@ $(filter %.wsa,$^) | sponge $@
+	$(WSLIB)/wsf-assemble $< $@
 
+# Manually-enumerated dependencies
 $(BUILD)/euler/1.wsa: $(WSLIB_BUILD)/math/math.wsa
 $(BUILD)/euler/6.wsa: $(WSLIB_BUILD)/math/math.wsa
 $(BUILD)/euler/16.wsa: $(WSLIB_BUILD)/math/exp.wsa
 $(BUILD)/euler/48.wsa: $(WSLIB_BUILD)/math/exp.wsa
-$(BUILD)/advent/2020/1.wsa: $(WSLIB_BUILD)/io/read.wsa
-$(BUILD)/advent/2020/2.wsa: $(WSLIB_BUILD)/array/array.wsa $(WSLIB_BUILD)/io/read.wsa $(WSLIB_BUILD)/math/logical.wsa $(WSLIB_BUILD)/math/math.wsa
+$(BUILD)/advent/2020/1.wsa: $(WSLIB_BUILD)/types/string.wsa
+$(BUILD)/advent/2020/2.wsa: $(WSLIB_BUILD)/math/math.wsa $(WSLIB_BUILD)/types/array.wsa $(WSLIB_BUILD)/types/bool.wsa $(WSLIB_BUILD)/types/string.wsa
 
 $(BUILD)/euler/14: $(BUILD)/euler/14.ws
 	$(COMPILE) $< $@ '' '-heap 1000000'
 
 $(WSLIB)/%:
-	$(error No wslib installation found at WSLIB=$(WSLIB))
+	$(error $* not found at WSLIB=$(WSLIB))
 $(WSLIB)/build/%.wsa: $(WSLIB)/%.wsf
 	@$(MAKE) -C $(WSLIB) --no-print-directory $(@:$(WSLIB)/%=%)
 

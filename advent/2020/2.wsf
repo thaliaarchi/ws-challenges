@@ -2,6 +2,11 @@
 # Day 2: Password Philosophy
 # https://adventofcode.com/2020/day/2
 
+    "@math"         import
+    "@types/array"  import
+    "@types/bool"   import
+    "@types/string" import
+
     2 ^ readi retrieve neg
 
 .validate_loop:
@@ -9,18 +14,18 @@
     ' ' call readi_until # y
     2 ^ readc retrieve   # ch
     2 ^ readc readc
-    2 call read_line     # len
+    2 call string.read_line # len
 
     # Part 1 validity criterion
     ^3 ^3
-    2 ^3 ^5 call count # 2 len ch
-    call within_range  # x <= count <= y
+    2 ^3 ^5 call array.count # 2 len ch
+    call math.in_range # x <= count <= y
     0 retrieve + 0 swap store
 
     # Part 2 validity criterion
     ^3 1+ retrieve ^2 -
     ^3 1+ retrieve ^3 -
-    call logical_xor
+    call bool.xor
     1 retrieve + 1 swap store
 
     4drop 1+

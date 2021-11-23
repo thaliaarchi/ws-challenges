@@ -2,7 +2,9 @@
 # Problem 6: Sum square difference
 # https://projecteuler.net/problem=6
 
+    "@math" import
+
     0 ^ readi retrieve
-    ^ call sum ^ *
-    swap call sum_squares
+    ^ call math.sum ^ *
+    swap call math.sum_squares
     - printi end

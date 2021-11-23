@@ -2,7 +2,9 @@
 # Day 1: Report Repair
 # https://adventofcode.com/2020/day/1
 
-    0 call readi_eof
+    "@types/array" import
+
+    0 call array.read_eof
     ^ call find_combination_2 printi '\n' printc
     ^ 2 call find_combination printi '\n' printc
     3 call find_combination printi '\n' printc
