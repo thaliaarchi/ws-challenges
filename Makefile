@@ -15,7 +15,7 @@ $(BUILD)/%.ws: $(BUILD)/%.wsa
 	$(ASSEMBLE) -f asm -t -o $@ $<
 
 .PRECIOUS: $(BUILD)/%.wsa
-$(BUILD)/%.wsa: %.wsf $(WSLIB)/wsf.sed
+$(BUILD)/%.wsa: %.wsf $(WSLIB)/wsf.sed $(WSLIB)/wsf-assemble
 	@mkdir -p $(@D)
 	$(WSLIB)/wsf-assemble $< $@
 
@@ -23,6 +23,7 @@ $(BUILD)/%.wsa: %.wsf $(WSLIB)/wsf.sed
 $(BUILD)/euler/1.wsa: $(WSLIB_BUILD)/math/math.wsa
 $(BUILD)/euler/6.wsa: $(WSLIB_BUILD)/math/math.wsa
 $(BUILD)/euler/16.wsa: $(WSLIB_BUILD)/math/exp.wsa
+$(BUILD)/euler/25.wsa: $(WSLIB_BUILD)/math/exp.wsa
 $(BUILD)/euler/48.wsa: $(WSLIB_BUILD)/math/exp.wsa
 $(BUILD)/advent/2020/1.wsa: $(WSLIB_BUILD)/types/string.wsa
 $(BUILD)/advent/2020/2.wsa: $(WSLIB_BUILD)/math/math.wsa $(WSLIB_BUILD)/types/array.wsa $(WSLIB_BUILD)/types/bool.wsa $(WSLIB_BUILD)/types/string.wsa

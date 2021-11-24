@@ -1,0 +1,22 @@
+# Project Euler
+# Problem 25: 1000-digit Fibonacci number
+# https://projecteuler.net/problem=25
+
+    "@math" import
+
+    10 0 ^ readi retrieve 1- call math.exp
+    call fib_index printi
+    end
+
+# fib_index returns the index of the first Fibonacci number that is at
+# least min.
+# (min -- i)
+fib_index:
+    0 1 0
+# (min f0 f1 i -- i)
+.fib_index:
+    ^2 ^4 j< .fib_index_recur
+    3slide ret
+.fib_index_recur:
+    ^3 ^2 ^ ^5 + ^3 1+ call .fib_index
+    4slide ret
