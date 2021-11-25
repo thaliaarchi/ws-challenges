@@ -27,6 +27,7 @@ $(BUILD)/euler/25.wsa: $(WSLIB_BUILD)/math/exp.wsa
 $(BUILD)/euler/48.wsa: $(WSLIB_BUILD)/math/exp.wsa
 $(BUILD)/advent/2020/1.wsa: $(WSLIB_BUILD)/types/string.wsa
 $(BUILD)/advent/2020/2.wsa: $(WSLIB_BUILD)/math/math.wsa $(WSLIB_BUILD)/types/array.wsa $(WSLIB_BUILD)/types/bool.wsa $(WSLIB_BUILD)/types/string.wsa
+$(BUILD)/advent/2020/3.wsa: $(WSLIB_BUILD)/types/bool.wsa $(WSLIB_BUILD)/types/matrix.wsa $(WSLIB_BUILD)/types/string.wsa
 
 $(BUILD)/euler/14: $(BUILD)/euler/14.ws
 	$(COMPILE) $< $@ '' '-heap 1000000'
