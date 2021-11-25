@@ -5,14 +5,15 @@
     "@math"         import
     "@types/array"  import
     "@types/bool"   import
+    "@types/int"    import
     "@types/string" import
 
     2 ^ readi retrieve neg
 
 .validate_loop:
-    '-' call readi_until # x
-    ' ' call readi_until # y
-    2 ^ readc retrieve   # ch
+    2 '-' call int.read_until # x
+    2 ' ' call int.read_until # y
+    2 ^ readc retrieve # ch
     2 ^ readc readc
     2 call string.read_line # len
 
@@ -34,16 +35,3 @@
     0 retrieve printi '\n' printc
     1 retrieve printi '\n' printc
     end
-
-# readi_until reads a number, stopping at character ch. Clobbers address
-# 2.
-# (ch -- n)
-readi_until:
-    0
-.readi_until_loop:
-    2 ^ readc retrieve
-    ^ ^3 j= .readi_until_ret
-    '0' - swap 10* +
-    jmp .readi_until_loop
-.readi_until_ret:
-    drop 1slide ret

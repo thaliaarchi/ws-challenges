@@ -20,14 +20,20 @@ $(BUILD)/%.wsa: %.wsf $(WSLIB)/wsf.sed $(WSLIB)/wsf-assemble
 	$(WSLIB)/wsf-assemble $< $@
 
 # Manually-enumerated dependencies
-$(BUILD)/euler/1.wsa: $(WSLIB_BUILD)/math/math.wsa
-$(BUILD)/euler/6.wsa: $(WSLIB_BUILD)/math/math.wsa
-$(BUILD)/euler/16.wsa: $(WSLIB_BUILD)/math/exp.wsa
-$(BUILD)/euler/25.wsa: $(WSLIB_BUILD)/math/exp.wsa
-$(BUILD)/euler/48.wsa: $(WSLIB_BUILD)/math/exp.wsa
-$(BUILD)/advent/2020/1.wsa: $(WSLIB_BUILD)/types/string.wsa
-$(BUILD)/advent/2020/2.wsa: $(WSLIB_BUILD)/math/math.wsa $(WSLIB_BUILD)/types/array.wsa $(WSLIB_BUILD)/types/bool.wsa $(WSLIB_BUILD)/types/string.wsa
-$(BUILD)/advent/2020/3.wsa: $(WSLIB_BUILD)/types/bool.wsa $(WSLIB_BUILD)/types/matrix.wsa $(WSLIB_BUILD)/types/string.wsa
+MATH = $(WSLIB)/math/module.wsf $(WSLIB)/math/collatz.wsf $(WSLIB)/math/divmod.wsf $(WSLIB)/math/exp.wsf $(WSLIB)/math/gcd.wsf $(WSLIB)/math/math.wsf
+ARRAY = $(WSLIB)/types/array.wsf
+BOOL = $(WSLIB)/types/bool.wsf
+INT = $(WSLIB)/types/int/module.wsf $(WSLIB)/types/int/bits.wsf $(WSLIB)/types/int/print.wsf $(WSLIB)/types/int/read.wsf
+MATRIX = $(WSLIB)/types/matrix.wsf
+STRING = $(WSLIB)/types/string.wsf
+$(BUILD)/euler/1.wsa: $(MATH)
+$(BUILD)/euler/6.wsa: $(MATH)
+$(BUILD)/euler/16.wsa: $(MATH)
+$(BUILD)/euler/25.wsa: $(MATH)
+$(BUILD)/euler/48.wsa: $(MATH)
+$(BUILD)/advent/2020/1.wsa: $(STRING)
+$(BUILD)/advent/2020/2.wsa: $(MATH) $(ARRAY) $(BOOL) $(INT) $(STRING)
+$(BUILD)/advent/2020/3.wsa: $(BOOL) $(MATRIX) $(STRING)
 
 $(BUILD)/euler/14: $(BUILD)/euler/14.ws
 	$(COMPILE) $< $@ '' '-heap 1000000'
