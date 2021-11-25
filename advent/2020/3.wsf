@@ -10,8 +10,9 @@
     0 ^ readi retrieve # w
     0 ^2 ^2 call matrix.read_chars jz .read_error
 
-    0 ^2 ^2 1 1 call count_slope_trees
-    0 ^3 ^3 1 3 call count_slope_trees *
+    0 ^2 ^2 1 3 call count_slope_trees
+    ^ printi '\n' printc
+    0 ^3 ^3 1 1 call count_slope_trees *
     0 ^3 ^3 1 5 call count_slope_trees *
     0 ^3 ^3 1 7 call count_slope_trees *
     0 ^3 ^3 2 1 call count_slope_trees *
@@ -30,7 +31,7 @@ count_slope_trees:
     +                # i = x + y
     ^2 ^1 j< .count_slope_trees_ret # i >= len
     # count += h[addr + i] == '#'
-    swap ^7 ^2 + retrieve '#' call bool.is_eq + swap
+    swap ^7 ^2 + retrieve '#' = + swap
     jmp .count_slope_trees_loop
 .count_slope_trees_ret:
     drop 6slide ret
