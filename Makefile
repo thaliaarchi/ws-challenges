@@ -9,7 +9,7 @@ WSF = $(patsubst ./%,%,$(shell find . -type f -name '*.wsf'))
 WS = $(patsubst %.wsf,$(BUILD)/%.ws,$(WSF))
 
 .PHONY: all
-all: $(WS) $(BUILD)/euler/14
+all: $(WS) $(BUILD)/euler/14 $(BUILD)/advent/2020/1
 
 $(BUILD)/%.ws: $(BUILD)/%.wsa
 	$(ASSEMBLE) -f asm -t -o $@ $<
@@ -37,6 +37,8 @@ $(BUILD)/advent/2020/3.wsa: $(BOOL) $(MATRIX) $(STRING)
 
 $(BUILD)/euler/14: $(BUILD)/euler/14.ws
 	$(COMPILE) $< $@ '' '-heap 1000000'
+$(BUILD)/advent/2020/1: $(BUILD)/advent/2020/1.ws
+	$(COMPILE) $< $@ '' '-heap 201'
 
 $(WSLIB)/%:
 	$(error $* not found at WSLIB=$(WSLIB))
