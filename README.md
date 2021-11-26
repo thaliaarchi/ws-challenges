@@ -14,6 +14,7 @@ Solutions for Project Euler and Advent of Code in Whitespace.
 - [Problem 14: Longest Collatz sequence](euler/14.wsf)
 - [Problem 16: Power digit sum](euler/16.wsf)
 - [Problem 17: Number letter counts](euler/17.wsf)
+- [Problem 22: Names scores](euler/22.wsf)
 - [Problem 25: 1000-digit Fibonacci number](euler/25.wsf)
 - [Problem 34: Digit factorials](euler/34.wsf)
 - [Problem 36: Double-base palindromes](euler/36.wsf)

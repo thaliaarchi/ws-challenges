@@ -1,0 +1,28 @@
+# Project Euler
+# Problem 22: Names scores
+# https://projecteuler.net/problem=22
+
+    "@types/bool"   import
+    "@types/int"    import
+    "@types/string" import
+
+    0
+.read_loop:
+    ^ '"' call expect_char jz .read_quote_error
+    ^ ^ '"' call int.read_base26_until jz .read_name_error store
+    1+
+    ^ ',' call expect_char jz .read_loop_break
+    jmp .read_loop
+.read_loop_break:
+    end
+
+# (addr ch -- ok?)
+expect_char:
+    swap ^ readc retrieve = ret
+
+.read_quote_error:
+    -1 "Error: quote expected before name\n"
+    call string.print_neg_stack drop end
+.read_name_error:
+    -1 "Error: invalid character in name\n"
+    call string.print_neg_stack 3drop end
