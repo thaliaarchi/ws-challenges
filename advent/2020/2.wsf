@@ -11,8 +11,8 @@
     2 ^ readi retrieve neg
 
 .validate_loop:
-    2 '-' call int.read_until # x
-    2 ' ' call int.read_until # y
+    2 '-' call int.read_until jz .read_error # x
+    2 ' ' call int.read_until jz .read_error # y
     2 ^ readc retrieve # ch
     2 ^ readc readc
     2 call string.read_line # len
@@ -35,3 +35,7 @@
     0 retrieve printi '\n' printc
     1 retrieve printi '\n' printc
     end
+
+.read_error:
+    -1 "Error: invalid int format\n"
+    call string.print_neg_stack end

@@ -25,7 +25,7 @@ ARRAY = $(WSLIB)/types/array.wsf
 BOOL = $(WSLIB)/types/bool.wsf
 INT = $(WSLIB)/types/int/module.wsf $(WSLIB)/types/int/bits.wsf $(WSLIB)/types/int/print.wsf $(WSLIB)/types/int/read.wsf
 MATRIX = $(WSLIB)/types/matrix.wsf
-STRING = $(WSLIB)/types/string.wsf
+STRING = $(WSLIB)/types/string/io.wsf $(WSLIB)/types/string/printf.wsf
 $(BUILD)/euler/1.wsa: $(MATH)
 $(BUILD)/euler/6.wsa: $(MATH)
 $(BUILD)/euler/16.wsa: $(MATH)
