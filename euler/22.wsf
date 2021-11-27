@@ -2,27 +2,76 @@
 # Problem 22: Names scores
 # https://projecteuler.net/problem=22
 
+    "@math"         import
+    "@types/array"  import
     "@types/bool"   import
-    "@types/int"    import
     "@types/string" import
 
-    0
+    27 15 call math.exp # Names up to 15 characters
+
+    0 # len
 .read_loop:
     ^ '"' call expect_char jz .read_quote_error
-    ^ ^ '"' call int.read_base26_until jz .read_name_error store
+    2dup call read_name jz .read_name_error
+    ^1 swap store
     1+
     ^ ',' call expect_char jz .read_loop_break
     jmp .read_loop
 .read_loop_break:
-    end
+    0 ^1 call array.quicksort
 
+    1-
+    0 0 # i score
+.score_loop:
+    ^2 ^2 j< .score_loop_break
+    ^1 call name_score +
+    swap 1+ swap
+    jmp .score_loop
+.score_loop_break:
+    3slide printi end
+
+# expect_char reads the next char and returns whether it equals ch.
+# Clobbers the given address.
 # (addr ch -- ok?)
 expect_char:
     swap ^ readc retrieve = ret
+
+# read_name reads a number in base 27 with the alphabet [A-Z], stopping
+# at '"'. The number is padded to a fixed length using pow, which must
+# be a power of 27. Clobbers the given address.
+# (pow addr -- n ok?)
+read_name:
+    swap 0
+.read_name_loop:
+    ^2 ^ readc retrieve
+    ^ '"' j= .read_name_ok
+    ^ 'A' j< .read_name_invalid
+    ^ '[' j< .read_name_letter
+.read_name_invalid:
+    drop 2slide 0 ret
+.read_name_ok:
+    drop 2slide 1 ret
+.read_name_letter:
+    '@' - ^2 * +  # n += (ch-('A'-1))*pow
+    swap 27/ swap # pow /= 27
+    jmp .read_name_loop
 
 .read_quote_error:
     -1 "Error: quote expected before name\n"
     call string.print_neg_stack drop end
 .read_name_error:
-    -1 "Error: invalid character in name\n"
+    -1 "Error: invalid name format\n"
     call string.print_neg_stack 3drop end
+
+# name_score returns the score for the name at index i, that is, the sum
+# of the letters multiplied by i+1.
+# (i -- score)
+name_score:
+    0 ^1 retrieve
+.name_score_loop:
+    ^ jz .name_score_ret
+    swap ^1 27% + swap
+    27/
+    jmp .name_score_loop
+.name_score_ret:
+    drop swap 1+ * ret
