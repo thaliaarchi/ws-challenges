@@ -20,12 +20,15 @@ $(BUILD)/%.wsa: %.wsf $(WSLIB)/wsf.sed $(WSLIB)/wsf-assemble
 	$(WSLIB)/wsf-assemble $< $@
 
 # Manually-enumerated dependencies
+CRYPTO = $(WSLIB)/crypto/module.wsf $(WSLIB)/crypto/caesar.wsf $(WSLIB)/crypto/luhn.wsf
 MATH = $(WSLIB)/math/module.wsf $(WSLIB)/math/collatz.wsf $(WSLIB)/math/divmod.wsf $(WSLIB)/math/exp.wsf $(WSLIB)/math/gcd.wsf $(WSLIB)/math/math.wsf
-ARRAY = $(WSLIB)/types/array/array.wsf $(WSLIB)/types/array/sort.wsf
+ARRAY = $(WSLIB)/types/array/module.wsf $(WSLIB)/types/array/array.wsf $(WSLIB)/types/array/sort.wsf
 BOOL = $(WSLIB)/types/bool.wsf
+CHAR = $(WSLIB)/types/char/module.wsf $(WSLIB)/types/char/print.wsf $(WSLIB)/types/char/unicode.wsf
 INT = $(WSLIB)/types/int/module.wsf $(WSLIB)/types/int/bits.wsf $(WSLIB)/types/int/print.wsf $(WSLIB)/types/int/read.wsf
+MAP = $(WSLIB)/types/map.wsf
 MATRIX = $(WSLIB)/types/matrix.wsf
-STRING = $(WSLIB)/types/string/io.wsf $(WSLIB)/types/string/printf.wsf
+STRING = $(WSLIB)/types/string/module.wsf $(WSLIB)/types/string/compare.wsf $(WSLIB)/types/string/print.wsf $(WSLIB)/types/string/read.wsf $(WSLIB)/types/string/store.wsf
 $(BUILD)/euler/1.wsa: $(MATH)
 $(BUILD)/euler/6.wsa: $(MATH)
 $(BUILD)/euler/16.wsa: $(MATH)
