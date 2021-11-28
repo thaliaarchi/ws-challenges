@@ -2,6 +2,8 @@
 # Problem 4: Largest palindrome product
 # https://projecteuler.net/problem=4
 
+    "@types/int" import
+
     0 ^ store # store before retrieving, to avoid wspace error
 
     999
@@ -10,7 +12,7 @@
     ^
 .loop_j:
     ^ 100 j< .loop_i_continue
-    2dup * ^ ^ 10 call reverse j= .is_pal
+    2dup * ^ ^ 10 call int.reverse_digits j= .is_pal
     drop
 .loop_j_continue:
     1-
@@ -24,15 +26,3 @@
     jmp .loop_i_continue
 .end:
     0 retrieve printi drop end
-
-# reverse reverses the order of the digits of n.
-# (n base -- n')
-reverse:
-    swap 0
-.reverse_loop:
-    ^1 jz .reverse_ret
-    ^2 * ^1 ^3 % +
-    swap ^2 / swap
-    jmp .reverse_loop
-.reverse_ret:
-    2slide ret

@@ -25,15 +25,17 @@ MATH = $(WSLIB)/math/module.wsf $(WSLIB)/math/collatz.wsf $(WSLIB)/math/divmod.w
 ARRAY = $(WSLIB)/types/array/module.wsf $(WSLIB)/types/array/array.wsf $(WSLIB)/types/array/sort.wsf
 BOOL = $(WSLIB)/types/bool.wsf
 CHAR = $(WSLIB)/types/char/module.wsf $(WSLIB)/types/char/print.wsf $(WSLIB)/types/char/unicode.wsf
-INT = $(WSLIB)/types/int/module.wsf $(WSLIB)/types/int/bits.wsf $(WSLIB)/types/int/print.wsf $(WSLIB)/types/int/read.wsf
+INT = $(WSLIB)/types/int/module.wsf $(WSLIB)/types/int/bits.wsf $(WSLIB)/types/int/int.wsf $(WSLIB)/types/int/print.wsf $(WSLIB)/types/int/read.wsf
 MAP = $(WSLIB)/types/map.wsf
 MATRIX = $(WSLIB)/types/matrix.wsf
 STRING = $(WSLIB)/types/string/module.wsf $(WSLIB)/types/string/compare.wsf $(WSLIB)/types/string/print.wsf $(WSLIB)/types/string/read.wsf $(WSLIB)/types/string/store.wsf
 $(BUILD)/euler/1.wsa: $(MATH)
+$(BUILD)/euler/4.wsa: $(INT)
 $(BUILD)/euler/6.wsa: $(MATH)
 $(BUILD)/euler/16.wsa: $(MATH)
 $(BUILD)/euler/22.wsa: $(MATH) $(ARRAY) $(BOOL) $(STRING)
 $(BUILD)/euler/25.wsa: $(MATH)
+$(BUILD)/euler/36.wsa: $(INT)
 $(BUILD)/euler/48.wsa: $(MATH)
 $(BUILD)/advent/2020/1.wsa: $(STRING)
 $(BUILD)/advent/2020/2.wsa: $(MATH) $(ARRAY) $(BOOL) $(INT) $(STRING)
