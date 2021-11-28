@@ -24,6 +24,7 @@ echo advent/2020/2: ; diff advent/2020/2.out <($wspace $build/advent/2020/2.ws <
 echo advent/2020/3: ; diff advent/2020/3.out <($wspace $build/advent/2020/3.ws < advent/2020/3.in)
 echo rosetta/99_bottles: ; diff rosetta/99_bottles.out <($wspace $build/rosetta/99_bottles.ws)
 echo rosetta/ascii: ; diff rosetta/ascii.out <($wspace $build/rosetta/ascii.ws)
+echo rosetta/binary_digits: ; diff rosetta/binary_digits.out <($wspace $build/rosetta/binary_digits.ws < rosetta/binary_digits.in)
 echo rosetta/fizzbuzz: ; diff rosetta/fizzbuzz.out <($wspace $build/rosetta/fizzbuzz.ws)
 echo misc/ascii4: ; diff misc/ascii4.out <($wspace $build/misc/ascii4.ws)
 

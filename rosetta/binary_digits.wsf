@@ -1,0 +1,14 @@
+# Rosetta Code
+# Binary digits
+# https://rosettacode.org/wiki/Binary_digits
+
+    "@types/int" import
+
+.loop:
+    0 ^ readi retrieve
+    ^ jeof .end
+    2 call int.print_base
+    '\n' printc
+    jmp .loop
+.end:
+    drop end

@@ -1,0 +1,14 @@
+# Rosetta Code
+# Count in octal
+# https://rosettacode.org/wiki/Count_in_octal
+
+    "@types/int" import
+
+    0
+.loop:
+    ^ 8 call int.print_base
+    '\n' printc
+    1+
+    jmp .loop
+.end:
+    drop end

@@ -1,0 +1,12 @@
+# Rosetta Code
+# Integer sequence
+# https://rosettacode.org/wiki/Integer_sequence
+
+    1
+.loop:
+    ^ printi
+    '\n' printc
+    1+
+    jmp .loop
+.end:
+    drop end

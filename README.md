@@ -33,7 +33,10 @@ test [wslib](https://github.com/andrewarchi/wslib).
 ## Rosetta Code
 
 - [99 Bottles of Beer](rosetta/99_bottles.wsf)
+- [Binary digits](rosetta/binary_digits.wsf)
+- [Count in octal](rosetta/count_in_octal.wsf)
 - [FizzBuzz](rosetta/fizzbuzz.wsf)
+- [Integer sequence](rosetta/integer_sequence.wsf)
 - [Show ASCII Table](rosetta/ascii.wsf)
 
 ## Code Golf

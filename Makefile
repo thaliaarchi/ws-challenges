@@ -39,6 +39,8 @@ $(BUILD)/advent/2020/1.wsa: $(STRING)
 $(BUILD)/advent/2020/2.wsa: $(MATH) $(ARRAY) $(BOOL) $(INT) $(STRING)
 $(BUILD)/advent/2020/3.wsa: $(BOOL) $(MATRIX) $(STRING)
 $(BUILD)/rosetta/99_bottles.wsa: $(STRING)
+$(BUILD)/rosetta/binary_digits.wsa: $(INT)
+$(BUILD)/rosetta/count_in_octal.wsa: $(INT)
 
 $(BUILD)/euler/14: $(BUILD)/euler/14.ws
 	$(COMPILE) $< $@ '' '-heap 1000000'
