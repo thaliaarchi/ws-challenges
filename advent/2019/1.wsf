@@ -2,13 +2,34 @@
 # Day 1: The Tyranny of the Rocket Equation
 # https://adventofcode.com/2019/day/1
 
-    0
+    0 ^
 .loop:
     0 ^ readi retrieve
     ^ jn .end
-    3/ 2- +
+    # Part 1
+    call fuel +
+
+    # Part 2
+    swap
+    0 retrieve
+.loop_part2:
+    call fuel
+    ^ jz .loop_part2_break
+    swap ^1 + swap
+    jmp .loop_part2
+.loop_part2_break:
+    drop swap
     jmp .loop
 .end:
     drop
     printi '\n' printc
+    printi '\n' printc
     end
+
+# (mass -- fuel)
+fuel:
+    3/ 2-
+    ^ jn .fuel_neg
+    ret
+.fuel_neg:
+    drop 0 ret
