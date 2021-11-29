@@ -1,0 +1,14 @@
+# Advent of Code 2019
+# Day 1: The Tyranny of the Rocket Equation
+# https://adventofcode.com/2019/day/1
+
+    0
+.loop:
+    0 ^ readi retrieve
+    ^ jn .end
+    3/ 2- +
+    jmp .loop
+.end:
+    drop
+    printi '\n' printc
+    end

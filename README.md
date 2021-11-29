@@ -24,6 +24,10 @@ test [wslib](https://github.com/andrewarchi/wslib).
 
 ## Advent of Code
 
+### 2019
+
+- [Day 1: The Tyranny of the Rocket Equation](advent/2019/1.wsf)
+
 ### 2020
 
 - [Day 1: Report Repair](advent/2020/1.wsf)
