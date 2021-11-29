@@ -27,6 +27,7 @@ test [wslib](https://github.com/andrewarchi/wslib).
 ### 2019
 
 - [Day 1: The Tyranny of the Rocket Equation](advent/2019/1.wsf)
+- [Day 2: 1202 Program Alarm](advent/2019/2.wsf)
 
 ### 2020
 

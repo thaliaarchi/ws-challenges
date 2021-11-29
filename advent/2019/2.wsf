@@ -1,0 +1,12 @@
+# Advent of Code 2019
+# Day 2: 1202 Program Alarm
+# https://adventofcode.com/2019/day/2
+
+    "@vm/intcode" import
+
+    call intcode.read_program
+    1 12 store
+    2 2  store
+    call intcode.interpret drop
+    0 retrieve printi '\n' printc
+    end

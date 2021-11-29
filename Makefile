@@ -29,6 +29,7 @@ INT = $(WSLIB)/types/int/module.wsf $(WSLIB)/types/int/bits.wsf $(WSLIB)/types/i
 MAP = $(WSLIB)/types/map.wsf
 MATRIX = $(WSLIB)/types/matrix.wsf
 STRING = $(WSLIB)/types/string/module.wsf $(WSLIB)/types/string/compare.wsf $(WSLIB)/types/string/print.wsf $(WSLIB)/types/string/read.wsf $(WSLIB)/types/string/store.wsf
+INTCODE = $(WSLIB)/vm/intcode.wsf
 $(BUILD)/euler/1.wsa: $(MATH)
 $(BUILD)/euler/4.wsa: $(INT)
 $(BUILD)/euler/6.wsa: $(MATH)
@@ -37,6 +38,7 @@ $(BUILD)/euler/22.wsa: $(MATH) $(ARRAY) $(BOOL) $(STRING)
 $(BUILD)/euler/25.wsa: $(MATH)
 $(BUILD)/euler/36.wsa: $(INT)
 $(BUILD)/euler/48.wsa: $(MATH)
+$(BUILD)/advent/2019/2.wsa: $(INTCODE)
 $(BUILD)/advent/2020/1.wsa: $(STRING)
 $(BUILD)/advent/2020/2.wsa: $(MATH) $(ARRAY) $(BOOL) $(INT) $(STRING)
 $(BUILD)/advent/2020/3.wsa: $(BOOL) $(MATRIX) $(STRING)
