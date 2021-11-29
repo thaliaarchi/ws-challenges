@@ -1,0 +1,59 @@
+# Rosetta Code
+# Find palindromic numbers in both binary and ternary bases
+# https://rosettacode.org/wiki/Find_palindromic_numbers_in_both_binary_and_ternary_bases
+
+    "@types/int" import
+
+    0 ^ readi retrieve # n
+
+    # Handle 0 separately
+    0 call print_pal
+
+    # Iterate chunked by magnitude so that palindromes are visited in
+    # order.
+    1 ^ # i found
+.loop_magnitude: # IVs: i found
+    ^1 2* swap # hi = i*2
+
+    ^2 # j = i
+.loop_odd: # IVs: found j
+    ^ 2 call int.make_palindrome_odd
+    ^ ^ 3 call int.reverse_digits j= .is_pal_odd
+    drop
+.loop_odd_continue:
+    1+ # j++
+    ^ ^3 j< .loop_odd # j < hi
+    drop
+
+    ^2 # j = i
+.loop_even: # IVs: found j
+    ^ 2 call int.make_palindrome_even
+    ^ ^ 3 call int.reverse_digits j= .is_pal_even
+    drop
+.loop_even_continue:
+    1+ # j++
+    ^ ^3 j< .loop_even # j < hi
+    drop
+
+    swap drop swap 2* swap # i *= 2
+    jmp .loop_magnitude
+
+.is_pal_odd:
+    call print_pal
+    swap 1+ swap # j++
+    ^1 ^5 j< .loop_odd_continue # found < n
+    jmp .end
+.is_pal_even:
+    call print_pal
+    swap 1+ swap # j++
+    ^1 ^5 j< .loop_even_continue # found < n
+.end:
+    5drop end
+
+# print_pal prints a palindrome in decimal, binary, and ternary.
+# (n -- )
+print_pal:
+    ^ printi ' ' printc
+    ^ 3 call int.print_base ' ' printc
+    2 call int.print_base '\n' printc
+    ret

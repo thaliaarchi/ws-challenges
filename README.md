@@ -35,6 +35,7 @@ test [wslib](https://github.com/andrewarchi/wslib).
 - [99 Bottles of Beer](rosetta/99_bottles.wsf)
 - [Binary digits](rosetta/binary_digits.wsf)
 - [Count in octal](rosetta/count_in_octal.wsf)
+- [Find palindromic numbers in both binary and ternary bases](rosetta/palindrome_2_3.wsf)
 - [FizzBuzz](rosetta/fizzbuzz.wsf)
 - [Integer sequence](rosetta/integer_sequence.wsf)
 - [Show ASCII Table](rosetta/ascii.wsf)

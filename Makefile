@@ -9,7 +9,7 @@ WSF = $(patsubst ./%,%,$(shell find . -type f -name '*.wsf'))
 WS = $(patsubst %.wsf,$(BUILD)/%.ws,$(WSF))
 
 .PHONY: all
-all: $(WS) $(BUILD)/euler/14 $(BUILD)/advent/2020/1
+all: $(WS) $(BUILD)/euler/14 $(BUILD)/advent/2020/1 $(BUILD)/rosetta/palindrome_2_3
 
 $(BUILD)/%.ws: $(BUILD)/%.wsa
 	$(ASSEMBLE) -f asm -t -o $@ $<
@@ -43,11 +43,14 @@ $(BUILD)/advent/2020/3.wsa: $(BOOL) $(MATRIX) $(STRING)
 $(BUILD)/rosetta/99_bottles.wsa: $(STRING)
 $(BUILD)/rosetta/binary_digits.wsa: $(INT)
 $(BUILD)/rosetta/count_in_octal.wsa: $(INT)
+$(BUILD)/rosetta/palindrome_2_3.wsa: $(INT)
 
 $(BUILD)/euler/14: $(BUILD)/euler/14.ws
 	$(COMPILE) $< $@ '' '-heap 1000000'
 $(BUILD)/advent/2020/1: $(BUILD)/advent/2020/1.ws
 	$(COMPILE) $< $@ '' '-heap 201'
+$(BUILD)/rosetta/palindrome_2_3: $(BUILD)/rosetta/palindrome_2_3.ws
+	$(COMPILE) $< $@ '' '-heap 1'
 
 $(WSLIB)/%:
 	$(error $* not found at WSLIB=$(WSLIB))
