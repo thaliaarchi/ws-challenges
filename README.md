@@ -34,6 +34,7 @@ test [wslib](https://github.com/andrewarchi/wslib).
 - [Day 1: Report Repair](advent/2020/1.wsf)
 - [Day 2: Password Philosophy](advent/2020/2.wsf)
 - [Day 3: Toboggan Trajectory](advent/2020/3.wsf)
+- [Day 5: Binary Boarding](advent/2020/5.wsf)
 
 ## Rosetta Code
 
