@@ -5,8 +5,34 @@
     "@vm/intcode" import
 
     call intcode.read_program
-    ^ 0 call intcode.reset_program
+
+    # Part 1
+    ^ call intcode.init_program
     ^ 12 2 call intcode.set_inputs
-    call intcode.interpret 2drop
-    retrieve printi '\n' printc
-    end
+    ^ call intcode.interpret
+    ^2 retrieve printi '\n' printc
+    1slide call intcode.reset_program
+
+    # Part 2
+    0 # noun
+.loop_noun:
+    99 ^1 j< .not_found
+    0 # verb
+.loop_verb:
+    99 ^1 j< .loop_noun_continue
+    3dup call intcode.set_inputs
+    ^2 call intcode.interpret
+    ^2 retrieve 19690720 j= .found
+    1slide call intcode.reset_program
+    1+
+    jmp .loop_verb
+.loop_noun_continue:
+    drop 1+
+    jmp .loop_noun
+
+.found:
+    3drop swap
+    100* + printi '\n' printc
+    drop end
+.not_found:
+    "?\n" prints 2drop end

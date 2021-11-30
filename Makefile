@@ -9,7 +9,9 @@ AOCDL = aocdl
 
 WSF = $(patsubst ./%,%,$(shell find . -not \( -type d -path ./$(BUILD) -prune \) -type f -name '*.wsf'))
 WS = $(patsubst %.wsf,$(BUILD)/%.ws,$(WSF))
-BINARIES = $(addprefix $(BUILD)/,euler/14 advent/2020/1 rosetta/palindrome_2_3)
+COMPILED_PROGRAMS = euler/14.wsf advent/2019/2.wsf advent/2020/1.wsf \
+	rosetta/palindrome_2_3.wsf
+BINARIES = $(patsubst %.wsf,$(BUILD)/%,$(COMPILED_PROGRAMS))
 
 .PHONY: all
 all: $(WS) $(BINARIES)
@@ -25,6 +27,7 @@ $(BUILD)/%.wsa: %.wsf $(WSLIB)/wsf.sed $(WSLIB)/wsf-assemble
 $(BINARIES): $(BUILD)/%: $(BUILD)/%.ws
 	$(COMPILE) $< $@ '' '$(NEBULA_FLAGS)'
 $(BUILD)/euler/14: NEBULA_FLAGS = -heap 1000000
+$(BUILD)/advent/2019/2: NEBULA_FLAGS = -heap 500
 $(BUILD)/advent/2020/1: NEBULA_FLAGS = -heap 201
 $(BUILD)/rosetta/palindrome_2_3: NEBULA_FLAGS = -heap 1
 
