@@ -8,15 +8,28 @@
 
     0 ^ readi retrieve
     0
-.loop:
-    swap 1- ^ jn .end swap
+.read_loop:
+    swap 1- ^ jn .read_loop_break swap
     0 'F' 'B' 7 call read_binary jz .read_error 8*
     0 'L' 'R' 3 call read_binary jz .read_error +
     0 '\n' call char.read_expect jz .read_error
+    ^ 1+ 1 store
     call math.max
-    jmp .loop
-.end:
-    drop printi '\n' printc end
+    jmp .read_loop
+.read_loop_break:
+    drop
+    printi '\n' printc
+
+    1
+.find_loop:
+    1+
+    ^ retrieve jz .find_loop_empty
+    jmp .find_loop
+.find_loop_empty:
+    ^ 1- retrieve jz .find_loop
+    ^ 1+ retrieve jz .find_loop
+    1- printi '\n' printc
+    end
 
 # read_binary reads a fixed-length binary number with ch0 for 0 and ch1
 # for 1. Clobbers the given address.
