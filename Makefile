@@ -5,6 +5,7 @@ SED = gsed
 ASSEMBLE = wsc
 COMPILE = nebula-compile
 WSPACE = wspace
+AOCDL = aocdl
 
 WSF = $(patsubst ./%,%,$(shell find . -not \( -type d -path ./$(BUILD) -prune \) -type f -name '*.wsf'))
 WS = $(patsubst %.wsf,$(BUILD)/%.ws,$(WSF))
@@ -77,6 +78,18 @@ $(TESTS_WITH_INPUTS): $(BUILD)/%.out: $(BUILD)/%.ws %.in
 	$(WSPACE) $< < $*.in > $@
 $(BINARY_TESTS): $(BUILD)/%.out: $(BUILD)/% %.in
 	$< < $*.in > $@
+
+ADVENT_WSF = $(shell find advent -type f -name '*.wsf')
+ADVENT_IN = $(shell find advent -type f -name '*.in')
+ADVENT_INPUTS = $(filter-out $(ADVENT_IN),$(patsubst %.wsf,%.in,$(ADVENT_WSF)))
+
+.PHONY: advent_inputs
+advent_inputs: $(ADVENT_INPUTS)
+
+# Fetch Advent of Code inputs with aocdl
+# https://github.com/GreenLightning/advent-of-code-downloader
+advent/%.in:
+	$(AOCDL) -year $(@D:advent/%=%) -day $(@F:%.in=%) -output $@
 
 .PHONY: clean clean_all clean_tests
 clean:
