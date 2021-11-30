@@ -5,8 +5,8 @@
     "@vm/intcode" import
 
     call intcode.read_program
-    1 12 store
-    2 2  store
-    call intcode.interpret drop
-    0 retrieve printi '\n' printc
+    ^ 0 call intcode.reset_program
+    ^ 12 2 call intcode.set_inputs
+    call intcode.interpret 2drop
+    retrieve printi '\n' printc
     end
