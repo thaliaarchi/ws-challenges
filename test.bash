@@ -1,35 +1,12 @@
 #!/bin/bash
 
-build=build
-wspace=wspace
+BUILD=build
 
-make -k
-echo euler/1: ; diff euler/1.out <($wspace $build/euler/1.ws < euler/1.in)
-echo euler/2: ; diff euler/2.out <($wspace $build/euler/2.ws < euler/2.in)
-echo euler/4: ; diff euler/4.out <($wspace $build/euler/4.ws)
-echo euler/6: ; diff euler/6.out <($wspace $build/euler/6.ws < euler/6.in)
-echo euler/8: ; diff euler/8.out <($wspace $build/euler/8.ws < euler/8.in)
-echo euler/11: ; diff euler/11.out <($wspace $build/euler/11.ws < euler/11.in)
-echo euler/13: ; diff euler/13.out <($wspace $build/euler/13.ws < euler/13.in)
-echo euler/14: ; diff euler/14.out <($build/euler/14 < euler/14.in)
-echo euler/16: ; diff euler/16.out <($wspace $build/euler/16.ws < euler/16.in)
-echo euler/17: ; diff euler/17.out <($wspace $build/euler/17.ws)
-echo euler/25: ; diff euler/25.out <($wspace $build/euler/25.ws < euler/25.in)
-echo euler/34: ; diff euler/34.out <($wspace $build/euler/34.ws)
-echo euler/36: ; diff euler/36.out <($wspace $build/euler/36.ws < euler/36.in)
-echo euler/40: ; diff euler/40.out <($wspace $build/euler/40.ws)
-echo euler/48: ; diff euler/48.out <($wspace $build/euler/48.ws)
-echo advent/2019/1: ; diff advent/2019/1.out <($wspace $build/advent/2019/1.ws < advent/2019/1.in)
-echo advent/2019/2: ; diff advent/2019/2.out <($wspace $build/advent/2019/2.ws < advent/2019/2.in)
-echo advent/2020/1: ; diff advent/2020/1.out <($build/advent/2020/1 < advent/2020/1.in)
-echo advent/2020/2: ; diff advent/2020/2.out <($wspace $build/advent/2020/2.ws < advent/2020/2.in)
-echo advent/2020/3: ; diff advent/2020/3.out <($wspace $build/advent/2020/3.ws < advent/2020/3.in)
-echo rosetta/99_bottles: ; diff rosetta/99_bottles.out <($wspace $build/rosetta/99_bottles.ws)
-echo rosetta/ascii: ; diff rosetta/ascii.out <($wspace $build/rosetta/ascii.ws)
-echo rosetta/binary_digits: ; diff rosetta/binary_digits.out <($wspace $build/rosetta/binary_digits.ws < rosetta/binary_digits.in)
-echo rosetta/fizzbuzz: ; diff rosetta/fizzbuzz.out <($wspace $build/rosetta/fizzbuzz.ws)
-echo rosetta/palindrome_2_3: ; diff rosetta/palindrome_2_3.out <($build/rosetta/palindrome_2_3 < rosetta/palindrome_2_3.in)
-echo misc/ascii4: ; diff misc/ascii4.out <($wspace $build/misc/ascii4.ws)
+make all run_tests
 
-# Long-running tests:
-echo euler/22: ; diff euler/22.out <($wspace $build/euler/22.ws < euler/22.in)
+find . -not \( -type d -path "./$BUILD" -prune \) -type f -name '*.out' | sort -V |
+while read -r out; do
+  name="${out#./}"
+  echo "${name%.out}"
+  diff "$out" "$BUILD/$out"
+done

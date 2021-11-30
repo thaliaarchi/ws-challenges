@@ -4,12 +4,14 @@ WSLIB_BUILD = $(WSLIB)/build
 SED = gsed
 ASSEMBLE = wsc
 COMPILE = nebula-compile
+WSPACE = wspace
 
-WSF = $(patsubst ./%,%,$(shell find . -type f -name '*.wsf'))
+WSF = $(patsubst ./%,%,$(shell find . -not \( -type d -path ./$(BUILD) -prune \) -type f -name '*.wsf'))
 WS = $(patsubst %.wsf,$(BUILD)/%.ws,$(WSF))
+BINARIES = $(addprefix $(BUILD)/,euler/14 advent/2020/1 rosetta/palindrome_2_3)
 
 .PHONY: all
-all: $(WS) $(BUILD)/euler/14 $(BUILD)/advent/2020/1 $(BUILD)/rosetta/palindrome_2_3
+all: $(WS) $(BINARIES)
 
 $(BUILD)/%.ws: $(BUILD)/%.wsa
 	$(ASSEMBLE) -f asm -t -o $@ $<
@@ -18,6 +20,12 @@ $(BUILD)/%.ws: $(BUILD)/%.wsa
 $(BUILD)/%.wsa: %.wsf $(WSLIB)/wsf.sed $(WSLIB)/wsf-assemble
 	@mkdir -p $(@D)
 	$(WSLIB)/wsf-assemble $< $@
+
+$(BINARIES): $(BUILD)/%: $(BUILD)/%.ws
+	$(COMPILE) $< $@ '' '$(NEBULA_FLAGS)'
+$(BUILD)/euler/14: NEBULA_FLAGS = -heap 1000000
+$(BUILD)/advent/2020/1: NEBULA_FLAGS = -heap 201
+$(BUILD)/rosetta/palindrome_2_3: NEBULA_FLAGS = -heap 1
 
 # Manually-enumerated dependencies
 CRYPTO = $(WSLIB)/crypto/module.wsf $(WSLIB)/crypto/caesar.wsf $(WSLIB)/crypto/luhn.wsf
@@ -47,20 +55,33 @@ $(BUILD)/rosetta/binary_digits.wsa: $(INT)
 $(BUILD)/rosetta/count_in_octal.wsa: $(INT)
 $(BUILD)/rosetta/palindrome_2_3.wsa: $(INT)
 
-$(BUILD)/euler/14: $(BUILD)/euler/14.ws
-	$(COMPILE) $< $@ '' '-heap 1000000'
-$(BUILD)/advent/2020/1: $(BUILD)/advent/2020/1.ws
-	$(COMPILE) $< $@ '' '-heap 201'
-$(BUILD)/rosetta/palindrome_2_3: $(BUILD)/rosetta/palindrome_2_3.ws
-	$(COMPILE) $< $@ '' '-heap 1'
-
 $(WSLIB)/%:
 	$(error $* not found at WSLIB=$(WSLIB))
 $(WSLIB)/build/%.wsa: $(WSLIB)/%.wsf
 	@$(MAKE) -C $(WSLIB) --no-print-directory $(@:$(WSLIB)/%=%)
 
-.PHONY: clean clean_all
+TEST_INPUTS = $(patsubst ./%,%,$(shell find . -not \( -type d -path ./$(BUILD) -prune \) -type f -name '*.in'))
+TEST_OUTPUTS = $(patsubst ./%,%,$(shell find . -not \( -type d -path ./$(BUILD) -prune \) -type f -name '*.out'))
+TESTS = $(addprefix $(BUILD)/,$(TEST_OUTPUTS))
+BINARY_TESTS = $(addsuffix .out,$(BINARIES))
+WSPACE_TESTS = $(filter-out $(BINARY_TESTS),$(TESTS))
+TESTS_WITH_INPUTS = $(filter $(patsubst %.in,$(BUILD)/%.out,$(TEST_INPUTS)),$(WSPACE_TESTS))
+TESTS_WITHOUT_INPUTS = $(filter-out $(TESTS_WITH_INPUTS),$(WSPACE_TESTS))
+
+.PHONY: run_tests
+run_tests: $(TESTS) $(BINARY_TESTS)
+
+$(TESTS_WITHOUT_INPUTS): $(BUILD)/%.out: $(BUILD)/%.ws
+	$(WSPACE) $< > $@
+$(TESTS_WITH_INPUTS): $(BUILD)/%.out: $(BUILD)/%.ws %.in
+	$(WSPACE) $< < $*.in > $@
+$(BINARY_TESTS): $(BUILD)/%.out: $(BUILD)/% %.in
+	$< < $*.in > $@
+
+.PHONY: clean clean_all clean_tests
 clean:
 	@rm -rf $(BUILD)/
 clean_all: clean
 	@$(MAKE) -C $(WSLIB) --no-print-directory clean
+clean_tests:
+	@find $(BUILD) -type f -name '*.out' -delete
