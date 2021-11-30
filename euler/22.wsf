@@ -5,17 +5,18 @@
     "@math"         import
     "@types/array"  import
     "@types/bool"   import
+    "@types/char"   import
     "@types/string" import
 
     27 15 call math.exp # Names up to 15 characters
 
     0 # len
 .read_loop:
-    ^ '"' call expect_char jz .read_quote_error
+    ^ '"' call char.read_expect jz .read_quote_error
     2dup call read_name jz .read_name_error
     ^1 swap store
     1+
-    ^ ',' call expect_char jz .read_loop_break
+    ^ ',' call char.read_expect jz .read_loop_break
     jmp .read_loop
 .read_loop_break:
     0 ^1 call array.quicksort
@@ -29,12 +30,6 @@
     jmp .score_loop
 .score_loop_break:
     3slide printi end
-
-# expect_char reads the next char and returns whether it equals ch.
-# Clobbers the given address.
-# (addr ch -- ok?)
-expect_char:
-    swap ^ readc retrieve = ret
 
 # read_name reads a number in base 27 with the alphabet [A-Z], stopping
 # at '"'. The number is padded to a fixed length using pow, which must

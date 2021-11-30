@@ -33,7 +33,7 @@ CRYPTO = $(WSLIB)/crypto/module.wsf $(WSLIB)/crypto/caesar.wsf $(WSLIB)/crypto/l
 MATH = $(WSLIB)/math/module.wsf $(WSLIB)/math/collatz.wsf $(WSLIB)/math/divmod.wsf $(WSLIB)/math/exp.wsf $(WSLIB)/math/gcd.wsf $(WSLIB)/math/math.wsf
 ARRAY = $(WSLIB)/types/array/module.wsf $(WSLIB)/types/array/array.wsf $(WSLIB)/types/array/sort.wsf
 BOOL = $(WSLIB)/types/bool.wsf
-CHAR = $(WSLIB)/types/char/module.wsf $(WSLIB)/types/char/print.wsf $(WSLIB)/types/char/unicode.wsf
+CHAR = $(WSLIB)/types/char/module.wsf $(WSLIB)/types/char/io.wsf $(WSLIB)/types/char/unicode.wsf
 INT = $(WSLIB)/types/int/module.wsf $(WSLIB)/types/int/bits.wsf $(WSLIB)/types/int/int.wsf $(WSLIB)/types/int/print.wsf $(WSLIB)/types/int/read.wsf
 MAP = $(WSLIB)/types/map.wsf
 MATRIX = $(WSLIB)/types/matrix.wsf
@@ -43,7 +43,7 @@ $(BUILD)/euler/1.wsa: $(MATH)
 $(BUILD)/euler/4.wsa: $(INT)
 $(BUILD)/euler/6.wsa: $(MATH)
 $(BUILD)/euler/16.wsa: $(MATH)
-$(BUILD)/euler/22.wsa: $(MATH) $(ARRAY) $(BOOL) $(STRING)
+$(BUILD)/euler/22.wsa: $(MATH) $(ARRAY) $(BOOL) $(CHAR) $(STRING)
 $(BUILD)/euler/25.wsa: $(MATH)
 $(BUILD)/euler/36.wsa: $(INT)
 $(BUILD)/euler/48.wsa: $(MATH)
