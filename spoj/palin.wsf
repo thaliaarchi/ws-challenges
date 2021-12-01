@@ -2,23 +2,49 @@
 # Problem 5: PALIN - The Next Palindrome
 # https://www.spoj.com/problems/PALIN/
 
-    "@types/int" import
+    "@math"       import
+    "@types/bool" import
+    "@types/int"  import
 
     0 ^ readi retrieve
 .loop:
     1- ^ jn .end
     0 ^ readi retrieve
-    call find_pal printi '\n' printc
+    1+ call find_pal printi '\n' printc
     jmp .loop
 .end:
     drop end
 
-# find_pal returns the smallest base-10 palindrome larger than n.
+# find_pal returns the smallest base-10 palindrome greater than or equal
+# to n.
 # (n -- pal)
 find_pal:
-    1+
-    ^ 10 call int.reverse_digits
-    ^1 j= .find_pal_ret
-    jmp find_pal
-.find_pal_ret:
-    ret
+    ^ call digit_count
+    10 ^1 2/ call math.exp
+    swap 2% jz .find_pal_even
+    2dup / # upper
+    ^
+    ^2 10* ^4 ^1 % + # lower with leading 1
+    10 call int.reverse_digits 10/
+    < + # upper++ if reverse(lower) > upper
+    10 call int.make_palindrome_odd
+    2slide ret
+.find_pal_even:
+    2dup / # upper
+    ^
+    ^2 ^4 ^1 % + # lower with leading 1
+    10 call int.reverse_digits 10/
+    < + # upper++ if reverse(lower) > upper
+    10 call int.make_palindrome_even
+    2slide ret
+
+# digit_count returns the number of base-10 digits in n.
+# (n -- count)
+digit_count:
+    0
+.digit_count_loop:
+    swap ^ jz .digit_count_ret
+    10/ swap 1+
+    jmp .digit_count_loop
+.digit_count_ret:
+    drop ret
