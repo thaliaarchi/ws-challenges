@@ -1,0 +1,24 @@
+# Sphere Online Judge
+# Problem 5: PALIN - The Next Palindrome
+# https://www.spoj.com/problems/PALIN/
+
+    "@types/int" import
+
+    0 ^ readi retrieve
+.loop:
+    1- ^ jn .end
+    0 ^ readi retrieve
+    call find_pal printi '\n' printc
+    jmp .loop
+.end:
+    drop end
+
+# find_pal returns the smallest base-10 palindrome larger than n.
+# (n -- pal)
+find_pal:
+    1+
+    ^ 10 call int.reverse_digits
+    ^1 j= .find_pal_ret
+    jmp find_pal
+.find_pal_ret:
+    ret
