@@ -2,17 +2,37 @@
 # Day 1: Sonar Sweep
 # https://adventofcode.com/2021/day/1
 
-    0
-    0 ^ readi retrieve
-.loop:
-    0 ^ readi retrieve
-    ^ jn .loop_break
-    2dup j< .increase
-    1slide
-    jmp .loop
-.increase:
-    1slide swap 1+ swap
-    jmp .loop
-.loop_break:
-    2drop
-    printi '\n' printc end
+    "@types/array" import
+
+    0 call array.read_eof 1-
+
+    0 0 # sum i
+.loop_1:
+    1+
+    ^2 ^1 j< .loop_1_break
+    ^ 1- retrieve
+    ^1 retrieve
+    j< .loop_1_increase
+    jmp .loop_1
+.loop_1_increase:
+    swap 1+ swap
+    jmp .loop_1
+.loop_1_break:
+    drop
+    printi '\n' printc
+
+    0 2 # sum i
+.loop_3:
+    1+
+    ^2 ^1 j< .loop_3_break
+    ^ 3- retrieve
+    ^1 retrieve
+    j< .loop_3_increase
+    jmp .loop_3
+.loop_3_increase:
+    swap 1+ swap
+    jmp .loop_3
+.loop_3_break:
+    drop
+    printi '\n' printc
+    drop end
