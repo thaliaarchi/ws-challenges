@@ -3,6 +3,7 @@
 # https://adventofcode.com/2021/day/1
 
     "@types/array" import
+    "@types/bool"  import
 
     0 call array.read_eof
     ^ 1 call window_increases printi '\n' printc
@@ -14,16 +15,12 @@
 # (len n -- increases)
 window_increases:
     swap 1-
-    0 ^2 1- # sum i
+    0 ^2 # sum i
 .window_increases_loop:
-    1+
     ^2 ^1 j< .window_increases_ret
-    ^ ^4 - retrieve
-    ^1 retrieve
-    j< .window_increases_larger
-    jmp .window_increases_loop
-.window_increases_larger:
-    swap 1+ swap
+    # sum += a[i-n] < a[i]
+    swap ^1 ^4 - retrieve ^2 retrieve < + swap
+    1+
     jmp .window_increases_loop
 .window_increases_ret:
     swap 3slide ret
