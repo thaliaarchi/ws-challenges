@@ -2,11 +2,12 @@
 
 BUILD=build
 
-make all run_tests
+make -k all run_tests
 
 find . -not \( -type d -path "./$BUILD" -prune \) -type f -name '*.out' | sort -V |
 while read -r out; do
-  name="${out#./}"
-  echo "${name%.out}"
+  test -f "${out%.out}.wsf" || continue
+  out="${out#./}"
+  echo "${out%.out}"
   diff "$out" "$BUILD/$out"
 done

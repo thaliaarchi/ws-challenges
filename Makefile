@@ -64,23 +64,28 @@ $(WSLIB)/%:
 $(WSLIB)/build/%.wsa: $(WSLIB)/%.wsf
 	@$(MAKE) -C $(WSLIB) --no-print-directory $(@:$(WSLIB)/%=%)
 
-TEST_INPUTS = $(patsubst ./%,%,$(shell find . -not \( -type d -path ./$(BUILD) -prune \) -type f -name '*.in'))
-TEST_OUTPUTS = $(patsubst ./%,%,$(shell find . -not \( -type d -path ./$(BUILD) -prune \) -type f -name '*.out'))
-TESTS = $(addprefix $(BUILD)/,$(TEST_OUTPUTS))
 BINARY_TESTS = $(addsuffix .out,$(BINARIES))
-WSPACE_TESTS = $(filter-out $(BINARY_TESTS),$(TESTS))
-TESTS_WITH_INPUTS = $(filter $(patsubst %.in,$(BUILD)/%.out,$(TEST_INPUTS)),$(WSPACE_TESTS))
-TESTS_WITHOUT_INPUTS = $(filter-out $(TESTS_WITH_INPUTS),$(WSPACE_TESTS))
+TEST_IN = $(patsubst ./%,%,$(shell find . -not \( -type d -path ./$(BUILD) -prune \) -type f -name '*.in'))
+TEST_OUT = $(patsubst ./%,%,$(shell find . -not \( -type d -path ./$(BUILD) -prune \) -type f -name '*.out'))
+TESTS_WITH_IN = $(filter $(patsubst %.in,$(BUILD)/%.out,$(TEST_IN)),$(patsubst %.wsf,$(BUILD)/%.out,$(WSF)))
+TESTS_WITH_OUT = $(filter $(patsubst %.out,$(BUILD)/%.out,$(TEST_OUT)),$(patsubst %.wsf,$(BUILD)/%.out,$(WSF)))
+TESTS_WITHOUT_IN = $(filter-out $(TESTS_WITH_IN),$(TESTS_WITH_OUT))
+TESTS_MISSING_OUT = $(patsubst $(BUILD)/%.out,%.out,$(filter-out $(TESTS_WITH_OUT),$(TESTS_WITH_IN)))
 
 .PHONY: run_tests
-run_tests: $(TESTS) $(BINARY_TESTS)
+run_tests: $(TESTS_MISSING_OUT) $(TESTS_WITH_IN) $(TESTS_WITH_OUT)
 
-$(TESTS_WITHOUT_INPUTS): $(BUILD)/%.out: $(BUILD)/%.ws
-	$(WSPACE) $< > $@
-$(TESTS_WITH_INPUTS): $(BUILD)/%.out: $(BUILD)/%.ws %.in
+$(filter-out $(BINARY_TESTS),$(TESTS_WITH_IN)): $(BUILD)/%.out: $(BUILD)/%.ws %.in
 	$(WSPACE) $< < $*.in > $@
-$(BINARY_TESTS): $(BUILD)/%.out: $(BUILD)/% %.in
+$(filter-out $(BINARY_TESTS),$(TESTS_WITHOUT_IN)): $(BUILD)/%.out: $(BUILD)/%.ws
+	$(WSPACE) $< > $@
+$(filter $(BINARY_TESTS),$(TESTS_WITH_IN)): $(BUILD)/%.out: $(BUILD)/% %.in
 	$< < $*.in > $@
+$(filter $(BINARY_TESTS),$(TESTS_WITHOUT_IN)): $(BUILD)/%.out: $(BUILD)/%
+	$< < $@
+$(TESTS_MISSING_OUT):
+	$(info Created $@)
+	@echo "?" > $@
 
 ADVENT_WSF = $(shell find advent -type f -name '*.wsf')
 ADVENT_IN = $(shell find advent -type f -name '*.in')
