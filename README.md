@@ -54,6 +54,10 @@ test [wslib](https://github.com/andrewarchi/wslib).
 
 - [Implement cowsay](codegolf/cowsay.wsf)
 
+## Sphere Online Judge
+
+- [Problem 3: SBSTR1 - Substring Check (Bug Funny)](spoj/sbstr1.wsf)
+
 ## Misc
 
 - [Four-column ASCII table](misc/ascii4.wsf)

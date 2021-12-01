@@ -1,0 +1,34 @@
+# Sphere Online Judge
+# Problem 3: SBSTR1 - Substring Check (Bug Funny)
+# https://www.spoj.com/problems/SBSTR1/
+
+    "@types/int"    import
+    "@types/string" import
+
+    -24
+.loop:
+    0 ' ' 2 call int.read_base_until jz .read_error
+    0 '\n' 2 call int.read_base_until jz .read_error
+    call is_substring printi '\n' printc
+    1+
+    ^ jn .loop
+    drop end
+
+# is_substring returns whether sub, which is in the range [0, 2**5), is
+# a substring of s.
+# (s sub -- ?)
+is_substring:
+    swap
+.is_substring_loop:
+    ^ 32% ^2 j= .is_substring_true
+    ^ jz .is_substring_false
+    2/
+    jmp .is_substring_loop
+.is_substring_true:
+    1 2slide ret
+.is_substring_false:
+    0 2slide ret
+
+.read_error:
+    -1 "Error: invalid format\n" call string.print_neg_stack
+    2drop end
