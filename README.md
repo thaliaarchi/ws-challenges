@@ -58,6 +58,7 @@ test [wslib](https://github.com/andrewarchi/wslib).
 
 - [Problem 1: TEST - Life, the Universe, and Everything](spoj/test.wsf)
 - [Problem 3: SBSTR1 - Substring Check (Bug Funny)](spoj/sbstr1.wsf)
+- [Problem 4: ONP - Transform the Expression](spoj/onp.wsf)
 
 ## Misc
 

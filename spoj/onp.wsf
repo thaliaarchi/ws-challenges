@@ -1,0 +1,101 @@
+# Sphere Online Judge
+# Problem 4: ONP - Transform the Expression
+# https://www.spoj.com/problems/ONP/
+
+# Implements the shunting-yard algorithm
+# https://en.wikipedia.org/wiki/Shunting-yard_algorithm#The_algorithm_in_detail
+
+    0 ^ readi retrieve
+.loop:
+    1- ^ jn .end
+    call infix_to_rpn '\n' printc
+    jmp .loop
+.end:
+    drop end
+
+# infix_to_rpn reads an infix expression on one line and converts it to
+# Reverse Polish notation. Supports + - * / % ^ () and single-letter
+# variables.
+# ( -- )
+infix_to_rpn:
+    -1
+.infix_to_rpn_loop:
+    0 ^ readc retrieve
+    ^ '\n' j= .infix_to_rpn_done
+    ^ ' ' j= .infix_to_rpn_space
+    ^ '+' j= .infix_to_rpn_precedence_2_left
+    ^ '-' j= .infix_to_rpn_precedence_2_left
+    ^ '*' j= .infix_to_rpn_precedence_3_left
+    ^ '/' j= .infix_to_rpn_precedence_3_left
+    ^ '%' j= .infix_to_rpn_precedence_3_left
+    ^ '^' j= .infix_to_rpn_precedence_4_right
+    ^ '(' j= .infix_to_rpn_left_paren
+    ^ ')' j= .infix_to_rpn_right_paren
+    ^ 'A' j< .index_to_rpn_syntax_error
+    ^ '[' j< .infix_to_rpn_variable
+    ^ 'a' j< .index_to_rpn_syntax_error
+    ^ '{' j< .infix_to_rpn_variable
+.index_to_rpn_syntax_error:
+    call .clear_stack
+    "Syntax error\n" prints end
+.infix_to_rpn_space:
+    drop jmp .infix_to_rpn_loop
+
+# Pop remaining operators and error if there is a left paren.
+.infix_to_rpn_done:
+    drop
+    ^ jn .infix_to_rpn_ret
+    jz .infix_to_rpn_unmatched
+    ^ printi jmp .infix_to_rpn_done
+.infix_to_rpn_unmatched:
+    "Unmatched (\n" prints end
+.infix_to_rpn_ret:
+    drop ret
+
+# Pop and print operators on the operator stack (which is just the
+# Whitespace stack) that have a precedence greater than the precedence
+# of the incoming operator or, if left associative, precedence greater
+# than or equal.
+# (-1 op0 prec0 ... opn precn op -- -1 op0 ... opm precm op prec)
+.infix_to_rpn_precedence_2_left:
+    1 ^2 j< .infix_to_rpn_precedence_2_left_pop # prec >= 2
+    2 jmp .infix_to_rpn_loop
+.infix_to_rpn_precedence_2_left_pop:
+    ^2 printc 2slide jmp .infix_to_rpn_precedence_2_left
+.infix_to_rpn_precedence_3_left:
+    2 ^2 j< .infix_to_rpn_precedence_3_left_pop # prec >= 3
+    3 jmp .infix_to_rpn_loop
+.infix_to_rpn_precedence_3_left_pop:
+    ^2 printc 2slide jmp .infix_to_rpn_precedence_3_left
+.infix_to_rpn_precedence_4_right:
+    4 jmp .infix_to_rpn_loop
+
+# Push left paren to operator stack with precedence lower than all other
+# ops.
+.infix_to_rpn_left_paren:
+    0 jmp .infix_to_rpn_loop
+
+# Pop all operators until a left paren is reached.
+.infix_to_rpn_right_paren:
+    drop
+.infix_to_rpn_right_paren_loop:
+    ^ jz .infix_to_rpn_right_paren_matched
+    jn .infix_to_rpn_right_paren_unmatched
+    printc jmp .infix_to_rpn_right_paren_loop
+.infix_to_rpn_right_paren_matched:
+    2drop jmp .infix_to_rpn_loop
+.infix_to_rpn_right_paren_unmatched:
+    "Unmatched )\n" prints end
+
+# Immediately output variables.
+.infix_to_rpn_variable:
+    printc jmp .infix_to_rpn_loop
+
+# .clear_stack pops all values off the stack until a negative number is
+# reached.
+# (-1 ... -- )
+.clear_stack:
+    jn .clear_stack_ret
+    jmp .clear_stack
+.clear_stack_ret:
+    ret
