@@ -1,0 +1,18 @@
+# Advent of Code 2021
+# Day 1: Sonar Sweep
+# https://adventofcode.com/2021/day/1
+
+    0
+    0 ^ readi retrieve
+.loop:
+    0 ^ readi retrieve
+    ^ jn .loop_break
+    2dup j< .increase
+    1slide
+    jmp .loop
+.increase:
+    1slide swap 1+ swap
+    jmp .loop
+.loop_break:
+    2drop
+    printi '\n' printc end

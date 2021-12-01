@@ -36,6 +36,10 @@ test [wslib](https://github.com/andrewarchi/wslib).
 - [Day 3: Toboggan Trajectory](advent/2020/3.wsf)
 - [Day 5: Binary Boarding](advent/2020/5.wsf)
 
+### 2021
+
+- [Day 1: Sonar Sweep](advent/2021/1.wsf)
+
 ## Rosetta Code
 
 - [99 Bottles of Beer](rosetta/99_bottles.wsf)
