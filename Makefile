@@ -6,6 +6,7 @@ ASSEMBLE = wsc
 COMPILE = nebula-compile
 WSPACE = wspace
 AOCDL = aocdl
+TEST_TIMEOUT = 60
 
 WSF = $(patsubst ./%,%,$(shell find . -not \( -type d -path ./$(BUILD) -prune \) -type f -name '*.wsf'))
 WS = $(patsubst %.wsf,$(BUILD)/%.ws,$(WSF))
@@ -77,13 +78,13 @@ TESTS_MISSING_OUT = $(patsubst $(BUILD)/%.out,%.out,$(filter-out $(TESTS_WITH_OU
 run_tests: $(TESTS_MISSING_OUT) $(TESTS_WITH_IN) $(TESTS_WITH_OUT)
 
 $(filter-out $(BINARY_TESTS),$(TESTS_WITH_IN)): $(BUILD)/%.out: $(BUILD)/%.ws %.in
-	$(WSPACE) $< < $*.in > $@ 2>&1
+	timeout $(TEST_TIMEOUT) $(WSPACE) $< < $*.in > $@ 2>&1
 $(filter-out $(BINARY_TESTS),$(TESTS_WITHOUT_IN)): $(BUILD)/%.out: $(BUILD)/%.ws
-	$(WSPACE) $< > $@ 2>&1
+	timeout $(TEST_TIMEOUT) $(WSPACE) $< > $@ 2>&1
 $(filter $(BINARY_TESTS),$(TESTS_WITH_IN)): $(BUILD)/%.out: $(BUILD)/% %.in
-	$< < $*.in > $@ 2>&1
+	timeout $(TEST_TIMEOUT) $< < $*.in > $@ 2>&1
 $(filter $(BINARY_TESTS),$(TESTS_WITHOUT_IN)): $(BUILD)/%.out: $(BUILD)/%
-	$< < $@ 2>&1
+	timeout $(TEST_TIMEOUT) $< < $@ 2>&1
 $(TESTS_MISSING_OUT):
 	$(info Created $@)
 	@echo "?" > $@
