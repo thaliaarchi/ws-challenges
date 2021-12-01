@@ -1,0 +1,26 @@
+# Sphere Online Judge
+# Problem 11: FCTRL - Factorial
+# https://www.spoj.com/problems/FCTRL/
+
+    0 ^ readi retrieve
+.loop:
+    1- ^ jn .end
+    0 ^ readi retrieve
+    call factorial_trailing_zeros
+    printi '\n' printc
+    jmp .loop
+.end:
+    drop end
+
+# factorial_trailing_zeros returns the number of base-10 trailing zeros
+# in n!.
+# (n -- ntz)
+factorial_trailing_zeros:
+    5 0
+.factorial_trailing_zeros_loop:
+    ^2 ^2 /
+    ^ jz .factorial_trailing_zeros_ret
+    + swap 5* swap
+    jmp .factorial_trailing_zeros_loop
+.factorial_trailing_zeros_ret:
+    drop 2slide ret
