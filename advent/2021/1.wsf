@@ -4,35 +4,26 @@
 
     "@types/array" import
 
-    0 call array.read_eof 1-
+    0 call array.read_eof
+    ^ 1 call window_increases printi '\n' printc
+    3 call window_increases printi '\n' printc
+    end
 
-    0 0 # sum i
-.loop_1:
+# window_increases returns the number of times that the sum of an
+# n-element sliding window increases from the previous sum.
+# (len n -- increases)
+window_increases:
+    swap 1-
+    0 ^2 1- # sum i
+.window_increases_loop:
     1+
-    ^2 ^1 j< .loop_1_break
-    ^ 1- retrieve
+    ^2 ^1 j< .window_increases_ret
+    ^ ^4 - retrieve
     ^1 retrieve
-    j< .loop_1_increase
-    jmp .loop_1
-.loop_1_increase:
+    j< .window_increases_larger
+    jmp .window_increases_loop
+.window_increases_larger:
     swap 1+ swap
-    jmp .loop_1
-.loop_1_break:
-    drop
-    printi '\n' printc
-
-    0 2 # sum i
-.loop_3:
-    1+
-    ^2 ^1 j< .loop_3_break
-    ^ 3- retrieve
-    ^1 retrieve
-    j< .loop_3_increase
-    jmp .loop_3
-.loop_3_increase:
-    swap 1+ swap
-    jmp .loop_3
-.loop_3_break:
-    drop
-    printi '\n' printc
-    drop end
+    jmp .window_increases_loop
+.window_increases_ret:
+    swap 3slide ret
