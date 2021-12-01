@@ -2,33 +2,36 @@
 # Problem 3: SBSTR1 - Substring Check (Bug Funny)
 # https://www.spoj.com/problems/SBSTR1/
 
-    "@types/int"    import
-    "@types/string" import
-
-    -24
+    -2 # Change to -24 for submission
 .loop:
-    0 ' ' 2 call int.read_base_until jz .read_error
-    0 '\n' 2 call int.read_base_until jz .read_error
+    10 call read_binary_fixed
+    5  call read_binary_fixed
     call is_substring printi '\n' printc
     1+
     ^ jn .loop
     drop end
 
-# is_substring returns whether sub, which is in the range [0, 2**5), is
-# a substring of s.
-# (s sub -- ?)
-is_substring:
-    swap
-.is_substring_loop:
-    ^ 32% ^2 j= .is_substring_true
-    ^ jz .is_substring_false
-    2/
-    jmp .is_substring_loop
-.is_substring_true:
-    1 2slide ret
-.is_substring_false:
-    0 2slide ret
+# read_binary_fixed reads a length n binary string and consumes the
+# following character. Clobbers address 0.
+# (len -- n)
+read_binary_fixed:
+    0
+.read_binary_fixed_loop:
+    swap ^ jz .read_binary_fixed_ret 1- swap
+    2* 0 ^ readc retrieve '0' - +
+    jmp .read_binary_fixed_loop
+.read_binary_fixed_ret:
+    drop 0 readc ret
 
-.read_error:
-    -1 "Error: invalid format\n" call string.print_neg_stack
-    2drop end
+# is_substring returns whether y (5 bits) is a substring of x (10 bits).
+# (x y -- ?)
+is_substring:
+    ^ ^2     32% j= .is_substring_true
+    ^ ^2 2/  32% j= .is_substring_true
+    ^ ^2 4/  32% j= .is_substring_true
+    ^ ^2 8/  32% j= .is_substring_true
+    ^ ^2 16/ 32% j= .is_substring_true
+    ^ ^2 32/     j= .is_substring_true
+    2drop 0 ret
+.is_substring_true:
+    2drop 1 ret

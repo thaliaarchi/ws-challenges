@@ -58,7 +58,6 @@ $(BUILD)/rosetta/99_bottles.wsa: $(STRING)
 $(BUILD)/rosetta/binary_digits.wsa: $(INT)
 $(BUILD)/rosetta/count_in_octal.wsa: $(INT)
 $(BUILD)/rosetta/palindrome_2_3.wsa: $(INT)
-$(BUILD)/spoj/sbstr1.wsa: $(INT) $(STRING)
 
 $(WSLIB)/%:
 	$(error $* not found at WSLIB=$(WSLIB))
