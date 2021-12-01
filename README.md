@@ -56,6 +56,7 @@ test [wslib](https://github.com/andrewarchi/wslib).
 
 ## Sphere Online Judge
 
+- [Problem 1: TEST - Life, the Universe, and Everything](spoj/test.wsf)
 - [Problem 3: SBSTR1 - Substring Check (Bug Funny)](spoj/sbstr1.wsf)
 
 ## Misc

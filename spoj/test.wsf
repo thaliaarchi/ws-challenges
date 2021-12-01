@@ -1,0 +1,11 @@
+# Sphere Online Judge
+# Problem 1: TEST - Life, the Universe, and Everything
+# https://www.spoj.com/problems/TEST/
+
+.loop:
+    0 ^ readi retrieve
+    ^ 42 j= .end
+    printi '\n' printc
+    jmp .loop
+.end:
+    end
