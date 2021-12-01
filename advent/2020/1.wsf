@@ -6,6 +6,7 @@
     "@types/bool"  import
 
     0 call array.read_eof
+    0 ^1 call array.quicksort
     ^ 2 call find_combination printi '\n' printc
     3 call find_combination printi '\n' printc
     end
