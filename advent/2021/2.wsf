@@ -1,0 +1,33 @@
+# Advent of Code 2021
+# Day 2: Dive!
+# https://adventofcode.com/2021/day/2
+
+    "@types/bool"   import
+    "@types/string" import
+
+    -1 "forwardownup" 3 call string.store_neg
+
+    2 ^ readi retrieve
+.loop:
+    1-
+    ^ jn .end
+    15 ' ' call string.read_until
+    2 ^ readi retrieve
+    15 ^2 3  7 call string.equals ! jz .move_forward
+    15 ^2 9  4 call string.equals ! jz .move_down
+    15 ^2 13 2 call string.equals ! jz .move_up
+    drop
+    -1 "Invalid command: " call string.print_neg_stack
+    15 swap call string.print '\n' printc
+    drop end
+.end:
+    drop
+    0 retrieve 1 retrieve * printi '\n' printc
+    end
+
+.move_forward:
+    0 retrieve + 0 swap store drop jmp .loop
+.move_down:
+    1 retrieve + 1 swap store drop jmp .loop
+.move_up:
+    1 retrieve swap - 1 swap store drop jmp .loop

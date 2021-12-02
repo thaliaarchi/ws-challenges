@@ -39,6 +39,7 @@ test [wslib](https://github.com/andrewarchi/wslib).
 ### 2021
 
 - [Day 1: Sonar Sweep](advent/2021/1.wsf)
+- [Day 2: Dive!](advent/2021/2.wsf)
 
 ## Rosetta Code
 
