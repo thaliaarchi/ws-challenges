@@ -4,42 +4,40 @@
 
     "@types/string" import
 
-    # 0    horizontal position
-    # 1    depth (part 1)
-    # 2    depth (part 2)
-    # 3    aim (part 2)
-    # 4    read temp
-    # 5-16 command constants
-    # 17+  command
+    # 0    x
+    # 1    y (part 1), aim (part 2)
+    # 2    y (part 2)
+    # 3    read temp
+    # 4-15 command constants
+    # 16+  command
 
-    -1 "forwardownup" 5 call string.store_neg
+    -1 "forwardownup" 4 call string.store_neg
 
-    4 ^ readi retrieve
+    3 ^ readi retrieve
 .loop:
     1-
     ^ jn .end
-    17 ' ' call string.read_until
-    4 ^ readi retrieve
-    17 ^2 5  7 call string.equals 1 j= .move_forward
-    17 ^2 11 4 call string.equals 1 j= .move_down
-    17 ^2 15 2 call string.equals 1 j= .move_up
+    16 ' ' call string.read_until
+    3 ^ readi retrieve
+    16 ^2 4  7 call string.equals 1 j= .move_forward
+    16 ^2 10 4 call string.equals 1 j= .move_down
+    16 ^2 14 2 call string.equals 1 j= .move_up
     drop
     -1 "Invalid command: " call string.print_neg_stack
-    17 swap call string.print '\n' printc
+    16 swap call string.print '\n' printc
     drop end
 .end:
     drop
-    0 retrieve 1 retrieve * printi '\n' printc
-    0 retrieve 2 retrieve * printi '\n' printc
+    0 retrieve 1 retrieve * printi '\n' printc # x * aim
+    0 retrieve 2 retrieve * printi '\n' printc # x * y
     end
 
 .move_forward:
-    0 ^ retrieve ^2 + store # horiz += n
-    2 ^ retrieve 3 retrieve ^3 * + store # depth += aim*n
+    0 ^ retrieve ^2 + store # x += n
+    2 ^ retrieve 1 retrieve ^3 * + store # y += aim*n
     2drop jmp .loop
 .move_up:
-    neg
+    neg # n *= -1
 .move_down:
-    1 ^ retrieve ^2 + store # depth += n
-    3 ^ retrieve ^2 + store # aim += n
+    1 ^ retrieve ^2 + store # aim += n
     2drop jmp .loop
