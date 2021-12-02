@@ -60,6 +60,7 @@ $(BUILD)/advent/2021/2.wsa: $(STRING)
 $(BUILD)/rosetta/99_bottles.wsa: $(STRING)
 $(BUILD)/rosetta/binary_digits.wsa: $(INT)
 $(BUILD)/rosetta/count_in_octal.wsa: $(INT)
+$(BUILD)/rosetta/luhn.wsa: $(HASH)
 $(BUILD)/rosetta/palindrome_2_3.wsa: $(INT)
 $(BUILD)/spoj/palin.wsa: $(BOOL) $(INT) $(MATH)
 

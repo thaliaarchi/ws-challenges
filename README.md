@@ -1,7 +1,7 @@
 # Coding Challenges in Whitespace
 
-Solutions for various coding challenges in Whitespace to improve and
-test [wslib](https://github.com/andrewarchi/wslib).
+Solutions for various coding challenges in Whitespace to improve,
+demonstrate, and test [wslib](https://github.com/andrewarchi/wslib).
 
 ## Project Euler
 
@@ -49,6 +49,7 @@ test [wslib](https://github.com/andrewarchi/wslib).
 - [Find palindromic numbers in both binary and ternary bases](rosetta/palindrome_2_3.wsf)
 - [FizzBuzz](rosetta/fizzbuzz.wsf)
 - [Integer sequence](rosetta/integer_sequence.wsf)
+- [Luhn test of credit card numbers](rosetta/luhn.wsf)
 - [Show ASCII Table](rosetta/ascii.wsf)
 
 ## Code Golf
