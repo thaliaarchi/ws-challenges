@@ -1,0 +1,20 @@
+# Code Golf
+# The Luhn algorithm for verifying credit card numbers, etc
+# https://codegolf.stackexchange.com/questions/22/the-luhn-algorithm-for-verifying-credit-card-numbers-etc
+
+# luhn validates an identification number, such as a credit card or NPI
+# number, using the Luhn algorithm. Returns 0 when n is valid.
+# (n -- 0 checksum)
+luhn:
+    0 # checksum
+.luhn_loop:
+    # Add odd-positioned digits as-is
+    ^1 10%
+    +
+    # Add even-positioned digits
+    ^1 10/ 10%
+    2* ^ 10/ swap 10% + # double, then sum the digits
+    +
+    swap 100/ swap
+    ^1 neg jn .luhn_loop
+    10% ret

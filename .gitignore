@@ -1,7 +1,4 @@
 /build/
 *.ws
 *.wsa
-*.nir
-*.ll
-*.o
-*.s
+!/codegolf/**/*.ws

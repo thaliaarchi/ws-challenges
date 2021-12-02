@@ -55,6 +55,7 @@ demonstrate, and test [wslib](https://github.com/andrewarchi/wslib).
 ## Code Golf
 
 - [Implement cowsay](codegolf/cowsay.wsf)
+- [The Luhn algorithm for verifying credit card numbers, etc](codegolf/luhn.wsf)
 
 ## Sphere Online Judge
 

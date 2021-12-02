@@ -62,6 +62,7 @@ $(BUILD)/rosetta/binary_digits.wsa: $(INT)
 $(BUILD)/rosetta/count_in_octal.wsa: $(INT)
 $(BUILD)/rosetta/luhn.wsa: $(HASH)
 $(BUILD)/rosetta/palindrome_2_3.wsa: $(INT)
+$(BUILD)/codegolf/luhn_test.wsa: codegolf/luhn.wsf
 $(BUILD)/spoj/palin.wsa: $(BOOL) $(INT) $(MATH)
 
 $(WSLIB)/%:
