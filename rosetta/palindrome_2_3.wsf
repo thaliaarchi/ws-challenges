@@ -2,7 +2,7 @@
 # Find palindromic numbers in both binary and ternary bases
 # https://rosettacode.org/wiki/Find_palindromic_numbers_in_both_binary_and_ternary_bases
 
-    "@types/int" import
+    "@int" import
 
     0 ^ readi retrieve # n
 

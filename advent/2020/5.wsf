@@ -2,9 +2,9 @@
 # Day 5: Binary Boarding
 # https://adventofcode.com/2020/day/5
 
-    "@math"         import
-    "@types/char"   import
-    "@types/string" import
+    "@char"   import
+    "@math"   import
+    "@string" import
 
     0 ^ readi retrieve
     0

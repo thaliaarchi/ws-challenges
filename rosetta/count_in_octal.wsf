@@ -2,7 +2,7 @@
 # Count in octal
 # https://rosettacode.org/wiki/Count_in_octal
 
-    "@types/int" import
+    "@int" import
 
     0
 .loop:

@@ -2,7 +2,7 @@
 # Problem 36: Double-base palindromes
 # https://projecteuler.net/problem=36
 
-    "@types/int" import
+    "@int" import
 
     0 ^ readi retrieve 1-
     1 0

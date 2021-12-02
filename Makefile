@@ -31,36 +31,37 @@ $(BUILD)/advent/2019/2: NEBULA_FLAGS = -heap 500
 $(BUILD)/rosetta/palindrome_2_3: NEBULA_FLAGS = -heap 1
 
 # Manually-enumerated dependencies
-CRYPTO = $(WSLIB)/crypto/module.wsf $(WSLIB)/crypto/caesar.wsf $(WSLIB)/crypto/luhn.wsf
+ARRAY = $(WSLIB)/array/module.wsf $(WSLIB)/array/array.wsf $(WSLIB)/array/sort.wsf
+BOOL = $(WSLIB)/bool/module.wsf $(WSLIB)/bool/bool.wsf
+CHAR = $(WSLIB)/char/module.wsf $(WSLIB)/char/io.wsf $(WSLIB)/char/unicode.wsf
+CRYPTO = $(WSLIB)/crypto/module.wsf $(WSLIB)/crypto/caesar.wsf
+HASH = $(WSLIB)/hash/module.wsf $(WSLIB)/hash/luhn.wsf
+INT = $(WSLIB)/int/module.wsf $(WSLIB)/int/bits.wsf $(WSLIB)/int/int.wsf $(WSLIB)/int/print.wsf $(WSLIB)/int/read.wsf
+MAP = $(WSLIB)/map/module.wsf $(WSLIB)/map/map.wsf
 MATH = $(WSLIB)/math/module.wsf $(WSLIB)/math/collatz.wsf $(WSLIB)/math/divmod.wsf $(WSLIB)/math/exp.wsf $(WSLIB)/math/gcd.wsf $(WSLIB)/math/math.wsf
-ARRAY = $(WSLIB)/types/array/module.wsf $(WSLIB)/types/array/array.wsf $(WSLIB)/types/array/sort.wsf
-BOOL = $(WSLIB)/types/bool.wsf
-CHAR = $(WSLIB)/types/char/module.wsf $(WSLIB)/types/char/io.wsf $(WSLIB)/types/char/unicode.wsf
-INT = $(WSLIB)/types/int/module.wsf $(WSLIB)/types/int/bits.wsf $(WSLIB)/types/int/int.wsf $(WSLIB)/types/int/print.wsf $(WSLIB)/types/int/read.wsf
-MAP = $(WSLIB)/types/map.wsf
-MATRIX = $(WSLIB)/types/matrix.wsf
-STRING = $(WSLIB)/types/string/module.wsf $(WSLIB)/types/string/compare.wsf $(WSLIB)/types/string/print.wsf $(WSLIB)/types/string/read.wsf $(WSLIB)/types/string/store.wsf
-INTCODE = $(WSLIB)/vm/intcode.wsf
+MATRIX = $(WSLIB)/matrix/module.wsf $(WSLIB)/matrix/matrix.wsf
+MEM = $(WSLIB)/mem/module.wsf $(WSLIB)/mem/mem.wsf
+STRING = $(WSLIB)/string/module.wsf $(WSLIB)/string/compare.wsf $(WSLIB)/string/print.wsf $(WSLIB)/string/read.wsf $(WSLIB)/string/store.wsf
 $(BUILD)/euler/1.wsa: $(MATH)
 $(BUILD)/euler/4.wsa: $(INT)
 $(BUILD)/euler/6.wsa: $(MATH)
 $(BUILD)/euler/16.wsa: $(MATH)
-$(BUILD)/euler/22.wsa: $(MATH) $(ARRAY) $(BOOL) $(CHAR) $(STRING)
+$(BUILD)/euler/22.wsa: $(ARRAY) $(BOOL) $(CHAR) $(MATH) $(STRING)
 $(BUILD)/euler/25.wsa: $(MATH)
 $(BUILD)/euler/36.wsa: $(INT)
 $(BUILD)/euler/48.wsa: $(MATH)
 $(BUILD)/advent/2019/2.wsa: $(INTCODE)
 $(BUILD)/advent/2020/1.wsa: $(STRING)
-$(BUILD)/advent/2020/2.wsa: $(MATH) $(ARRAY) $(BOOL) $(INT) $(STRING)
+$(BUILD)/advent/2020/2.wsa: $(ARRAY) $(BOOL) $(INT) $(MATH) $(STRING)
 $(BUILD)/advent/2020/3.wsa: $(BOOL) $(MATRIX) $(STRING)
-$(BUILD)/advent/2020/5.wsa: $(MATH) $(CHAR) $(STRING)
+$(BUILD)/advent/2020/5.wsa: $(CHAR) $(MATH) $(STRING)
 $(BUILD)/advent/2021/1.wsa: $(ARRAY) $(BOOL)
 $(BUILD)/advent/2021/2.wsa: $(STRING)
 $(BUILD)/rosetta/99_bottles.wsa: $(STRING)
 $(BUILD)/rosetta/binary_digits.wsa: $(INT)
 $(BUILD)/rosetta/count_in_octal.wsa: $(INT)
 $(BUILD)/rosetta/palindrome_2_3.wsa: $(INT)
-$(BUILD)/spoj/palin.wsa: $(MATH) $(BOOL) $(INT)
+$(BUILD)/spoj/palin.wsa: $(BOOL) $(INT) $(MATH)
 
 $(WSLIB)/%:
 	$(error $* not found at WSLIB=$(WSLIB))

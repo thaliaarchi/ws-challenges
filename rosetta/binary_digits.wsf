@@ -2,7 +2,7 @@
 # Binary digits
 # https://rosettacode.org/wiki/Binary_digits
 
-    "@types/int" import
+    "@int" import
 
 .loop:
     0 ^ readi retrieve

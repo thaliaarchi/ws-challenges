@@ -2,7 +2,7 @@
 # 99 Bottles of Beer
 # https://rosettacode.org/wiki/99_Bottles_of_Beer/EsoLang
 
-    "@types/string" import
+    "@string" import
 
     -1
     "Go to the store and buy some more, "

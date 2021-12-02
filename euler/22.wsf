@@ -2,11 +2,11 @@
 # Problem 22: Names scores
 # https://projecteuler.net/problem=22
 
-    "@math"         import
-    "@types/array"  import
-    "@types/bool"   import
-    "@types/char"   import
-    "@types/string" import
+    "@array"  import
+    "@bool"   import
+    "@char"   import
+    "@math"   import
+    "@string" import
 
     27 15 call math.exp # Names up to 15 characters
 

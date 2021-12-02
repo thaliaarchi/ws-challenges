@@ -2,11 +2,11 @@
 # Day 2: Password Philosophy
 # https://adventofcode.com/2020/day/2
 
-    "@math"         import
-    "@types/array"  import
-    "@types/bool"   import
-    "@types/int"    import
-    "@types/string" import
+    "@array"  import
+    "@bool"   import
+    "@int"    import
+    "@math"   import
+    "@string" import
 
     2 ^ readi retrieve neg
 

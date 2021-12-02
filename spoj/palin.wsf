@@ -2,9 +2,9 @@
 # Problem 5: PALIN - The Next Palindrome
 # https://www.spoj.com/problems/PALIN/
 
-    "@math"       import
-    "@types/bool" import
-    "@types/int"  import
+    "@bool" import
+    "@int"  import
+    "@math" import
 
     0 ^ readi retrieve
 .loop:

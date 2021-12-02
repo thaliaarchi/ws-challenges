@@ -2,7 +2,7 @@
 # Day 2: Dive!
 # https://adventofcode.com/2021/day/2
 
-    "@types/string" import
+    "@string" import
 
     # 0    x
     # 1    y (part 1), aim (part 2)

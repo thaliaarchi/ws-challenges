@@ -2,9 +2,9 @@
 # Day 3: Toboggan Trajectory
 # https://adventofcode.com/2020/day/3
 
-    "@types/bool"   import
-    "@types/matrix" import
-    "@types/string" import
+    "@bool"   import
+    "@matrix" import
+    "@string" import
 
     0 ^ readi retrieve # h
     0 ^ readi retrieve # w

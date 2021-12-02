@@ -2,8 +2,8 @@
 # Day 1: Sonar Sweep
 # https://adventofcode.com/2021/day/1
 
-    "@types/array" import
-    "@types/bool"  import
+    "@array" import
+    "@bool"  import
 
     0 call array.read_eof
     ^ 1 call window_increases printi '\n' printc
