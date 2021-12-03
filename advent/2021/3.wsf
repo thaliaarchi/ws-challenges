@@ -27,6 +27,15 @@
     1slide
     2 ^2 ** 1- ^1 - # gamma = ((1<<bits)-1)&^epsilon
     * printi '\n' printc # gamma * epsilon
+
+    # Part 2
+    0 ^2 2 ^3 1- ** call partition_search_least # 0 numbers 1<<(bits-1)
+    retrieve
+    printi '\n' printc
+    0 ^2 2 ^3 1- ** call partition_search_greatest # 0 numbers 1<<(bits-1)
+    retrieve
+    printi '\n' printc
+    # * printi '\n' printc
     2drop end
 
 # least_common_bit_value returns the bit value (0 or 1) that is least
@@ -42,6 +51,58 @@ least_common_bit_value:
     ^1 ^5 j< .least_common_bit_value_loop # i < hi
     1slide
     ^3 ^5 - 2/ < * # (count < (hi-lo)/2) << bit
+    3slide ret
+
+# partition_search_least performs a binary search to find the index of
+# the number that has the least common of each successive binary digit.
+# (lo hi pow -- i)
+partition_search_least:
+    ^ jz .partition_search_least_ret
+    3dup call partition # i
+    ^
+    ^4 ^4 ^1 - 2/ + # m = lo+(hi-lo)/2
+    j< .partition_search_least_zero # i < m
+    ^2 ^2 2/ call partition_search_least # i hi pow/2
+    3slide ret
+.partition_search_least_zero:
+    ^3 swap ^2 2/ call partition_search_least # lo i pow/2
+    3slide ret
+.partition_search_least_ret:
+    2drop 1- ret # lo-1
+
+# partition_search_greatest performs a binary search to find the index
+# of the number that has the most common of each successive binary
+# digit.
+# (lo hi pow -- i)
+partition_search_greatest:
+    ^ jz .partition_search_greatest_ret
+    3dup call partition # i
+    ^
+    ^4 ^4 ^1 - 1+ 2/ + # m = lo+(hi-lo+1)/2
+    j< .partition_search_greatest_one # i < m
+    ^3 swap ^2 2/ call partition_search_greatest # lo i pow/2
+    3slide ret
+.partition_search_greatest_one:
+    ^2 ^2 2/ call partition_search_greatest # i hi pow/2
+    3slide ret
+.partition_search_greatest_ret:
+    2drop 1+ ret # lo+1
+
+# partition performs a binary search to find the address of the first
+# number in the sorted range [lo, hi) that has a 1 at the given bit
+# position (given as a power of 2).
+# (lo hi pow -- i)
+partition:
+    ^2 ^2 j< .partition_recur # lo < hi
+    swap 2slide ret # hi
+.partition_recur:
+    ^2 ^2 ^1 - 2/ + # m = lo + (hi-lo)/2
+    ^ retrieve ^2 / 2% # b = (nums[m]>>bit)&1
+    jz .partition_zero
+    ^3 swap ^2 call partition # lo m pow
+    3slide ret
+.partition_zero:
+    1+ ^2 ^2 call partition # m+1 hi pow
     3slide ret
 
 .read_error:
