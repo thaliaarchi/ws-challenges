@@ -52,11 +52,11 @@ read_name:
     jmp .read_name_loop
 
 .read_quote_error:
-    -1 "Error: quote expected before name\n"
-    call string.print_neg_stack drop end
+    -1 "Error: quote expected before name"
+    call string.println_neg_stack drop end
 .read_name_error:
-    -1 "Error: invalid name format\n"
-    call string.print_neg_stack 3drop end
+    -1 "Error: invalid name format"
+    call string.println_neg_stack 3drop end
 
 # name_score returns the score for the name at index i, that is, the sum
 # of the letters multiplied by i+1.

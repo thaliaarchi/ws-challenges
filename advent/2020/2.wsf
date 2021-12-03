@@ -37,5 +37,5 @@
     end
 
 .read_error:
-    -1 "Error: invalid int format\n"
-    call string.print_neg_stack end
+    -1 "Error: invalid int format"
+    call string.println_neg_stack end

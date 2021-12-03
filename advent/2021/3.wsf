@@ -25,5 +25,5 @@
     4drop end
 
 .read_error:
-    -1 "Error: invalid grid format\n"
-    call string.print_neg_stack 2drop end
+    -1 "Error: invalid grid format"
+    call string.println_neg_stack 2drop end

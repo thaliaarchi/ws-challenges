@@ -24,7 +24,7 @@
     16 ^2 14 2 call string.equals 1 j= .move_up
     drop
     -1 "Invalid command: " call string.print_neg_stack
-    16 swap call string.print '\n' printc
+    16 swap call string.println
     drop end
 .end:
     drop

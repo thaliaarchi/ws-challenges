@@ -37,5 +37,5 @@ count_slope_trees:
     drop 6slide ret
 
 .read_error:
-    -1 "Error: invalid map format\n"
-    call string.print_neg_stack end
+    -1 "Error: invalid map format"
+    call string.println_neg_stack end
