@@ -46,11 +46,13 @@ demonstrate, and test [wslib](https://github.com/andrewarchi/wslib).
 
 - [99 Bottles of Beer](rosetta/99_bottles.wsf)
 - [Binary digits](rosetta/binary_digits.wsf)
+- [Caesar cipher](rosetta/caesar.wsf)
 - [Count in octal](rosetta/count_in_octal.wsf)
 - [Find palindromic numbers in both binary and ternary bases](rosetta/palindrome_2_3.wsf)
 - [FizzBuzz](rosetta/fizzbuzz.wsf)
 - [Integer sequence](rosetta/integer_sequence.wsf)
 - [Luhn test of credit card numbers](rosetta/luhn.wsf)
+- [Rot-13](rosetta/rot13.wsf)
 - [Show ASCII Table](rosetta/ascii.wsf)
 - [Sorting algorithms/Quicksort](rosetta/quicksort.wsf)
 - [Zero to the zero power](rosetta/zero_pow_zero.wsf)

@@ -1,0 +1,14 @@
+# Rosetta Code
+# Caesar cipher
+# https://rosettacode.org/wiki/Caesar_cipher
+
+    "@crypto" import
+    "@string" import
+
+    0 ^ readi retrieve
+    0 call string.read_line
+    0 ^1 ^3 call crypto.caesar
+    0 ^1 call string.println
+    0 ^1 ^3 neg call crypto.caesar
+    0 ^1 call string.println
+    2drop end
