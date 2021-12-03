@@ -48,6 +48,7 @@ demonstrate, and test [wslib](https://github.com/andrewarchi/wslib).
 - [Binary digits](rosetta/binary_digits.wsf)
 - [Caesar cipher](rosetta/caesar.wsf)
 - [Count in octal](rosetta/count_in_octal.wsf)
+- [CUSIP](rosetta/cusip.wsf)
 - [Find palindromic numbers in both binary and ternary bases](rosetta/palindrome_2_3.wsf)
 - [FizzBuzz](rosetta/fizzbuzz.wsf)
 - [Integer sequence](rosetta/integer_sequence.wsf)
