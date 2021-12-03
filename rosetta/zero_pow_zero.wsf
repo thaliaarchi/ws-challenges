@@ -4,5 +4,5 @@
 
     "@math" import
 
-    0 0 call math.exp printi '\n' printc
+    0 0 ** printi '\n' printc
     end

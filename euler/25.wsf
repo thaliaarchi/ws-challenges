@@ -4,7 +4,7 @@
 
     "@math" import
 
-    10 0 ^ readi retrieve 1- call math.exp
+    10 0 ^ readi retrieve 1- **
     call fib_index printi
     end
 

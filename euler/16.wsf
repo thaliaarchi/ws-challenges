@@ -6,7 +6,7 @@
 
     0 ^ readi retrieve
     0 ^ readi retrieve
-    call math.exp
+    **
     0
 .loop:
     ^1 10% +

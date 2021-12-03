@@ -20,7 +20,7 @@
 # (n -- pal)
 find_pal:
     ^ call digit_count
-    10 ^1 2/ call math.exp
+    10 ^1 2/ **
     swap 2% jz .find_pal_even
     2dup / # upper
     ^

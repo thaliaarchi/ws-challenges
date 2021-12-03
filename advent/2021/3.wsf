@@ -25,7 +25,7 @@
     swap 1+ swap
     ^1 ^3 j< .part1_loop # i < bits
     1slide
-    2 ^2 call math.exp 1- ^1 - # gamma = ((1<<bits)-1)&^epsilon
+    2 ^2 ** 1- ^1 - # gamma = ((1<<bits)-1)&^epsilon
     * printi '\n' printc # gamma * epsilon
     2drop end
 
@@ -34,7 +34,7 @@
 # When 0 and 1 are equally-common, 0 is returned.
 # (lo hi bit -- v)
 least_common_bit_value:
-    2 ^1 call math.exp # 1 << bit
+    2 ^1 ** # 1 << bit
     ^3 0 # i count
 .least_common_bit_value_loop:
     ^1 retrieve ^3 / 2% + # count += (nums[i]>>bit)&1

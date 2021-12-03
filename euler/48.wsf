@@ -6,7 +6,7 @@
 
     1000 0
 .loop:
-    ^1 ^ call math.exp + # TODO: replace with modexp
+    ^1 ^ ** + # TODO: replace with modexp
     swap 1-
     ^ jz .end
     swap

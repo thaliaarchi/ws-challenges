@@ -8,7 +8,7 @@
     "@math"   import
     "@string" import
 
-    27 15 call math.exp # Names up to 15 characters
+    27 15 ** # Names up to 15 characters
 
     0 # len
 .read_loop:
