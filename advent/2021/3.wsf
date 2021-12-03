@@ -1,0 +1,29 @@
+# Advent of Code 2021
+# Day 3: Binary Diagnostic
+# https://adventofcode.com/2021/day/3
+
+    "@bool"   import
+    "@matrix" import
+    "@string" import
+
+    # 0  gamma rate
+    # 1  epsilon rate
+    # 2+ matrix
+
+    2 ^ readi retrieve # rows
+    2 ^ readi retrieve # cols
+    2 ^2 ^2 call matrix.read_chars jz .read_error
+    ^1 '0' * ^2 2/ +
+    0
+.loop:
+    2 ^4 ^4 ^3 call matrix.sum_col ^2 - neg?
+    0 ^ retrieve 2* 1 ^3 - + store
+    1 ^ retrieve 2* ^2 + store
+    drop 1+
+    ^ ^3 j< .loop
+    0 retrieve 1 retrieve * printi '\n' printc
+    4drop end
+
+.read_error:
+    -1 "Error: invalid grid format\n"
+    call string.print_neg_stack 2drop end
