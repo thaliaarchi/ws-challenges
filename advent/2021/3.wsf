@@ -2,28 +2,44 @@
 # Day 3: Binary Diagnostic
 # https://adventofcode.com/2021/day/3
 
+    "@array"  import
     "@bool"   import
-    "@matrix" import
+    "@int"    import
+    "@math"   import
     "@string" import
 
-    # 0  gamma rate
-    # 1  epsilon rate
-    # 2+ matrix
-
-    2 ^ readi retrieve # rows
-    2 ^ readi retrieve # cols
-    2 ^2 ^2 call matrix.read_chars jz .read_error
-    ^1 '0' * ^2 2/ +
+    0 ^ readi retrieve # numbers
+    0 ^ readi retrieve # bits
     0
-.loop:
-    2 ^4 ^4 ^3 call matrix.sum_col ^2 - neg?
-    0 ^ retrieve 2* 1 ^3 - + store
-    1 ^ retrieve 2* ^2 + store
-    drop 1+
-    ^ ^3 j< .loop
-    0 retrieve 1 retrieve * printi '\n' printc
-    4drop end
+.read_loop:
+    ^ ^ 2 call int.read_base jz .read_error store
+    1+
+    ^ ^3 j< .read_loop
+    drop
+    0 ^2 call array.quicksort
+
+    # Part 1
+    0 0 # i epsilon
+.part1_loop_bits: # IVs: i epsilon
+    2 ^2 call math.exp # 1 << i
+    0 0 # j count
+.part1_loop_numbers: # IVs: j count
+    # numbers bits i epsilon 1<<i j count
+    ^1 retrieve ^3 / 2% + # count += (nums[j]>>i)&1
+    swap 1+ swap
+    ^1 ^7 j< .part1_loop_numbers # j < numbers
+    1slide
+    ^5 2/ < * + # epsilon += (count < numbers/2) << i
+    # numbers bits i epsilon
+    swap 1+ swap
+    ^1 ^3 j< .part1_loop_bits # i < bits
+    1slide
+    # numbers bits epsilon
+
+    2 ^2 call math.exp 1- ^1 - # gamma = ((1<<bits)-1)&^epsilon
+    * printi '\n' printc # gamma * epsilon
+    2drop end
 
 .read_error:
-    -1 "Error: invalid grid format"
+    -1 "Error: invalid binary format"
     call string.println_neg_stack 2drop end
