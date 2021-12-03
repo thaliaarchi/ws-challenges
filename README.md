@@ -52,6 +52,7 @@ demonstrate, and test [wslib](https://github.com/andrewarchi/wslib).
 - [Integer sequence](rosetta/integer_sequence.wsf)
 - [Luhn test of credit card numbers](rosetta/luhn.wsf)
 - [Show ASCII Table](rosetta/ascii.wsf)
+- [Sorting algorithms/Quicksort](rosetta/quicksort.wsf)
 
 ## Code Golf
 

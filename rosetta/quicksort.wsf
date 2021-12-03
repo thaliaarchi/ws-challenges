@@ -1,0 +1,21 @@
+# Rosetta Code
+# Sorting algorithms/Quicksort
+# https://rosettacode.org/wiki/Sorting_algorithms/Quicksort
+
+    "@array" import
+
+    0 4   store
+    1 65  store
+    2 2   store
+    3 -31 store
+    4 0   store
+    5 99  store
+    6 2   store
+    7 83  store
+    8 782 store
+    9 1   store
+
+    0 10 call array.print '\n' printc
+    0 10 call array.quicksort
+    0 10 call array.print '\n' printc
+    end
