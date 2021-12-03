@@ -1,0 +1,8 @@
+# Rosetta Code
+# Zero to the zero power
+# https://rosettacode.org/wiki/Zero_to_the_zero_power
+
+    "@math" import
+
+    0 0 call math.exp printi '\n' printc
+    end
