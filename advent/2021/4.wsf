@@ -1,0 +1,40 @@
+# Advent of Code 2021
+# Day 4: Giant Squid
+# https://adventofcode.com/2021/day/4
+
+    "@int" import
+
+    0 ',' 10 call int.read_line_delim_base
+    ^
+    ^ ^ readi retrieve
+.read_boards:
+    1- ^ jn .read_board_break
+    ^1 readc # '\n'
+    ^1 5 call read_square_grid
+    swap 25+ swap
+    jmp .read_boards
+.read_board_break:
+    3drop end
+
+# read_square_grid reads a square grid of two-digit numbers into the
+# heap.
+# (addr n -- )
+read_square_grid:
+    ^ * 1- ^1 + swap
+.read_square_grid_loop:
+    2dup j< .read_square_grid_ret
+    ^
+    ^ ^ readc retrieve
+    ^ ' ' j= .read_square_grid_space
+    '0' -
+.read_square_grid_next_digit:
+    10*
+    ^1 ^ readc retrieve '0' - +
+    ^1 readc # discard ' ' or '\n'
+    store
+    1+
+    jmp .read_square_grid_loop
+.read_square_grid_ret:
+    2drop ret
+.read_square_grid_space:
+    drop 0 jmp .read_square_grid_next_digit
