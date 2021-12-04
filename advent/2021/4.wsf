@@ -2,39 +2,89 @@
 # Day 4: Giant Squid
 # https://adventofcode.com/2021/day/4
 
-    "@int" import
+    "@array"  import
+    "@int"    import
+    "@matrix" import
+    "@mem"    import
+    "@string" import
 
-    0 ',' 10 call int.read_line_delim_base
-    ^
-    ^ ^ readi retrieve
+    0 ',' 10 call int.read_line_delim_base # numbers
+    ^ ^ readi retrieve # boards
+    2dup
 .read_boards:
     1- ^ jn .read_board_break
     ^1 readc # '\n'
-    ^1 5 call read_square_grid
+    ^1 5 call read_square_board
     swap 25+ swap
     jmp .read_boards
 .read_board_break:
-    3drop end
+    2drop
 
-# read_square_grid reads a square grid of two-digit numbers into the
+    0
+.loop_numbers:
+    ^ retrieve
+    0
+.loop_boards:
+    # numbers boards i num j
+    ^ 25* ^5 + ^2 call check_board
+    ^ jn .loop_boards_not_found
+    5slide printi '\n' printc
+    end
+.loop_boards_not_found:
+    drop
+    1+
+    ^ ^4 j< .loop_boards
+    2drop
+    1+
+    ^ ^3 j< .loop_numbers
+    3drop
+    -1 "No winning board" call string.println_neg_stack
+    end
+
+# read_square_board reads a square grid of two-digit numbers into the
 # heap.
 # (addr n -- )
-read_square_grid:
+read_square_board:
     ^ * 1- ^1 + swap
-.read_square_grid_loop:
-    2dup j< .read_square_grid_ret
+.read_square_board_loop:
+    2dup j< .read_square_board_ret
     ^
     ^ ^ readc retrieve
-    ^ ' ' j= .read_square_grid_space
+    ^ ' ' j= .read_square_board_space
     '0' -
-.read_square_grid_next_digit:
+.read_square_board_next_digit:
     10*
     ^1 ^ readc retrieve '0' - +
     ^1 readc # discard ' ' or '\n'
     store
     1+
-    jmp .read_square_grid_loop
-.read_square_grid_ret:
+    jmp .read_square_board_loop
+.read_square_board_ret:
     2drop ret
-.read_square_grid_space:
-    drop 0 jmp .read_square_grid_next_digit
+.read_square_board_space:
+    drop 0 jmp .read_square_board_next_digit
+
+# check_board marks the number on the board and checks whether the board
+# has won. Returns the board score when it is a winner, that is, the sum
+# of the remaining numbers, multiplied by the picked number. Otherwise,
+# returns negative.
+# (addr num -- sum)
+check_board:
+    swap
+    ^ 25 ^3 -1 call mem.replace_all
+    jz .check_board_not_found
+    0 # i
+.check_board_loop:
+    # num addr i
+    ^1 5 5 ^3 -1 call matrix.count_row 5 j= .check_board_winner
+    ^1 5 5 ^3 -1 call matrix.count_col 5 j= .check_board_winner
+    1+
+    ^ 5 j< .check_board_loop
+    drop
+.check_board_not_found:
+    -1 2slide ret
+.check_board_winner:
+    drop
+    ^ 25 call array.sum
+    swap 25 -1 call array.count +
+    * ret

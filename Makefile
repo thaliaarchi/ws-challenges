@@ -58,7 +58,7 @@ $(BUILD)/advent/2020/5.wsa: $(CHAR) $(MATH) $(STRING)
 $(BUILD)/advent/2021/1.wsa: $(ARRAY) $(BOOL)
 $(BUILD)/advent/2021/2.wsa: $(STRING)
 $(BUILD)/advent/2021/3.wsa: $(ARRAY) $(BOOL) $(INT) $(MATH) $(STRING)
-$(BUILD)/advent/2021/4.wsa: $(INT)
+$(BUILD)/advent/2021/4.wsa: $(ARRAY) $(INT) $(MATRIX) $(MEM) $(STRING)
 $(BUILD)/rosetta/99_bottles.wsa: $(STRING)
 $(BUILD)/rosetta/binary_digits.wsa: $(INT)
 $(BUILD)/rosetta/count_in_octal.wsa: $(INT)
@@ -83,6 +83,7 @@ TESTS_MISSING_OUT = $(patsubst $(BUILD)/%.out,%.out,$(filter-out $(TESTS_WITH_OU
 .PHONY: run_tests
 run_tests: $(TESTS_MISSING_OUT) $(TESTS_WITH_IN) $(TESTS_WITH_OUT)
 
+$(BUILD)/advent/2021/4.out: TEST_TIMEOUT = 120
 $(filter-out $(BINARY_TESTS),$(TESTS_WITH_IN)): $(BUILD)/%.out: $(BUILD)/%.ws %.in
 	timeout $(TEST_TIMEOUT) $(WSPACE) $< < $*.in > $@ 2>&1
 $(filter-out $(BINARY_TESTS),$(TESTS_WITHOUT_IN)): $(BUILD)/%.out: $(BUILD)/%.ws
