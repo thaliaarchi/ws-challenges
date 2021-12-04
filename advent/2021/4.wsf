@@ -6,7 +6,6 @@
     "@int"    import
     "@matrix" import
     "@mem"    import
-    "@string" import
 
     0 ',' 10 call int.read_line_delim_base # numbers
     ^ ^ readi retrieve # boards
@@ -20,25 +19,30 @@
 .read_board_break:
     2drop
 
-    0
-.loop_numbers:
-    ^ retrieve
-    0
-.loop_boards:
-    # numbers boards i num j
-    ^ 25* ^5 + ^2 call check_board
-    ^ jn .loop_boards_not_found
-    5slide printi '\n' printc
-    end
-.loop_boards_not_found:
+    0 0 # i winners
+.loop_numbers: # IVs: i winners
+    ^1 retrieve swap
+    0 swap # j
+.loop_boards: # IVs: j winners
+    # numbers boards i nums[i] j winners
+    ^1 25* ^6 + ^3 call check_board
+    ^ jn .loop_boards_next
+    swap 1+ swap
+    ^1 1 j= .first_winner
+    ^1 ^6 j= .last_winner
+.loop_boards_next:
     drop
-    1+
-    ^ ^4 j< .loop_boards
-    2drop
-    1+
-    ^ ^3 j< .loop_numbers
-    3drop
-    -1 "No winning board" call string.println_neg_stack
+    swap 1+ swap
+    ^1 ^5 j< .loop_boards
+    2slide
+    swap 1+ swap
+    ^1 ^4 j< .loop_numbers
+    4drop end
+.first_winner:
+    ^ printi '\n' printc # Part 1
+    jmp .loop_boards_next
+.last_winner:
+    6slide printi '\n' printc # Part 2
     end
 
 # read_square_board reads a square grid of two-digit numbers into the
@@ -71,6 +75,7 @@ read_square_board:
 # (addr num -- sum)
 check_board:
     swap
+    ^ retrieve -2 j= .check_board_already_won
     ^ 25 ^3 -1 call mem.replace_all
     jz .check_board_not_found
     0 # i
@@ -83,8 +88,11 @@ check_board:
     drop
 .check_board_not_found:
     -1 2slide ret
+.check_board_already_won:
+    -2 2slide ret
 .check_board_winner:
     drop
     ^ 25 call array.sum
-    swap 25 -1 call array.count +
+    ^1 25 -1 call array.count +
+    swap -2 store # Mark as won
     * ret
