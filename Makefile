@@ -83,7 +83,7 @@ TESTS_MISSING_OUT = $(patsubst $(BUILD)/%.out,%.out,$(filter-out $(TESTS_WITH_OU
 .PHONY: run_tests
 run_tests: $(TESTS_MISSING_OUT) $(TESTS_WITH_IN) $(TESTS_WITH_OUT)
 
-$(BUILD)/advent/2021/4.out: TEST_TIMEOUT = 120
+$(BUILD)/advent/2021/4.out: TEST_TIMEOUT = 180
 $(filter-out $(BINARY_TESTS),$(TESTS_WITH_IN)): $(BUILD)/%.out: $(BUILD)/%.ws %.in
 	timeout $(TEST_TIMEOUT) $(WSPACE) $< < $*.in > $@ 2>&1
 $(filter-out $(BINARY_TESTS),$(TESTS_WITHOUT_IN)): $(BUILD)/%.out: $(BUILD)/%.ws
