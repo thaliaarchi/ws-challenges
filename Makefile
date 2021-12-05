@@ -14,7 +14,7 @@ COMPILED_PROGRAMS = euler/14.wsf advent/2019/2.wsf rosetta/palindrome_2_3.wsf
 BINARIES = $(patsubst %.wsf,$(BUILD)/%,$(COMPILED_PROGRAMS))
 
 .PHONY: all
-all: $(WS) $(BINARIES)
+all: wslib $(WS) $(BINARIES)
 
 $(BUILD)/%.ws: $(BUILD)/%.wsa
 	$(ASSEMBLE) -f asm -t -o $@ $<
@@ -31,17 +31,17 @@ $(BUILD)/advent/2019/2: NEBULA_FLAGS = -heap 500
 $(BUILD)/rosetta/palindrome_2_3: NEBULA_FLAGS = -heap 1
 
 # Manually-enumerated dependencies
-ARRAY = $(WSLIB)/array/module.wsf $(WSLIB)/array/array.wsf $(WSLIB)/array/sort.wsf
-BOOL = $(WSLIB)/bool/module.wsf $(WSLIB)/bool/bool.wsf
-CHAR = $(WSLIB)/char/module.wsf $(WSLIB)/char/io.wsf $(WSLIB)/char/unicode.wsf
-CRYPTO = $(WSLIB)/crypto/module.wsf $(WSLIB)/crypto/caesar.wsf
-HASH = $(WSLIB)/hash/module.wsf $(WSLIB)/hash/cusip.wsf $(WSLIB)/hash/luhn.wsf
-INT = $(WSLIB)/int/module.wsf $(WSLIB)/int/bits.wsf $(WSLIB)/int/int.wsf $(WSLIB)/int/print.wsf $(WSLIB)/int/read.wsf
-MAP = $(WSLIB)/map/module.wsf $(WSLIB)/map/map.wsf
-MATH = $(WSLIB)/math/module.wsf $(WSLIB)/math/collatz.wsf $(WSLIB)/math/divmod.wsf $(WSLIB)/math/exp.wsf $(WSLIB)/math/gcd.wsf $(WSLIB)/math/math.wsf
-MATRIX = $(WSLIB)/matrix/module.wsf $(WSLIB)/matrix/matrix.wsf
-MEM = $(WSLIB)/mem/module.wsf $(WSLIB)/mem/mem.wsf
-STRING = $(WSLIB)/string/module.wsf $(WSLIB)/string/compare.wsf $(WSLIB)/string/print.wsf $(WSLIB)/string/read.wsf $(WSLIB)/string/store.wsf
+ARRAY = $(WSLIB_BUILD)/array/module.wsa
+BOOL = $(WSLIB_BUILD)/bool/module.wsa
+CHAR = $(WSLIB_BUILD)/char/module.wsa
+CRYPTO = $(WSLIB_BUILD)/crypto/module.wsa
+HASH = $(WSLIB_BUILD)/hash/module.wsa
+INT = $(WSLIB_BUILD)/int/module.wsa
+MAP = $(WSLIB_BUILD)/map/module.wsa
+MATH = $(WSLIB_BUILD)/math/module.wsa
+MATRIX = $(WSLIB_BUILD)/matrix/module.wsa
+MEM = $(WSLIB_BUILD)/mem/module.wsa
+STRING = $(WSLIB_BUILD)/string/module.wsa
 $(BUILD)/euler/1.wsa: $(MATH)
 $(BUILD)/euler/4.wsa: $(INT)
 $(BUILD)/euler/6.wsa: $(MATH)
@@ -67,6 +67,9 @@ $(BUILD)/rosetta/palindrome_2_3.wsa: $(INT)
 $(BUILD)/codegolf/luhn_test.wsa: codegolf/luhn.wsf
 $(BUILD)/spoj/palin.wsa: $(BOOL) $(INT) $(MATH)
 
+.PHONY: wslib
+wslib:
+	@$(MAKE) -C $(WSLIB)
 $(WSLIB)/%:
 	$(error $* not found at WSLIB=$(WSLIB))
 $(WSLIB)/build/%.wsa: $(WSLIB)/%.wsf
