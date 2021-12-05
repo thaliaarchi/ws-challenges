@@ -19,6 +19,9 @@
 .read_board_break:
     2drop
 
+    2dup call lookup_number_indices
+    2drop end
+
     0 0 # i winners
 .loop_numbers: # IVs: i winners
     ^1 retrieve swap
@@ -96,3 +99,15 @@ check_board:
     ^1 25 -1 call array.count +
     swap -2 store # Mark as won
     * ret
+
+# lookup_number_indices replaces each number on the boards with the
+# index that it will be picked.
+# (numbers boards -- )
+lookup_number_indices:
+    25* ^1 + 1- # max
+    ^1 # i
+.lookup_number_indices_loop:
+    ^ 0 ^1 ^ retrieve call array.index_of store
+    1+
+    ^ ^2 j< .lookup_number_indices_loop
+    3drop ret
