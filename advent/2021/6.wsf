@@ -13,11 +13,22 @@
     jmp .read_loop
 .read_loop_break:
 
-    0
-.days_loop:
-    ^ 7+ 9% ^ retrieve ^2 9% retrieve + store
-    1+
-    ^ 80 j< .days_loop
+    # Part 1
+    0 80 call simulate_lanternfish
+    0 9 call array.sum printi '\n' printc
 
+    # Part 2
+    80 256 call simulate_lanternfish
     0 9 call array.sum printi '\n' printc
     end
+
+# simulate_lanternfish simulates a lanterfish population for a given
+# range of days.
+# (start end -- )
+simulate_lanternfish:
+    swap
+.simulate_days_loop:
+    ^ 7+ 9% ^ retrieve ^2 9% retrieve + store
+    1+
+    ^ ^2 j< .simulate_days_loop
+    drop ret
