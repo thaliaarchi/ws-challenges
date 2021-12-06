@@ -1,4 +1,5 @@
 BUILD = build
+FILTER = .
 WSLIB = ../wslib
 WSLIB_BUILD = $(WSLIB)/build
 SED = gsed
@@ -7,11 +8,12 @@ COMPILE = nebula-compile
 WSPACE = wspace
 AOCDL = aocdl
 TEST_TIMEOUT = 60
-
-WSF = $(patsubst ./%,%,$(shell find . -not \( -type d -path ./$(BUILD) -prune \) -type f -name '*.wsf'))
-WS = $(patsubst %.wsf,$(BUILD)/%.ws,$(WSF))
 COMPILED_PROGRAMS = euler/14.wsf advent/2019/2.wsf rosetta/palindrome_2_3.wsf
-BINARIES = $(patsubst %.wsf,$(BUILD)/%,$(COMPILED_PROGRAMS))
+
+WSF = $(patsubst ./%,%,$(shell find $(FILTER) -not \( -type d -path ./$(BUILD) -prune \) -type f -name '*.wsf'))
+WS = $(WSF:%.wsf=$(BUILD)/%.ws)
+FILTERED_COMPILED_PROGRAMS = $(patsubst ./%,%,$(filter $(FILTER)/%,$(COMPILED_PROGRAMS) $(addprefix ./,$(COMPILED_PROGRAMS))))
+BINARIES = $(FILTERED_COMPILED_PROGRAMS:%.wsf=$(BUILD)/%)
 
 .PHONY: all
 all: wslib $(WS) $(BINARIES)
