@@ -1,0 +1,23 @@
+# Advent of Code 2021
+# Day 6: Lanternfish
+# https://adventofcode.com/2021/day/6
+
+    "@array" import
+    "@int"   import
+
+.read_loop:
+    9 ',' 10 call int.read_base_until
+    swap
+    ^ retrieve 1+ store
+    jz .read_loop_break
+    jmp .read_loop
+.read_loop_break:
+
+    0
+.days_loop:
+    ^ 7+ 9% ^ retrieve ^2 9% retrieve + store
+    1+
+    ^ 80 j< .days_loop
+
+    0 9 call array.sum printi '\n' printc
+    end

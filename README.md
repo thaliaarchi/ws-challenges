@@ -43,6 +43,7 @@ demonstrate, and test [wslib](https://github.com/andrewarchi/wslib).
 - [Day 3: Binary Diagnostic](advent/2021/3.wsf)
 - [Day 4: Giant Squid](advent/2021/4.wsf)
 - [Day 5: Hydrothermal Venture](advent/2021/5.wsf)
+- [Day 6: Lanternfish](advent/2021/6.wsf)
 
 ## Rosetta Code
 
