@@ -44,6 +44,7 @@ demonstrate, and test [wslib](https://github.com/andrewarchi/wslib).
 - [Day 4: Giant Squid](advent/2021/4.wsf)
 - [Day 5: Hydrothermal Venture](advent/2021/5.wsf)
 - [Day 6: Lanternfish](advent/2021/6.wsf)
+- [Day 7: The Treachery of Whales](advent/2021/7.wsf)
 
 ## Rosetta Code
 

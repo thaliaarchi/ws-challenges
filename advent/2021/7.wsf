@@ -1,0 +1,18 @@
+# Advent of Code 2021
+# Day 7: The Treachery of Whales
+# https://adventofcode.com/2021/day/7
+
+    "@array"  import
+    "@int"    import
+
+    0 ',' 10 call int.read_line_delim_base # n
+    0 ^1 call array.quicksort
+
+    ^ 2/ retrieve # median
+    0 0 # i fuel
+.part1_loop:
+    ^1 retrieve ^3 - call math.abs + # fuel += abs(crab[i] - median)
+    swap 1+ swap
+    ^1 ^4 j< .part1_loop
+    printi '\n' printc
+    2drop end
