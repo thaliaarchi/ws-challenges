@@ -3,9 +3,10 @@
 # https://adventofcode.com/2021/day/7
 
     "@array"  import
-    "@int"    import
+    "@string" import
 
-    0 ',' 10 call int.read_line_delim_base # n
+    0 10 ',' call array.read_base_delim # n
+    jz .read_error
     0 ^1 call array.quicksort
 
     ^ 2/ retrieve # median
@@ -16,3 +17,8 @@
     ^1 ^4 j< .part1_loop
     printi '\n' printc
     2drop end
+
+# (x -- )
+.read_error:
+    -1 "Error: invalid positions format"
+    call string.println_neg_stack drop end

@@ -2,9 +2,10 @@
 # Day 2: 1202 Program Alarm
 # https://adventofcode.com/2019/day/2
 
+    "@string"     import
     "@vm/intcode" import
 
-    call intcode.read_program
+    call intcode.read_program jz .read_error
 
     # Part 1
     ^ call intcode.init_program
@@ -36,3 +37,8 @@
     drop end
 .not_found:
     "?\n" prints 2drop end
+
+# (x -- )
+.read_error:
+    -1 "Error: invalid program format"
+    call string.println_neg_stack drop end

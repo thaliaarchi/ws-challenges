@@ -6,7 +6,7 @@
     "@int"   import
 
 .read_loop:
-    9 ',' 10 call int.read_base_until
+    9 10 ',' call int.read_base_until
     swap
     ^ retrieve 1+ store
     jz .read_loop_break

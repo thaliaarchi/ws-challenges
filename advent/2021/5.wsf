@@ -33,13 +33,13 @@
 # x1,y1 -> x2,y2. Stores at addr..addr+4.
 # (addr -- ok?)
 read_line_segment:
-       ^ ^ ','  10 call int.read_base_until jz .read_line_segment_err3 store
-    1+ ^ ^ ' '  10 call int.read_base_until jz .read_line_segment_err3 store
-    1+ ^   '-'     call char.read_expect    jz .read_line_segment_err1
-       ^   '>'     call char.read_expect    jz .read_line_segment_err1
-       ^   ' '     call char.read_expect    jz .read_line_segment_err1
-       ^ ^ ','  10 call int.read_base_until jz .read_line_segment_err3 store
-    1+ ^ ^ '\n' 10 call int.read_base_until jz .read_line_segment_err3 store
+       ^ ^ 10 ','  call int.read_base_until jz .read_line_segment_err3 store
+    1+ ^ ^ 10 ' '  call int.read_base_until jz .read_line_segment_err3 store
+    1+ ^      '-'  call char.read_expect    jz .read_line_segment_err1
+       ^      '>'  call char.read_expect    jz .read_line_segment_err1
+       ^      ' '  call char.read_expect    jz .read_line_segment_err1
+       ^ ^ 10 ','  call int.read_base_until jz .read_line_segment_err3 store
+    1+ ^ ^ 10 '\n' call int.read_base_until jz .read_line_segment_err3 store
     drop 1 ret
 .read_line_segment_err3:
     2drop

@@ -3,11 +3,12 @@
 # https://adventofcode.com/2021/day/4
 
     "@array"  import
-    "@int"    import
     "@matrix" import
     "@mem"    import
+    "@string" import
 
-    0 ',' 10 call int.read_line_delim_base # numbers
+    0 10 ',' call array.read_base_delim # numbers
+    jz .read_numbers_error
     ^ ^ readi retrieve # boards
     2dup
 .read_boards:
@@ -111,3 +112,8 @@ lookup_number_indices:
     1+
     ^ ^2 j< .lookup_number_indices_loop
     3drop ret
+
+# (x -- )
+.read_numbers_error:
+    -1 "Error: invalid numbers format"
+    call string.println_neg_stack drop end
