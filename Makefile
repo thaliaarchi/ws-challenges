@@ -1,8 +1,8 @@
 BUILD = build
 FILTER = .
 WSLIB = ../wslib
-WSLIB_BUILD = $(WSLIB)/build
-SED = gsed
+WSLIB_BUILD = build
+WSLIB_MAKE_FLAGS = BUILD=$(WSLIB_BUILD) SED=$(SED) ASSEMBLE=$(ASSEMBLE)
 ASSEMBLE = wsc
 COMPILE = nebula-compile
 WSPACE = wspace
@@ -33,17 +33,17 @@ $(BUILD)/advent/2019/2: NEBULA_FLAGS = -heap 500
 $(BUILD)/rosetta/palindrome_2_3: NEBULA_FLAGS = -heap 1
 
 # Manually-enumerated dependencies
-ARRAY = $(WSLIB_BUILD)/array/module.wsa
-BOOL = $(WSLIB_BUILD)/bool/module.wsa
-CHAR = $(WSLIB_BUILD)/char/module.wsa
-CRYPTO = $(WSLIB_BUILD)/crypto/module.wsa
-HASH = $(WSLIB_BUILD)/hash/module.wsa
-INT = $(WSLIB_BUILD)/int/module.wsa
-MAP = $(WSLIB_BUILD)/map/module.wsa
-MATH = $(WSLIB_BUILD)/math/module.wsa
-MATRIX = $(WSLIB_BUILD)/matrix/module.wsa
-MEM = $(WSLIB_BUILD)/mem/module.wsa
-STRING = $(WSLIB_BUILD)/string/module.wsa
+ARRAY = $(WSLIB)/$(WSLIB_BUILD)/array/module.wsa
+BOOL = $(WSLIB)/$(WSLIB_BUILD)/bool/module.wsa
+CHAR = $(WSLIB)/$(WSLIB_BUILD)/char/module.wsa
+CRYPTO = $(WSLIB)/$(WSLIB_BUILD)/crypto/module.wsa
+HASH = $(WSLIB)/$(WSLIB_BUILD)/hash/module.wsa
+INT = $(WSLIB)/$(WSLIB_BUILD)/int/module.wsa
+MAP = $(WSLIB)/$(WSLIB_BUILD)/map/module.wsa
+MATH = $(WSLIB)/$(WSLIB_BUILD)/math/module.wsa
+MATRIX = $(WSLIB)/$(WSLIB_BUILD)/matrix/module.wsa
+MEM = $(WSLIB)/$(WSLIB_BUILD)/mem/module.wsa
+STRING = $(WSLIB)/$(WSLIB_BUILD)/string/module.wsa
 $(BUILD)/euler/1.wsa: $(MATH)
 $(BUILD)/euler/4.wsa: $(INT)
 $(BUILD)/euler/6.wsa: $(MATH)
@@ -74,11 +74,11 @@ $(BUILD)/spoj/palin.wsa: $(BOOL) $(INT) $(MATH)
 
 .PHONY: wslib
 wslib:
-	@$(MAKE) -C $(WSLIB)
+	@$(MAKE) -C $(WSLIB) $(WSLIB_MAKE_FLAGS)
 $(WSLIB)/%:
 	$(error $* not found at WSLIB=$(WSLIB))
 $(WSLIB)/build/%.wsa: $(WSLIB)/%.wsf
-	@$(MAKE) -C $(WSLIB) --no-print-directory $(@:$(WSLIB)/%=%)
+	@$(MAKE) -C $(WSLIB) --no-print-directory $(@:$(WSLIB)/%=%) $(WSLIB_MAKE_FLAGS)
 
 BINARY_TESTS = $(addsuffix .out,$(BINARIES))
 TEST_IN = $(patsubst ./%,%,$(shell find . -not \( -type d -path ./$(BUILD) -prune \) -type f -name '*.in'))
@@ -120,6 +120,6 @@ advent/%.in:
 clean:
 	@rm -rf $(BUILD)/
 clean_all: clean
-	@$(MAKE) -C $(WSLIB) --no-print-directory clean
+	@$(MAKE) -C $(WSLIB) --no-print-directory clean $(WSLIB_MAKE_FLAGS)
 clean_tests:
 	@find $(BUILD) -type f -name '*.out' -delete
