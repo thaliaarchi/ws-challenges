@@ -2,21 +2,29 @@
 # Day 1: Calorie Counting
 # https://adventofcode.com/2022/day/1
 
-    "@int"  import
-    "@math" import
+    "@array" import
+    "@int"   import
 
-    0 # max
+    0 # i
 .read_elf_loop:
-    0 call int.read drop # sum = snacks[0]
+    ^ call int.read drop # sum = snacks[0]
     ^ jn .read_elf_break
 .read_snack_loop:
-    0 call int.read drop
+    ^1 call int.read drop
     ^ jz .read_elf_next
     + # sum += snacks[j]
     jmp .read_snack_loop
 .read_elf_next:
-    drop call math.max
+    drop
+    ^1 swap store # sums[i] = sum
+    1+ # i++
     jmp .read_elf_loop
 .read_elf_break:
-    drop printi '\n' printc
+    drop
+    0 ^1 call array.quicksort
+    ^ 1- retrieve
+    ^ printi '\n' printc # Part 1
+    ^1 2- retrieve
+    ^2 3- retrieve
+    + + printi '\n' printc # Part 2
     end
