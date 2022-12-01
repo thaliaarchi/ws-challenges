@@ -1,0 +1,22 @@
+# Advent of Code 2022
+# Day 1: Calorie Counting
+# https://adventofcode.com/2022/day/1
+
+    "@int"  import
+    "@math" import
+
+    0 # max
+.read_elf_loop:
+    0 call int.read drop # sum = snacks[0]
+    ^ jn .read_elf_break
+.read_snack_loop:
+    0 call int.read drop
+    ^ jz .read_elf_next
+    + # sum += snacks[j]
+    jmp .read_snack_loop
+.read_elf_next:
+    drop call math.max
+    jmp .read_elf_loop
+.read_elf_break:
+    drop printi '\n' printc
+    end

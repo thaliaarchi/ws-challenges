@@ -1,7 +1,7 @@
 # Coding Challenges in Whitespace
 
 Solutions for various coding challenges in Whitespace to improve,
-demonstrate, and test [wslib](https://github.com/andrewarchi/wslib).
+demonstrate, and test [wslib](https://github.com/thaliaarchi/wslib).
 
 ## Project Euler
 
@@ -45,6 +45,10 @@ demonstrate, and test [wslib](https://github.com/andrewarchi/wslib).
 - [Day 5: Hydrothermal Venture](advent/2021/5.wsf)
 - [Day 6: Lanternfish](advent/2021/6.wsf)
 - [Day 7: The Treachery of Whales](advent/2021/7.wsf)
+
+### 2022
+
+- [Day 1: Calorie Counting](advent/2022/1.wsf)
 
 ## Rosetta Code
 
