@@ -1,0 +1,32 @@
+# Advent of Code 2022
+# Day 2: Rock Paper Scissors
+# https://adventofcode.com/2022/day/2
+
+    0 ^ readi retrieve # count
+    0 # score
+.read_loop:
+    swap 1- ^ jn .read_break swap
+
+    0 ^ readc retrieve 'A' - # opponent
+    0 readc
+    0 ^ readc retrieve 'X' - # player
+    0 readc
+
+    swap ^1
+    call score_outcome
+    swap call score_shape
+    + +
+
+    jmp .read_loop
+.read_break:
+    drop
+    printi '\n' printc
+    end
+
+# (opponent player -- score)
+score_outcome:
+    swap - 4+ 3% 3* ret
+
+# (player -- score)
+score_shape:
+    1+ ret

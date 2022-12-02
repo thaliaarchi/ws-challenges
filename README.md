@@ -49,6 +49,7 @@ demonstrate, and test [wslib](https://github.com/thaliaarchi/wslib).
 ### 2022
 
 - [Day 1: Calorie Counting](advent/2022/1.wsf)
+- [Day 2: Rock Paper Scissors](advent/2022/2.wsf)
 
 ## Rosetta Code
 
