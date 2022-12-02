@@ -2,31 +2,40 @@
 # Day 2: Rock Paper Scissors
 # https://adventofcode.com/2022/day/2
 
-    0 ^ readi retrieve # count
-    0 # score
+    3 ^ readi retrieve # count
 .read_loop:
-    swap 1- ^ jn .read_break swap
+    1- ^ jn .read_break
 
     0 ^ readc retrieve 'A' - # opponent
     0 readc
-    0 ^ readc retrieve 'X' - # player
+    0 ^ readc retrieve 'X' - # player (part 1), outcome (part 2)
     0 readc
 
-    swap ^1
-    call score_outcome
-    swap call score_shape
-    + +
+    # Part 1
+    1 ^ retrieve
+    ^3 ^3 call score
+    + store
 
+    # Part 2
+    2 ^ retrieve
+    ^3 ^ ^4 call choose_shape call score
+    + store
+
+    2drop
     jmp .read_loop
 .read_break:
     drop
-    printi '\n' printc
+    1 retrieve printi '\n' printc # Part 1
+    2 retrieve printi '\n' printc # Part 2
     end
 
 # (opponent player -- score)
-score_outcome:
-    swap - 4+ 3% 3* ret
+score:
+    swap ^1 swap
+    - 4+ 3% 3* # score for outcome
+    + 1+ # score for shape
+    ret
 
-# (player -- score)
-score_shape:
-    1+ ret
+# (opponent outcome -- shape)
+choose_shape:
+    1- + 3% ret
