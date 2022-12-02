@@ -6,36 +6,26 @@
 .read_loop:
     1- ^ jn .read_break
 
-    0 ^ readc retrieve 'A' - # opponent
+    0 ^ readc retrieve 'A' - # x: opponent
     0 readc
-    0 ^ readc retrieve 'X' - # player (part 1), outcome (part 2)
+    0 ^ readc retrieve 'X' - # y: player (part 1), outcome (part 2)
     0 readc
 
     # Part 1
-    1 ^ retrieve
-    ^3 ^3 call score
-    + store
+    # ((y - x + 1) % 3) * 3 + y + 1
+    ^ ^ ^3
+    - 1+ 3% 3* + 1+
+    1 retrieve + 1 swap store
 
     # Part 2
-    2 ^ retrieve
-    ^3 ^ ^4 call choose_shape call score
-    + store
+    # ((x + y - 1) % 3) + y * 3 + 1
+    swap ^1
+    + 1- 3% swap 3* + 1+
+    2 retrieve + 2 swap store
 
-    2drop
     jmp .read_loop
 .read_break:
     drop
     1 retrieve printi '\n' printc # Part 1
     2 retrieve printi '\n' printc # Part 2
     end
-
-# (opponent player -- score)
-score:
-    swap ^1 swap
-    - 4+ 3% 3* # score for outcome
-    + 1+ # score for shape
-    ret
-
-# (opponent outcome -- shape)
-choose_shape:
-    1- + 3% ret
