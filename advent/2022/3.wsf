@@ -2,19 +2,21 @@
 # Day 3: Rucksack Reorganization
 # https://adventofcode.com/2022/day/3
 
+    "@array"  import
     "@mem"    import
     "@string" import
 
     0 ^ readi retrieve # count
     0 # score
 .read_loop:
-    swap 1- ^ jn .read_break swap
+    swap 3- ^ jn .read_break swap
 
-    55 call string.read_line 2/
+    108 call string.read_line 2/
 
-    1 54 call mem.clear
-    ^ call index_first
-    call score_second +
+    0 108 ^2 call index
+    54 108 ^2 + ^2 call index
+    0 54 call intersect
+    0 54 call array.sum +
 
     jmp .read_loop
 .read_break:
@@ -22,35 +24,40 @@
     printi '\n' printc
     end
 
+# priority converts an item in the alphabet a-zA-Z to its priority in
+# 1-54.
 # (item -- priority)
 priority:
     # (1 - x/96)*26 + x%32
     1 ^1 96/ - 26* swap 32% +
     ret
 
-# (len -- )
-index_first:
-    55+ 55
-.index_first_loop:
-    ^ ^2 j= .index_first_break
+# (table addr len -- )
+index:
+    ^2 54 call mem.clear
+    ^1 + swap
+.index_loop:
+    ^ ^2 j= .index_break
     ^ retrieve call priority # priority
-    1 store                  # first[priority] = 1
+    ^ 1- ^4 +                # offset
+    swap store               # table[offset] = priority
     1+
-    jmp .index_first_loop
-.index_first_break:
+    jmp .index_loop
+.index_break:
     2drop ret
 
-# (len -- score)
-score_second:
-    ^ 55+ swap ^1 + swap
+# (table addr len -- score)
+intersect:
+    ^ ^2 + swap ^1 + swap
     0 # score
-.score_second_loop:
-    ^1 ^3 j= .score_second_break
-    ^1 retrieve call priority # priority
-    ^ retrieve                # has = first[priority]
-    ^1 0 store                # first[priority] = 0
-    * +                       # score += priority * has
+.intersect_loop:
+    ^1 ^3 j= .intersect_break
+    ^1 retrieve call priority # priority2
+    ^ 1- ^4 +                 # offset
+    ^ retrieve                # priority1 = table[offset]
+    ^1 0 store                # table[offset] = 0
+    * +                       # score += priority1
     swap 1+ swap
-    jmp .score_second_loop
-.score_second_break:
+    jmp .intersect_loop
+.intersect_break:
     2slide ret
