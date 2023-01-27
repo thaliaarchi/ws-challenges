@@ -1,0 +1,15 @@
+# Kattis
+# Jumbo Javelin
+# https://open.kattis.com/problems/jumbojavelin
+
+    0 ^ readi retrieve
+    1
+.loop:
+    swap 1- ^ jn .end swap
+    0 ^ readi retrieve
+    1- +
+    jmp .loop
+.end:
+    drop
+    printi '\n' printc
+    end

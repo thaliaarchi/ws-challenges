@@ -82,6 +82,10 @@ demonstrate, and test [wslib](https://github.com/thaliaarchi/wslib).
 - [Problem 5: PALIN - The Next Palindrome](spoj/palin.wsf)
 - [Problem 11: FCTRL - Factorial](spoj/fctrl.wsf)
 
+## Kattis
+
+- [Jumbo Javelin](kattis/jumbojavelin.wsf)
+
 ## Misc
 
 - [Four-column ASCII table](misc/ascii4.wsf)
