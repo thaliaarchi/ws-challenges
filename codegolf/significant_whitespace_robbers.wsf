@@ -1,0 +1,6 @@
+loop:
+    63 ^ readc retrieve
+    ^ 10 j= loop
+    ^ 32 j= loop
+    printc
+    jmp loop
