@@ -1,0 +1,6 @@
+loop:
+    0 readc
+    0 retrieve 10 j= loop
+    0 retrieve 32 j= loop
+    0 retrieve printc
+    jmp loop
