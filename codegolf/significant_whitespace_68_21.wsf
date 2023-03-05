@@ -1,0 +1,6 @@
+loop:
+    -0 ^ readc retrieve
+    10 - ^ jz loop
+    22 - jz loop
+    0 retrieve printc
+    jmp loop
