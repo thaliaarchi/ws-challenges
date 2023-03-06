@@ -1,3 +1,7 @@
+# Code Golf
+# Significant Whitespace: Robbers
+# https://codegolf.stackexchange.com/questions/103183/significant-whitespace-robbers/258852#258852
+
 loop:
     0 ^ readc retrieve
     ^ 10 j= loop

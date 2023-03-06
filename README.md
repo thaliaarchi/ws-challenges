@@ -72,6 +72,7 @@ demonstrate, and test [wslib](https://github.com/thaliaarchi/wslib).
 
 - [Implement cowsay](codegolf/cowsay.wsf)
 - [Shortest Error Message](codegolf/shortest_error.wsf)
+- [Significant Whitespace: Robbers](codegolf/significant_whitespace.md)
 - [The Luhn algorithm for verifying credit card numbers, etc](codegolf/luhn.wsf)
 
 ## Sphere Online Judge
