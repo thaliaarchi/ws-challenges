@@ -1,0 +1,40 @@
+# Advent of Code 2023
+# Day 1: Trebuchet?!
+# https://adventofcode.com/2023/day/1
+
+    0 ^ readi retrieve # number of lines
+    0 # sum
+.read_lines:
+    swap 1- ^ jn .read_lines_break swap
+
+    1 -1 store # first digit
+    2 -1 store # second digit
+.read_line:
+    0 ^ readc retrieve
+    ^ '\n' j= .read_line_break
+    '0' - ^ jn .read_line_continue
+    ^ 10 - jn .handle_digit
+.read_line_continue:
+    drop
+    jmp .read_line
+
+.handle_digit:
+    2 ^1 store
+    1 retrieve jn .store_first_digit
+    drop
+    jmp .read_line
+.store_first_digit:
+    1 swap store
+    jmp .read_line
+
+.read_line_break:
+    drop
+    1 retrieve 10*
+    2 retrieve +
+    +
+    jmp .read_lines
+
+.read_lines_break:
+    drop
+    printi '\n' printc
+    end

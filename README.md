@@ -52,6 +52,10 @@ demonstrate, and test [wslib](https://github.com/thaliaarchi/wslib).
 - [Day 2: Rock Paper Scissors](advent/2022/2.wsf)
 - [Day 3: Rucksack Reorganization](advent/2022/3.wsf)
 
+### 2023
+
+- [Day 1: Trebuchet?!](advent/2023/1.wsf)
+
 ## Rosetta Code
 
 - [99 Bottles of Beer](rosetta/99_bottles.wsf)
