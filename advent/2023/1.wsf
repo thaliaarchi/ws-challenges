@@ -2,35 +2,108 @@
 # Day 1: Trebuchet?!
 # https://adventofcode.com/2023/day/1
 
+    2  't' store
+    3  'w' store
+    4  'o' store
+    5  'n' store
+    6  'e' store
+    7  'i' store
+    8  'g' store
+    9  'h' store
+    10 't' store
+    11 'h' store
+    12 'r' store
+    13 'e' store
+    14 'e' store
+    15 'f' store
+    16 'o' store
+    17 'u' store
+    18 'r' store
+    19 'f' store
+    20 'i' store
+    21 'v' store
+    22 'e' store
+    23 's' store
+    24 'i' store
+    25 'x' store
+    26 's' store
+    27 'e' store
+    28 'v' store
+    29 'e' store
+    30 'n' store
+    31 'i' store
+    32 'n' store
+    33 'e' store
+
     0 ^ readi retrieve # number of lines
     0 # sum
 .read_lines:
     swap 1- ^ jn .read_lines_break swap
 
-    1 -1 store # first digit
-    2 -1 store # second digit
+    34 # string write pointer
 .read_line:
-    0 ^ readc retrieve
-    ^ '\n' j= .read_line_break
-    '0' - ^ jn .read_line_continue
-    ^ 10 - jn .handle_digit
-.read_line_continue:
-    drop
+    ^ readc
+    ^ retrieve '\n' j= .read_line_break
+    1+
     jmp .read_line
-
-.handle_digit:
-    2 ^1 store
-    1 retrieve jn .store_first_digit
-    drop
-    jmp .read_line
-.store_first_digit:
-    1 swap store
-    jmp .read_line
-
 .read_line_break:
+
+    0 -1 store # first digit
+    1 -1 store # second digit
+    33 # string read pointer
+.parse_line:
+    1+
+    2dup j< .parse_line_break
+    ^ retrieve '0' -
+    ^ jn .parse_line_continue
+    ^ 10 - jn .parsed_digit
     drop
-    1 retrieve 10*
-    2 retrieve +
+    2dup - # length
+    4  3 call starts_with jz .parsed_digit_1
+    2  3 call starts_with jz .parsed_digit_2
+    10 5 call starts_with jz .parsed_digit_3
+    15 4 call starts_with jz .parsed_digit_4
+    19 4 call starts_with jz .parsed_digit_5
+    23 3 call starts_with jz .parsed_digit_6
+    27 5 call starts_with jz .parsed_digit_7
+    6  5 call starts_with jz .parsed_digit_8
+    30 4 call starts_with jz .parsed_digit_9
+    drop
+.parse_line_continue:
+    drop
+    jmp .parse_line
+
+.parsed_digit_1:
+    1 jmp .parsed_digit
+.parsed_digit_2:
+    2 jmp .parsed_digit
+.parsed_digit_3:
+    3 jmp .parsed_digit
+.parsed_digit_4:
+    4 jmp .parsed_digit
+.parsed_digit_5:
+    5 jmp .parsed_digit
+.parsed_digit_6:
+    6 jmp .parsed_digit
+.parsed_digit_7:
+    7 jmp .parsed_digit
+.parsed_digit_8:
+    8 jmp .parsed_digit
+.parsed_digit_9:
+    9
+.parsed_digit:
+    1 ^1 store # store the second digit
+    0 retrieve jn .store_first_digit
+    drop
+    jmp .parse_line_continue
+.store_first_digit:
+    0 swap store
+    jmp .parse_line_continue
+
+.parse_line_break:
+    drop
+    0 retrieve 10*
+    1 retrieve +
     +
     jmp .read_lines
 
@@ -38,3 +111,18 @@
     drop
     printi '\n' printc
     end
+
+# starts_with returns whether the string starts with the prefix.
+# (addr len prefixaddr prefixlen -- addr len ?)
+starts_with:
+    -1 # i
+    ^3 ^2 j< .starts_with_false
+.starts_with_loop:
+    1+
+    2dup j<= .starts_with_true # i >= prefixlen
+    ^4 ^1 + retrieve ^3 ^2 + retrieve
+    j= .starts_with_loop
+.starts_with_false:
+    -1 3slide ret
+.starts_with_true:
+    0 3slide ret
