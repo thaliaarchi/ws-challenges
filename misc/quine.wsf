@@ -1,0 +1,35 @@
+    # The source of this file, excluding this, encoded as little endian ternary.
+    1184945559098063154595003145094952288266868243782225256856322205698143241914245055798377171548003147014444700658597613
+
+    # Unpack the number on the stack as big-endian binary.
+    0 '\n' ^2
+expand_data:
+    ^ jz .expand_data_break
+    ^ 2%
+    # Map 0 => 32, 1 => 9
+    -23* 32+
+    swap 2/
+    jmp expand_data
+.expand_data_break:
+    drop
+    ' ' ^ ^
+
+    # Print the initial push.
+print_data:
+    ^ jz .print_data_break
+    printc
+    jmp print_data
+.print_data_break:
+    drop
+
+    # Print the rest of the program.
+    ^
+print_source:
+    ^ jz .print_source_break
+    ^ 3%
+    # Map 0 => 9, 1 => 10, 2 => 32
+    ^ 2/ 21* + 9+ printc
+    3/
+    jmp print_source
+.print_source_break:
+    end

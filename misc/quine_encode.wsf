@@ -1,0 +1,24 @@
+    # Encode a Whitespace program as little endian ternary.
+    1 0
+read_loop:
+    0 ^ readc retrieve
+    ^ '\t' j= .read_tab
+    ^ '\n' j= .read_lf
+    ^ ' ' j= .read_space
+    jz .read_break
+    jmp read_loop
+.read_tab:
+    drop 0 jmp .read_next
+.read_lf:
+    drop 1 jmp .read_next
+.read_space:
+    drop 2
+.read_next:
+    ^2 * +
+    swap 3* swap
+    jmp read_loop
+.read_break:
+    printi
+    # Since the last byte is always LF, we don't need a marker MSB.
+    drop
+    end
