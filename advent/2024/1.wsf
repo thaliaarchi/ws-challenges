@@ -1,0 +1,47 @@
+# Advent of Code 2023
+# Day 1: Historian Hysteria
+# https://adventofcode.com/2024/day/1
+
+    "@array" import
+    "@int"   import
+    "@math"  import
+
+    0 ^ readi retrieve # len
+    0 # i
+.read_loop:
+    ^
+    ^ ' ' call int.read_until jz invalid_number
+    store
+    2dup +
+    ^ call read_space ^ call read_space
+    ^ '\n' call int.read_until jz invalid_number
+    store
+    1+
+    ^ ^2 j< .read_loop
+# .read_break:
+    drop
+    0 ^1 call array.quicksort
+    ^ ^ call array.quicksort
+
+    # ^ len
+    0 # i
+    0 # sum of distances
+.sum_distances_loop:
+    ^1 retrieve ^3 ^3 + retrieve - call math.abs
+    +
+    swap 1+ swap
+    ^1 ^3 j< .sum_distances_loop
+# .sum_distances_break:
+    printi '\n' printc
+    2drop end
+
+invalid_number:
+    "Invalid number\n" prints end
+
+# (addr -- )
+read_space:
+    ^ readc retrieve
+    ' ' j= .read_space_ok
+    "Expected space\n" prints end
+.read_space_ok:
+    ret

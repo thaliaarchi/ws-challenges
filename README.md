@@ -56,6 +56,10 @@ demonstrate, and test [wslib](https://github.com/thaliaarchi/wslib).
 
 - [Day 1: Trebuchet?!](advent/2023/1.wsf)
 
+### 2024
+
+- [Day 1: Historian Hysteria](advent/2024/1.wsf)
+
 ## Rosetta Code
 
 - [99 Bottles of Beer](rosetta/99_bottles.wsf)
