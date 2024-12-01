@@ -2,6 +2,9 @@
 # Day 1: Historian Hysteria
 # https://adventofcode.com/2024/day/1
 
+    # TODO: Part 2: Count occurrences by iterating right list in lock step,
+    # instead of with a map.
+
     "@array" import
     "@int"   import
     "@math"  import
@@ -23,6 +26,7 @@
     0 ^1 call array.quicksort
     ^ ^ call array.quicksort
 
+    # Part 1
     # ^ len
     0 # i
     0 # sum of distances
@@ -33,7 +37,37 @@
     ^1 ^3 j< .sum_distances_loop
 # .sum_distances_break:
     printi '\n' printc
-    2drop end
+    drop
+
+    # Part 2
+    ^ 2* ^1 retrieve 0 retrieve call math.min - # min table addr
+
+    # 0-fill heap to max addr
+    ^1 1- retrieve ^2 2* 1- retrieve call math.max
+    ^1 + 0 store
+
+    # ^ len
+    # ^ min table addr
+    0 # i
+.count_loop:
+    # Increment count in table
+    ^ ^3 + retrieve ^2 + ^ retrieve 1+ store
+    1+
+    ^ ^3 j< .count_loop
+    drop
+
+    # ^ len
+    # ^ min table addr
+    0 # i
+    0 # sum of similarity scores
+.sum_similarity_loop:
+    ^1 retrieve ^ ^4 + retrieve *
+    +
+    swap 1+ swap
+    ^1 ^4 j< .sum_similarity_loop
+# .sum_similarity_break:
+    printi '\n' printc
+    3drop end
 
 invalid_number:
     "Invalid number\n" prints end
